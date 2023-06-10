@@ -1,0 +1,81 @@
+.bg {
+    background-color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.bg-img-1 {
+    position: absolute;
+    top: 0;
+    right: 50vh;
+    height: 9rem;
+}
+
+.bg-img-2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 9rem;
+}
+
+.bg-img-3 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 9rem;
+}
+
+.imgLoginPgTrk {
+    position: absolute;
+    right: 5vw;
+    height: 26rem;
+    flex-shrink: 1;
+}
+
+.logo {
+    position: absolute;
+    left: 5vw;
+    top: 5vh;
+    height: 3rem;
+    flex-shrink: 1;
+}
+
+#formId {
+    position: absolute;
+    left: 15vw;
+    margin-bottom: 5rem;
+}
+
+.btn {
+    margin-top: 30rem;
+    height: 3rem;
+}
+
+.input-grp {
+    width: 20rem;
+}
+
+.subTxt {
+    margin-top: 0.8rem;
+    margin-bottom: 3rem;
+    color: var(--sec-grey-color);
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .imgLoginPgTrk {
+        display: none;
+    }
+
+    #formId {
+        position: relative;
+        justify-content: center;
+        width: 17rem;
+    }
+
+    .input-grp {
+        width: 17rem;
+    }
+}
