@@ -1,5 +1,6 @@
-import React from "react";
-import './App.css';
+import React, { useEffect } from "react";
+import { CookiesProvider } from 'react-cookie';
+import './App.scss';
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import LoginPage from "./pages/LoginPage";
@@ -9,37 +10,50 @@ import HomePage from "./pages/HomePage";
 import LoadingScreen from "./components/loadingScreen";
 import { useAuthContext } from "./context/AuthContext";
 
-
+import MasterLayout from "./components/components/layouts/MasterLayout";
 
 
 
 function App() {
+
+  useEffect(() => {
+    setTimeout(function () {
+      document.getElementById('root').classList.add('loaded');
+    }, 100);
+  });
+
   const { loading } = useAuthContext();
   return (
     <>
-      {loading && <LoadingScreen />}
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
+      <CookiesProvider>
+        <MasterLayout>
+          {loading && <LoadingScreen />}
+          <Routes>
+            <Route path="/" element={<HomePage />}>
+              <Route path="/login" element={<LoginPage />} />
+            </Route>
 
-        <Route element={<RequireAuth allowedRoles={['sa']} />}>
-          <Route path="/sa" element={<Layout />}>
+            <Route element={<RequireAuth allowedRoles={['sa']} />}>
+              <Route path="/sa" element={<Layout />}>
 
-          </Route>
-        </Route>
+              </Route>
+            </Route>
 
-        <Route element={<RequireAuth allowedRoles={['staff']} />}>
-          <Route path="/bo" element={<Layout />}>
-
-
-          </Route>
-        </Route>
+            <Route element={<RequireAuth allowedRoles={['staff']} />}>
+              <Route path="/bo" element={<Layout />}>
 
 
-        {/* catch all */}
-        <Route path="*" element={<MissingPage />} />
-      </Routes>
+              </Route>
+            </Route>
+
+
+            {/* catch all */}
+            <Route path="*" element={<MissingPage />} />
+          </Routes>
+        </MasterLayout>
+      </CookiesProvider>
     </>
+
   );
 }
 
