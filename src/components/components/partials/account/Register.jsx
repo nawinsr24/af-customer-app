@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Link from 'next/link';
-import Router from 'next/router';
-import { login } from '../../../store/auth/action';
+// import Link from 'next/link';
+// import Router from 'next/router';
+// import { login } from '../../../store/auth/action';
 
 import { Form, Input } from 'antd';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 class Register extends Component {
     constructor(props) {
@@ -16,8 +16,8 @@ class Register extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.dispatch(login());
-                Router.push('/account/login');
+                // this.props.dispatch(login());
+                // Router.push('/account/login');
             } else {
             }
         });
@@ -32,14 +32,14 @@ class Register extends Component {
                         onSubmit={this.handleSubmit}>
                         <ul className="ps-tab-list">
                             <li>
-                                <Link href="/account/login">
+                                <a href="/login">
                                     <a>Login</a>
-                                </Link>
+                                </a>
                             </li>
                             <li className="active">
-                                <Link href="/account/register">
+                                <a href="/register">
                                     <a>Register</a>
-                                </Link>
+                                </a>
                             </li>
                         </ul>
                         <div className="ps-tab active" id="register">
@@ -123,4 +123,4 @@ class Register extends Component {
 const mapStateToProps = state => {
     return state.auth;
 };
-export default connect(mapStateToProps)(Register);
+export default Register;

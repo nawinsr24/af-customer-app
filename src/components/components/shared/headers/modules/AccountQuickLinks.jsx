@@ -72,12 +72,12 @@ const AccountQuickLinks = (props) => {
                     <i className="icon-user"></i>
                 </div>
                 <div className="ps-block__right">
-                    <Link to="/account/login">
+                    <Link to="/login">
                         {/* <a> */}
                         Login
                         {/* </a> */}
                     </Link>
-                    <Link to="/account/register">
+                    <Link to="/register">
                         {/* <a> */}
                         Register
                         {/* </a> */}

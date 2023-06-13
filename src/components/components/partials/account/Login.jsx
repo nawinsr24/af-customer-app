@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Link from 'next/link';
-import Router from 'next/router';
-import { login } from '../../../store/auth/action';
+// import Link from 'next/link';
+// import Router from 'next/router';
+// import { login } from '../../../store/auth/action';
 
 import { Form, Input, notification } from 'antd';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 class Login extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class Login extends Component {
 
     static getDerivedStateFromProps(props) {
         if (props.isLoggedIn === true) {
-            Router.push('/');
+            // Router.push('/');
         }
         return false;
     }
@@ -30,8 +30,8 @@ class Login extends Component {
 
     handleLoginSubmit = e => {
         console.log('test');
-        this.props.dispatch(login());
-        Router.push('/');
+        // this.props.dispatch(login());
+        // Router.push('/');
 
     };
 
@@ -44,14 +44,14 @@ class Login extends Component {
                         onFinish={this.handleLoginSubmit.bind(this)}>
                         <ul className="ps-tab-list">
                             <li className="active">
-                                <Link href="/account/login">
+                                <a href="/login">
                                     <a>Login</a>
-                                </Link>
+                                </a>
                             </li>
                             <li>
-                                <Link href="/account/register">
+                                <a href="/register">
                                     <a>Register</a>
-                                </Link>
+                                </a>
                             </li>
                         </ul>
                         <div className="ps-tab active" id="sign-in">
@@ -167,4 +167,4 @@ class Login extends Component {
 const mapStateToProps = state => {
     return state.auth;
 };
-export default connect(mapStateToProps)(Login);
+export default Login;

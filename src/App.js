@@ -30,7 +30,6 @@ function App() {
           {loading && <LoadingScreen />}
           <Routes>
             <Route path="/" element={<HomePage />}>
-              <Route path="/login" element={<LoginPage />} />
             </Route>
 
             <Route element={<RequireAuth allowedRoles={['sa']} />}>

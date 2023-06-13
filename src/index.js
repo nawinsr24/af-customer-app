@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { QueryClientProvider, QueryClient } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
+import Login from './components/components/partials/account/Login';
+import Register from './components/components/partials/account/Register';
 
 const queryClient = new QueryClient();
 
@@ -20,6 +22,8 @@ root.render(
         <AuthContextProvider>
           <Routes>
             <Route path="/*" element={<App />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </AuthContextProvider>
         <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />

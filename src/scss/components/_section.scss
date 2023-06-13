@@ -1509,8 +1509,16 @@
 }
 
 .ps-my-account {
+    // old
+    // min-height: 100vh;
+    // background-color: #f1f1f1;
+
+    // new 
     min-height: 100vh;
     background-color: #f1f1f1;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .ps-order-tracking {
