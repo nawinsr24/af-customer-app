@@ -9,9 +9,9 @@ import RequireAuth from "./components/RequireAuth";
 import HomePage from "./pages/HomePage";
 import LoadingScreen from "./components/loadingScreen";
 import { useAuthContext } from "./context/AuthContext";
-
-import MasterLayout from "./components/components/layouts/MasterLayout";
-
+import MasterLayout from "./components/layouts/MasterLayout";
+import Login from './pages/LoginPage';
+import Register from './pages/Register';
 
 
 function App() {
@@ -29,8 +29,10 @@ function App() {
         <MasterLayout>
           {loading && <LoadingScreen />}
           <Routes>
-            <Route path="/" element={<HomePage />}>
-            </Route>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
 
             <Route element={<RequireAuth allowedRoles={['sa']} />}>
               <Route path="/sa" element={<Layout />}>
