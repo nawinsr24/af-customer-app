@@ -12,6 +12,8 @@ import { useAuthContext } from "./context/AuthContext";
 import MasterLayout from "./components/layouts/MasterLayout";
 import Login from './pages/LoginPage';
 import Register from './pages/Register';
+import ProductDetailPage from "./pages/product/product";
+import ShoppingCart from "./pages/shoping-cart/shoping-cart";
 
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/product/:pid" element={<ProductDetailPage />} />
+            <Route path="/shoping-cart" element={<ShoppingCart />} />
 
 
             <Route element={<RequireAuth allowedRoles={['sa']} />}>
