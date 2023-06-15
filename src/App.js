@@ -14,6 +14,7 @@ import Login from './pages/LoginPage';
 import Register from './pages/Register';
 import ProductDetailPage from "./pages/product/product";
 import ShoppingCart from "./pages/shoping-cart/shoping-cart";
+import ShopPage from "./pages/shop/shop";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/product/:pid" element={<ProductDetailPage />} />
             <Route path="/shoping-cart" element={<ShoppingCart />} />
+            <Route path="/shop" element={<ShopPage />} />
 
 
             <Route element={<RequireAuth allowedRoles={['sa']} />}>
