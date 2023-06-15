@@ -37,7 +37,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/product/:pid" element={<ProductDetailPage />} />
             <Route path="/shoping-cart" element={<ShoppingCart />} />
-            <Route path="/shop" element={<ShopPage />} />
+            {/* <Route path="/shop" element={<ShopPage />} /> */}
 
 
             <Route element={<RequireAuth allowedRoles={['sa']} />}>

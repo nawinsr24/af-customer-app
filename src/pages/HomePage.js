@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 
 import PageContainer from '../components/layouts/PageContainer';
-// import ShopPage from './shop/shop';
+import ShopPage from './shop/shop';
 
 function HomePage() {
     const { ctxtUser, setLoadingScreen } = useAuthContext();
@@ -24,11 +24,12 @@ function HomePage() {
     // }, []);
 
     return (
-        <PageContainer title="Multipurpose Marketplace React Ecommerce Template">
-            <main id="homepage-1">
+        // <PageContainer title="Multipurpose Marketplace React Ecommerce Template">
+        //     <main id="homepage-1">
 
-            </main>
-        </PageContainer>
+        //     </main>
+        // </PageContainer>
+        <ShopPage />
     );
 }
 

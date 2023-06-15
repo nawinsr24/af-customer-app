@@ -71,7 +71,7 @@ const Product = ({ product }) => {
     return (
         <div className="ps-product">
             <div className="ps-product__thumbnail">
-                <a href="/product/[pid]" as={`/product/${product.id}`}>
+                <a href={`/product/${product.id}`} >
                     <LazyLoad>
                         <img
                             src={product.thumbnail.url}
