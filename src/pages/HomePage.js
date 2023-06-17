@@ -29,6 +29,7 @@ function HomePage() {
 
         //     </main>
         // </PageContainer>
+
         <ShopPage />
     );
 }

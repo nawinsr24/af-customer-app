@@ -4,7 +4,7 @@ import BreadCrumb from '../../components/BreadCrumb';
 import { useNavigate } from 'react-router-dom';
 
 
-function Register() {
+function OtpPage() {
     const Router = useNavigate();
     const breadCrumb = [
         {
@@ -12,76 +12,56 @@ function Register() {
             url: '/',
         },
         {
-            text: 'Register',
+            text: 'OTP',
         },
     ];
 
     async function handleSubmit(values) {
-        Router('/verify');
+        Router('/');
         console.log(values)
     }
     return (
         <>
             <BreadCrumb breacrumb={breadCrumb} />
-            <div className="ps-my-account">
+            <div className="ps-my-account" style={{ minHeight: '90vh' }}>
                 <div className="container">
                     <Form
                         className="ps-form--account"
                         onFinish={handleSubmit}>
-                        <ul className="ps-tab-list">
+                        {/* <ul className="ps-tab-list">
                             <li>
-                                <a href="/login">
-                                    Login
+                                <a>
+                                    OTP
                                 </a>
                             </li>
-                            <li className="active">
-                                <a href="/register">
-                                    Register
-                                </a>
-                            </li>
-                        </ul>
-                        <div className="ps-tab active" id="register">
+
+                        </ul> */}
+                        <div className="ps-tab active" id="otp">
                             <div className="ps-form__content">
-                                <h5>Register An Account</h5>
+                                <h5>Enter OTP</h5>
                                 <div className="form-group">
                                     <Form.Item
-                                        name="email"
+                                        name="otp"
                                         rules={[
                                             {
                                                 required: true,
                                                 message:
-                                                    'Please input your email!',
+                                                    'Please input your otp!',
                                             },
                                         ]}>
                                         <Input
                                             className="form-control"
-                                            type="email"
-                                            placeholder="Email address"
+                                            type="text"
+                                            placeholder="Otp"
                                         />
                                     </Form.Item>
                                 </div>
-                                <div className="form-group form-forgot">
-                                    <Form.Item
-                                        name="password"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message:
-                                                    'Please input your password!',
-                                            },
-                                        ]}>
-                                        <Input
-                                            className="form-control"
-                                            type="password"
-                                            placeholder="Password..."
-                                        />
-                                    </Form.Item>
-                                </div>
+
                                 <div className="form-group submit">
                                     <button
                                         type="submit"
                                         className="ps-btn ps-btn--fullwidth">
-                                        Register
+                                        Verify
                                     </button>
                                 </div>
                             </div>
@@ -118,4 +98,4 @@ function Register() {
     )
 }
 
-export default Register;
+export default OtpPage;

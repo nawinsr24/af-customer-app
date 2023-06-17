@@ -15,6 +15,11 @@ import Register from './pages/Register';
 import ProductDetailPage from "./pages/product/product";
 import ShoppingCart from "./pages/shoping-cart/shoping-cart";
 import ShopPage from "./pages/shop/shop";
+import CheckoutPage from "./pages/checkout/checkout";
+import ShippingPage from "./pages/shipping/shipping";
+import PaymentPage from "./pages/payment/payment";
+import PaymentSuccessPage from "./pages/payment/payment-success";
+import OtpPage from "./pages/otpPage/otp";
 
 
 function App() {
@@ -36,8 +41,13 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/product/:pid" element={<ProductDetailPage />} />
-            <Route path="/shoping-cart" element={<ShoppingCart />} />
-            {/* <Route path="/shop" element={<ShopPage />} /> */}
+            <Route path="/shopping-cart" element={<ShoppingCart />} />
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path='/checkout' element={<CheckoutPage />} />
+            <Route path='/shipping' element={<ShippingPage />} />
+            <Route path='/payment' element={<PaymentPage />} />
+            <Route path='/payment-success' element={<PaymentSuccessPage />} />
+            <Route path='/verify' element={<OtpPage />} />
 
 
             <Route element={<RequireAuth allowedRoles={['sa']} />}>

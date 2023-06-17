@@ -20,7 +20,7 @@ const ProductCart = ({ product }) => {
     }
     const title = (payload) => {
         let view = (
-            <a href="/product/[pid]" as={`/product/${payload.id}`}>
+            <a href={`/product/${payload.id}`}>
                 <a className="ps-product__title">{payload.title}</a>
             </a>
         );

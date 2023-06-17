@@ -19,6 +19,7 @@ const ShopPage = () => {
         },
         {
             text: 'Shop',
+            // url: '/shop',
         },
     ];
 

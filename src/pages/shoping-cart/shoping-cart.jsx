@@ -66,7 +66,7 @@ const ShoppingCart = ({ ecomerce }) => {
                             <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
                                 <CartSummary source={products} />
 
-                                <a href="/account/checkout" className="ps-btn ps-btn--fullwidth">
+                                <a href="/checkout" className="ps-btn ps-btn--fullwidth">
                                     Proceed to checkout
                                 </a>
 

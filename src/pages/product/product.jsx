@@ -41,10 +41,10 @@ const ProductDetailPage = () => {
             text: 'Home',
             url: '/',
         },
-        // {
-        //     text: 'Product',
-        //     url: '/shop',
-        // },
+        {
+            text: 'Shop',
+            url: '/shop',
+        },
         {
             text: product ? product.title : 'Loading...',
         },

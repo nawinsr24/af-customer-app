@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 // import { connect } from 'react-redux';
 // import Link from 'next/link';
-import { Link } from 'react-router-dom';
 import ProductOnCart from '../../ProductOnCart';
 // import useEcomerce from '~/hooks/useEcomerce';
 import { calculateAmount } from '../../../utilities/ecomerce-helpers';
+import data from '../../../static/data/product.json';
 
 const MiniCart = ({ ecomerce }) => {
     // const { products, removeItem, removeItems, getProducts } = useEcomerce();
@@ -19,7 +19,7 @@ const MiniCart = ({ ecomerce }) => {
     }, [ecomerce]);
 
     let cartItemsView;
-    let products; //new 
+    let products = data.relatedProduct;
     if (products && products.length > 0) {
         const amount = calculateAmount(products);
         const productItems = products.map((item) => {
@@ -42,12 +42,8 @@ const MiniCart = ({ ecomerce }) => {
                         <strong>${amount ? amount : 0}</strong>
                     </h3>
                     <figure>
-                        {/* <Link to="/account/shopping-cart"> */}
-                        <a href='to="/account/shopping-cart"' className="ps-btn">View Cart</a>
-                        {/* </Link> */}
-                        {/* <Link to="/account/checkout"> */}
-                        <a href='/account/checkout' className="ps-btn">Checkout</a>
-                        {/* </Link> */}
+                        <a href='/shopping-cart"' className="ps-btn">View Cart</a>
+                        <a href='/checkout' className="ps-btn">Checkout</a>
                     </figure>
                 </div>
             </div>

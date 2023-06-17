@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 
 const DetailActionsMobile = ({ ecomerce, product }) => {
     // const { addItem } = useEcomerce();
-    // const Router = useRouter();
+    const Router = useNavigate();
     const handleAddItemToCart = (e) => {
         e.preventDefault();
         // addItem({ id: product.id, quantity: 1 }, ecomerce.cartItems, 'cart');
@@ -11,9 +13,12 @@ const DetailActionsMobile = ({ ecomerce, product }) => {
     };
 
     const handleBuyNow = (e) => {
+
+
         e.preventDefault();
         // addItem({ id: product.id, quantity: 1 }, ecomerce.cartItems, 'cart');
         // Router.push('/account/checkout');
+        Router('/checkout');
     };
 
     return (

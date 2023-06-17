@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { Modal } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const ActionsSidebar = ({ ecomerce, product }) => {
+    const Router = useNavigate();
     const [quantity, setQuantity] = useState(1);
     // const { addItem } = useEcomerce();
 
     function handleAddItemToCart(e) {
         e.preventDefault();
+        Router('/checkout')
         // addItem(
         //     { id: product.id, quantity: quantity },
         //     ecomerce.cartItems,
@@ -16,7 +19,7 @@ const ActionsSidebar = ({ ecomerce, product }) => {
 
     function handleAddItemToCompare(e) {
         e.preventDefault();
-        e.preventDefault();
+
         // addItem({ id: product.id }, ecomerce.compareItems, 'compare');
         const modal = Modal.success({
             centered: true,
