@@ -20,6 +20,9 @@ import ShippingPage from "./pages/shipping/shipping";
 import PaymentPage from "./pages/payment/payment";
 import PaymentSuccessPage from "./pages/payment/payment-success";
 import OtpPage from "./pages/otpPage/otp";
+import UserInformationPage from "./pages/user-information/userInformation";
+import InvoicePage from "./pages/invoices/invoices";
+import InvoiceDetailPage from "./pages/invoices/invoice-details";
 
 
 function App() {
@@ -48,6 +51,9 @@ function App() {
             <Route path='/payment' element={<PaymentPage />} />
             <Route path='/payment-success' element={<PaymentSuccessPage />} />
             <Route path='/verify' element={<OtpPage />} />
+            <Route path='/user-information' element={<UserInformationPage />} />
+            <Route path='/invoices' element={<InvoicePage />} />
+            <Route path='/invoice-detail' element={<InvoiceDetailPage />} />
 
 
             <Route element={<RequireAuth allowedRoles={['sa']} />}>

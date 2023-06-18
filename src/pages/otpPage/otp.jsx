@@ -17,8 +17,7 @@ function OtpPage() {
     ];
 
     async function handleSubmit(values) {
-        Router('/');
-        console.log(values)
+        Router('/login');
     }
     return (
         <>

@@ -1,7 +1,4 @@
 import React from 'react';
-// import { connect, useDispatch } from 'react-redux';
-// import Link from 'next/link';
-import { Link } from 'react-router-dom';
 // import { logOut } from '~/store/auth/action';
 
 const AccountQuickLinks = (props) => {
@@ -13,39 +10,36 @@ const AccountQuickLinks = (props) => {
     const accountLinks = [
         {
             text: 'Account Information',
-            url: '/account/user-information',
+            url: '/user-information',
         },
-        {
-            text: 'Notifications',
-            url: '/account/notifications',
-        },
+        // {
+        //     text: 'Notifications',
+        //     url: '/notifications',
+        // },
         {
             text: 'Invoices',
-            url: '/account/invoices',
+            url: '/invoices',
         },
         {
             text: 'Address',
-            url: '/account/addresses',
+            url: '/addresses',
         },
-        {
-            text: 'Recent Viewed Product',
-            url: '/account/recent-viewed-product',
-        },
-        {
-            text: 'Wishlist',
-            url: '/account/wishlist',
-        },
+        // {
+        //     text: 'Recent Viewed Product',
+        //     url: '/account/recent-viewed-product',
+        // },
+
     ];
     const { isLoggedIn } = props;
 
     // View
     const linksView = accountLinks.map((item) => (
         <li key={item.text}>
-            <Link to={item.url}>
-                {/* <a> */}
+
+            <a href={item.url}>
                 {item.text}
-                {/* </a> */}
-            </Link>
+            </a>
+
         </li>
     ));
 
@@ -72,16 +66,16 @@ const AccountQuickLinks = (props) => {
                     <i className="icon-user"></i>
                 </div>
                 <div className="ps-block__right">
-                    <Link to="/login">
-                        {/* <a> */}
+
+                    <a href='/login'>
                         Login
-                        {/* </a> */}
-                    </Link>
-                    <Link to="/register">
-                        {/* <a> */}
+                    </a>
+
+
+                    <a href='/register'>
                         Register
-                        {/* </a> */}
-                    </Link>
+                    </a>
+
                 </div>
             </div>
         );
