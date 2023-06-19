@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 //     setWishlistTtems,
 // } from '~/store/ecomerce/action';
 import PageLoader from '../common/PageLoader';
-//import NavigationList from '../navigation/NavigationList';
+import NavigationList from '../navigationList/navigationList';
 
 const MasterLayout = ({ children }) => {
     // const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const MasterLayout = ({ children }) => {
         <>
             {children}
             <PageLoader />
-            {/* <NavigationList /> */}
+            <NavigationList />
             <BackTop>
                 <button className="ps-btn--backtop">
                     <i className="icon-arrow-up" />

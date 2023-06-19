@@ -2,8 +2,7 @@ import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 
-import PageContainer from '../components/layouts/PageContainer';
-import ShopPage from './shop/shop';
+import ShopHomePage from './shopHome/shopHome';
 
 function HomePage() {
     const { ctxtUser, setLoadingScreen } = useAuthContext();
@@ -30,7 +29,7 @@ function HomePage() {
         //     </main>
         // </PageContainer>
 
-        <ShopPage />
+        <ShopHomePage />
     );
 }
 

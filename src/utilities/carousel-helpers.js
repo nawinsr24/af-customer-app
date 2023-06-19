@@ -1,5 +1,5 @@
-import NextArrow from '../components/components/elements/carousel/NextArrow';
-import PrevArrow from '../components/components/elements/carousel/PrevArrow';
+import NextArrow from '../components/arrow/NextArrow';
+import PrevArrow from '../components/arrow/PrevArrow';
 import React from 'react';
 
 export const carouselStandard = {

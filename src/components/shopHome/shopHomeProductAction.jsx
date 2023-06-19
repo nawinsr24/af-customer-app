@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Modal } from 'antd';
-import ProductDetailQuickView from '../../../shopHome/productQuickView/productQuickView';
+import ProductDetailQuickView from './productQuickView/productQuickView';
 
-const ProductActions = ({ product, ecomerce }) => {
+const ModuleProductActions = ({ product, ecomerce }) => {
     const [isQuickView, setIsQuickView] = useState(false);
     // const { addItem } = useEcomerce();
 
@@ -98,4 +98,4 @@ const ProductActions = ({ product, ecomerce }) => {
     );
 };
 
-export default ProductActions;
+export default ModuleProductActions;
