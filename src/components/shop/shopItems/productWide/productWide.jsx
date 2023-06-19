@@ -12,8 +12,8 @@ const ProductWide = ({ product }) => {
                 <a href={`/product/${product.id}`}>{
                     <LazyLoad>
                         <img
-                            src={product.thumbnail}
-                            alt={product.thumbnail}
+                            src={product.thumbnail.url}
+                            alt={product.thumbnail.url}
                         />
                     </LazyLoad>}</a>
 

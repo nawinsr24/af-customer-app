@@ -18,28 +18,32 @@ class AccountQuickLinks extends Component {
         const accountLinks = [
             {
                 text: 'Account Information',
-                url: '/account/user-information',
+                url: '/user-information',
             },
             {
-                text: 'Notifications',
-                url: '/account/notifications',
+                text: 'Your Orders',
+                url: '/orders',
+            },
+            {
+                text: 'Order History',
+                url: '/order-history',
             },
             {
                 text: 'Invoices',
-                url: '/account/invoices',
+                url: '/invoices',
             },
-            {
-                text: 'Address',
-                url: '/account/addresses',
-            },
-            {
-                text: 'Recent Viewed Product',
-                url: '/account/recent-viewed-product',
-            },
-            {
-                text: 'Wishlist',
-                url: '/account/wishlist',
-            },
+            // {
+            //     text: 'Address',
+            //     url: '/account/addresses',
+            // },
+            // {
+            //     text: 'Recent Viewed Product',
+            //     url: '/account/recent-viewed-product',
+            // },
+            // {
+            //     text: 'Wishlist',
+            //     url: '/account/wishlist',
+            // },
         ];
         const menu = (
             <Menu>

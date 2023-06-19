@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import AccountMenuSidebar from '../accountMenuSideBar';
-import ProductCart from './invoice-detail-productcart';
+import AccountMenuSidebar from './accountMenu';
+import ProductCart from './ProductCart';
 
-class InvoiceDetail extends Component {
+class OrderDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -19,6 +19,7 @@ class InvoiceDetail extends Component {
                 text: 'Your Orders',
                 url: '/orders',
                 icon: 'icon-store',
+                active: true
             },
             {
                 text: 'Order History',
@@ -29,7 +30,7 @@ class InvoiceDetail extends Component {
                 text: 'Invoices',
                 url: '/invoices',
                 icon: 'icon-papers',
-                active: true,
+
             },
             // {
             //     text: 'Address',
@@ -50,10 +51,11 @@ class InvoiceDetail extends Component {
         const invoiceProducts = [
             {
                 id: '6',
-                thumbnail: '/static/img/products/shop/5.jpg',
+                thumbnail: 'https://beta.apinouthemes.com/uploads/e98492a0c2b24ae5892641009bf21056.jpg',
                 title: 'Grand Slam Indoor Of Show Jumping Novel',
                 vendor: "Robert's Store",
                 sale: true,
+                status: 'Today',
                 price: '32.99',
                 salePrice: '41.00',
                 rating: true,
@@ -67,10 +69,29 @@ class InvoiceDetail extends Component {
             },
             {
                 id: '7',
-                thumbnail: '/static/img/products/shop/6.jpg',
+                thumbnail: 'https://reactstorefronts.com/static/img/categories/7.jpg',
                 title: 'Sound Intone I65 Earphone White Version',
                 vendor: 'Youngshop',
                 sale: true,
+                status: 'Tommorrow',
+                price: '100.99',
+                salePrice: '106.00',
+                rating: true,
+                ratingCount: '5',
+                badge: [
+                    {
+                        type: 'sale',
+                        value: '-5%',
+                    },
+                ],
+            },
+            {
+                id: '7',
+                thumbnail: 'https://beta.apinouthemes.com/uploads/feaeaa8c5d24474e943f57a7df55e921.jpg',
+                title: 'Marshall Kilburn Portable Wireless Speaker',
+                vendor: 'Youngshop',
+                sale: true,
+                status: '20 june 2023',
                 price: '100.99',
                 salePrice: '106.00',
                 rating: true,
@@ -84,7 +105,10 @@ class InvoiceDetail extends Component {
             },
         ];
         return (
-            <section className="ps-my-account ps-page--account">
+            <section style={{
+                minHeight: '76vh', paddingTop: '10px'
+            }
+            } className="ps-my-account ps-page--account" >
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4">
@@ -97,12 +121,12 @@ class InvoiceDetail extends Component {
                                 <div className="ps-section--account-setting">
                                     <div className="ps-section__header">
                                         <h3>
-                                            Invoice #500884010 -
-                                            <strong>Successful delivery</strong>
+
+                                            <strong>Your Orders</strong>
                                         </h3>
                                     </div>
                                     <div className="ps-section__content">
-                                        <div className="row">
+                                        {/* <div className="row">
                                             <div className="col-md-4 col-12">
                                                 <figure className="ps-block--invoice">
                                                     <figcaption>
@@ -147,7 +171,7 @@ class InvoiceDetail extends Component {
                                                     </div>
                                                 </figure>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="table-responsive">
                                             <table className="table ps-table--shopping-cart">
                                                 <thead>
@@ -171,6 +195,9 @@ class InvoiceDetail extends Component {
                                                                             product
                                                                         }
                                                                     />
+                                                                    <div style={{ color: 'green' }}>
+                                                                        <strong>Arriving {product.status}</strong>
+                                                                    </div>
                                                                 </td>
                                                                 <td className="price">
                                                                     $
@@ -192,18 +219,18 @@ class InvoiceDetail extends Component {
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <a href="/invoices" className="ps-btn ps-btn--sm ">
+                                        {/* <a href="/invoices" className="ps-btn ps-btn--sm ">
                                             Back to invoices
-                                        </a>
+                                        </a> */}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
         );
     }
 }
 
-export default InvoiceDetail;
+export default OrderDetails;

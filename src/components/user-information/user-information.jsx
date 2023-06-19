@@ -10,11 +10,16 @@ const UserInformation = () => {
             icon: 'icon-user',
             active: true,
         },
-        // {
-        //     text: 'Notifications',
-        //     url: '/notifications',
-        //     icon: 'icon-alarm-ringing',
-        // },
+        {
+            text: 'Your Orders',
+            url: '/orders',
+            icon: 'icon-store',
+        },
+        {
+            text: 'Order History',
+            url: '/order-history',
+            icon: 'icon-history',
+        },
         {
             text: 'Invoices',
             url: '/invoices',

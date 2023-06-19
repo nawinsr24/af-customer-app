@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import AccountMenuSidebar from '../accountMenuSideBar';
-import ProductCart from './invoice-detail-productcart';
+import AccountMenuSidebar from '../accountMenu';
+import OrderHistoryProductCart from './order-history-product-cart';
+import ModulePaymentOrderSummary from '../../payment/paymentOrderSummary';
 
-class InvoiceDetail extends Component {
+class ProductDeliveryDetails extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -19,17 +20,19 @@ class InvoiceDetail extends Component {
                 text: 'Your Orders',
                 url: '/orders',
                 icon: 'icon-store',
+
             },
             {
                 text: 'Order History',
                 url: '/order-history',
                 icon: 'icon-history',
+                active: true
             },
             {
                 text: 'Invoices',
                 url: '/invoices',
                 icon: 'icon-papers',
-                active: true,
+
             },
             // {
             //     text: 'Address',
@@ -50,10 +53,11 @@ class InvoiceDetail extends Component {
         const invoiceProducts = [
             {
                 id: '6',
-                thumbnail: '/static/img/products/shop/5.jpg',
+                thumbnail: 'https://beta.apinouthemes.com/uploads/e98492a0c2b24ae5892641009bf21056.jpg',
                 title: 'Grand Slam Indoor Of Show Jumping Novel',
                 vendor: "Robert's Store",
                 sale: true,
+                status: '11 june 2023',
                 price: '32.99',
                 salePrice: '41.00',
                 rating: true,
@@ -65,26 +69,14 @@ class InvoiceDetail extends Component {
                     },
                 ],
             },
-            {
-                id: '7',
-                thumbnail: '/static/img/products/shop/6.jpg',
-                title: 'Sound Intone I65 Earphone White Version',
-                vendor: 'Youngshop',
-                sale: true,
-                price: '100.99',
-                salePrice: '106.00',
-                rating: true,
-                ratingCount: '5',
-                badge: [
-                    {
-                        type: 'sale',
-                        value: '-5%',
-                    },
-                ],
-            },
+
+
         ];
         return (
-            <section className="ps-my-account ps-page--account">
+            <section style={{
+                minHeight: '76vh', paddingTop: '10px'
+            }
+            } className="ps-my-account ps-page--account" >
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4">
@@ -97,11 +89,26 @@ class InvoiceDetail extends Component {
                                 <div className="ps-section--account-setting">
                                     <div className="ps-section__header">
                                         <h3>
-                                            Invoice #500884010 -
-                                            <strong>Successful delivery</strong>
+
+                                            <strong>Delivery Details</strong>
                                         </h3>
                                     </div>
                                     <div className="ps-section__content">
+
+                                        <div style={{ marginBottom: '3rem' }}>
+                                            <div>
+                                                <div style={{ color: 'black' }}>
+                                                    <strong>Delivered on {invoiceProducts[0].status}</strong>
+                                                </div>
+                                                <OrderHistoryProductCart
+                                                    product={
+                                                        invoiceProducts[0]
+                                                    }
+                                                />
+
+                                            </div>
+                                        </div>
+
                                         <div className="row">
                                             <div className="col-md-4 col-12">
                                                 <figure className="ps-block--invoice">
@@ -148,62 +155,39 @@ class InvoiceDetail extends Component {
                                                 </figure>
                                             </div>
                                         </div>
-                                        <div className="table-responsive">
-                                            <table className="table ps-table--shopping-cart">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Product</th>
-                                                        <th>Price</th>
-                                                        <th>Quantity</th>
-                                                        <th>Amount</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {invoiceProducts.map(
-                                                        product => (
-                                                            <tr
-                                                                key={
-                                                                    product.id
-                                                                }>
-                                                                <td>
-                                                                    <ProductCart
-                                                                        product={
-                                                                            product
-                                                                        }
-                                                                    />
-                                                                </td>
-                                                                <td className="price">
-                                                                    $
-                                                                    {
-                                                                        product.price
-                                                                    }
-                                                                </td>
 
-                                                                <td>1</td>
-                                                                <td className="price">
-                                                                    $
-                                                                    {
-                                                                        product.price
-                                                                    }
-                                                                </td>
-                                                            </tr>
-                                                        )
-                                                    )}
-                                                </tbody>
-                                            </table>
+                                        <div className='order-traker'>
+                                            <div class="wrapper">
+                                                <ul class="StepProgress">
+                                                    <li class="StepProgress-item is-done"><strong>Order Received</strong>
+                                                        11 june 2023</li>
+                                                    {/* <li class="StepProgress-item is-done"><strong>Order Processed</strong>
+                                                        12 june 2023
+                                                    </li>
+                                                    <li class="StepProgress-item is-done"><strong>Order Dispatched</strong>
+                                                        13 june 2023</li> */}
+                                                    <li style={{ height: '15px' }} class="StepProgress-item is-done"> <strong>Order Deliverd</strong> 13 june 2023</li>
+                                                    {/* <li class="StepProgress-item"><strong>Provide feedback</strong></li> */}
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <a href="/invoices" className="ps-btn ps-btn--sm ">
+
+                                        <div style={{ marginTop: '6rem' }}>
+                                            < ModulePaymentOrderSummary />
+                                        </div>
+
+                                        {/* <a href="/invoices" className="ps-btn ps-btn--sm ">
                                             Back to invoices
-                                        </a>
+                                        </a> */}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
         );
     }
 }
 
-export default InvoiceDetail;
+export default ProductDeliveryDetails;

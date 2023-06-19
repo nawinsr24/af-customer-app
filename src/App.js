@@ -23,6 +23,10 @@ import OtpPage from "./pages/otpPage/otp";
 import UserInformationPage from "./pages/user-information/userInformation";
 import InvoicePage from "./pages/invoices/invoices";
 import InvoiceDetailPage from "./pages/invoices/invoice-details";
+import OrdersPage from "./pages/orders/order";
+import OrderTrakingPage from "./pages/order-traking/orderTraking";
+import OrdersHistoryPage from "./pages/orderHistory/orderHistory";
+import ProductDeliveryHistoryPage from "./pages/orderHistory/productDeliveryistory";
 
 
 function App() {
@@ -54,6 +58,10 @@ function App() {
             <Route path='/user-information' element={<UserInformationPage />} />
             <Route path='/invoices' element={<InvoicePage />} />
             <Route path='/invoice-detail' element={<InvoiceDetailPage />} />
+            <Route path='/orders' element={<OrdersPage />} />
+            <Route path='/order-tracking/:id' element={<OrderTrakingPage />} />
+            <Route path='/order-history' element={<OrdersHistoryPage />} />
+            <Route path='/delivery-history/:id' element={<ProductDeliveryHistoryPage />} />
 
 
             <Route element={<RequireAuth allowedRoles={['sa']} />}>

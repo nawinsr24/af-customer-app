@@ -45,20 +45,31 @@ const Checkout = () => {
                                                     <Radio.Group style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}
                                                         onChange={(e) => handleAddressChange(e)}
                                                         value={address}>
-                                                        <Radio value={'address 1'}>{`12345 Grand Boulevard
+                                                        <Radio value={'address 1'}>
+                                                            <figure style={{ border: '1.5px solid #eaeaea', padding: '10px' }}>
+                                                                <figcaption>
+                                                                    {`12345 Grand Boulevard
                                                                                     Suite 5678, Building C
                                                                                     City Center Complex
                                                                                     Metropolis City
                                                                                     State of Prosperity
                                                                                     Country of Success
-                                                                                    Postal Code: 67890`}</Radio>
-                                                        <Radio value={'address 2'}>{`12345 Grand Boulevard
+                                                                                    Postal Code: 67890`}
+                                                                </figcaption>
+                                                            </figure> </Radio>
+                                                        <Radio value={'address 2'}>
+                                                            <figure style={{ border: '1.5px solid #eaeaea', padding: '10px' }}>
+                                                                <figcaption>
+                                                                    {`12345 Grand Boulevard
                                                                                     Suite 5678, Building C
                                                                                     City Center Complex
                                                                                     Metropolis City
                                                                                     State of Prosperity
                                                                                     Country of Success
-                                                                                    Postal Code: 67890`}</Radio>
+                                                                                    Postal Code: 67890`}
+                                                                </figcaption>
+                                                            </figure>
+                                                        </Radio>
                                                     </Radio.Group>
                                                 </div>
                                             </div>

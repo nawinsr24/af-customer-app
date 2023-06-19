@@ -15,11 +15,16 @@ class Invoices extends Component {
                 url: '/user-information',
                 icon: 'icon-user',
             },
-            // {
-            //     text: 'Notifications',
-            //     url: '/account/notifications',
-            //     icon: 'icon-alarm-ringing',
-            // },
+            {
+                text: 'Your Orders',
+                url: '/orders',
+                icon: 'icon-store',
+            },
+            {
+                text: 'Order History',
+                url: '/order-history',
+                icon: 'icon-history',
+            },
             {
                 text: 'Invoices',
                 url: '/invoices',

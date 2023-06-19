@@ -12,18 +12,22 @@ const AccountQuickLinks = (props) => {
             text: 'Account Information',
             url: '/user-information',
         },
-        // {
-        //     text: 'Notifications',
-        //     url: '/notifications',
-        // },
+        {
+            text: 'Your Orders',
+            url: '/orders',
+        },
+        {
+            text: 'Order History',
+            url: '/order-history',
+        },
         {
             text: 'Invoices',
             url: '/invoices',
         },
-        {
-            text: 'Address',
-            url: '/addresses',
-        },
+        // {
+        //     text: 'Address',
+        //     url: '/addresses',
+        // },
         // {
         //     text: 'Recent Viewed Product',
         //     url: '/account/recent-viewed-product',
