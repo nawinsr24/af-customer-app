@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import LazyLoad from 'react-lazyload';
 import AccountMenuSidebar from '../accountMenu';
-import OrderHistoryProductCart from './order-history-product-cart';
 import ModulePaymentOrderSummary from '../../payment/paymentOrderSummary';
 
 class ProductDeliveryDetails extends Component {
@@ -100,11 +100,26 @@ class ProductDeliveryDetails extends Component {
                                                 <div style={{ color: 'black' }}>
                                                     <strong>Delivered on {invoiceProducts[0].status}</strong>
                                                 </div>
-                                                <OrderHistoryProductCart
-                                                    product={
-                                                        invoiceProducts[0]
-                                                    }
-                                                />
+
+                                                <div className="ps-product--cart">
+                                                    <div className="ps-product__thumbnail">
+
+
+                                                        <a href={`/product/${product?.id}`}>
+                                                            <LazyLoad>
+                                                                <img
+                                                                    src={invoiceProducts[0].thumbnail}
+                                                                    alt={invoiceProducts[0].thumbnail}
+                                                                />
+                                                            </LazyLoad>
+                                                        </a>
+
+                                                    </div>
+                                                    <div className="ps-product__content">{
+                                                        <a href={`/product/${invoiceProducts[0].id}`} className="ps-product__title">{invoiceProducts[0].title}</a>
+                                                    }</div>
+                                                </div>
+
 
                                             </div>
                                         </div>

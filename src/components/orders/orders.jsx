@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AccountMenuSidebar from './accountMenu';
-import ProductCart from './ProductCart';
+import LazyLoad from 'react-lazyload';
+
 
 class OrderDetails extends Component {
     constructor(props) {
@@ -190,11 +191,24 @@ class OrderDetails extends Component {
                                                                     product.id
                                                                 }>
                                                                 <td>
-                                                                    <ProductCart
-                                                                        product={
-                                                                            product
-                                                                        }
-                                                                    />
+                                                                    <div className="ps-product--cart">
+                                                                        <div className="ps-product__thumbnail">
+
+
+                                                                            <a href={`/order-tracking/${product?.id}`}>
+                                                                                <LazyLoad>
+                                                                                    <img
+                                                                                        src={product.thumbnail}
+                                                                                        alt={product.thumbnail}
+                                                                                    />
+                                                                                </LazyLoad>
+                                                                            </a>
+
+                                                                        </div>
+                                                                        <div className="ps-product__content">{
+                                                                            <a href={`/order-tracking/${product.id}`} className="ps-product__title">{product.title}</a>
+                                                                        }</div>
+                                                                    </div>
                                                                     <div style={{ color: 'green' }}>
                                                                         <strong>Arriving {product.status}</strong>
                                                                     </div>
