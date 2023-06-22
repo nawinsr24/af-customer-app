@@ -1,10 +1,15 @@
 import React from 'react';
+import { useAuthContext } from '../../../context/AuthContext';
+import { notify } from '../../notify';
 // import { logOut } from '~/store/auth/action';
 
 const AccountQuickLinks = (props) => {
     // const dispatch = useDispatch();
+    const { ctxtlogout } = useAuthContext();
     const handleLogout = (e) => {
         e.preventDefault();
+        ctxtlogout();
+        notify("success", "Logged out successfully");
         // dispatch(logOut());
     };
     const accountLinks = [
@@ -55,7 +60,7 @@ const AccountQuickLinks = (props) => {
                     <ul className="ps-list--arrow">
                         {linksView}
                         <li className="ps-block__footer">
-                            <a href="/#" onClick={(e) => handleLogout(e)}>
+                            <a href="/" onClick={(e) => handleLogout(e)}>
                                 Logout
                             </a>
                         </li>

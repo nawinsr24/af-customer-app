@@ -30,10 +30,7 @@ export function AuthContextProvider({ children }) {
         return {
             token,
             userId: tokenData.userId,
-            type: tokenData.type,
-            roleId: tokenData.roleId,
-            role: tokenData.role,
-            backofficeId: tokenData.backofficeId,
+            custName: tokenData.custName
         }
     }
 

@@ -3,7 +3,6 @@ import { CookiesProvider } from 'react-cookie';
 import './App.scss';
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import LoginPage from "./pages/LoginPage";
 import MissingPage from "./pages/MissingPage";
 import RequireAuth from "./components/RequireAuth";
 import HomePage from "./pages/HomePage";

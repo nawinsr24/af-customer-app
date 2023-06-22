@@ -1,11 +1,7 @@
 import axios from "axios";
 
 
-
-// axios.defaults.baseURL = "http://ylapi.bigblue.in";
-//axios.defaults.baseURL = "http://localhost:5000";
-
- axios.defaults.baseURL = "https://testapi.dlxlogistics.in";
+ axios.defaults.baseURL = "http://3.109.4.44:9005";
 
 // Add a request interceptor
 axios.interceptors.request.use(

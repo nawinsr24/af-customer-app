@@ -1,30 +1,14 @@
-import { postData, putData } from "./rest-api-helper"
+import { postData } from "./rest-api-helper"
 
-export async function loginService(data) {
+export async function loginService({ username, password }) {
     const details = {
-        urlPath: "/login/staff",
+        urlPath: "/customer/login",
         body: {
-            username: data.email,
-            password: data.password
+            username, password
         }
     }
 
     const res = await postData(details);
     console.log(res, "---------------loginService");
-    return res;
-}
-
-export async function ChangePwdService(data) {
-    const details = {
-        urlPath: "/password/changeWithOldPwd",
-        body: {
-            userId: data.userId,
-            password: data.password,
-            oldPwd: data.old_password
-        }
-    }
-
-    const res = await putData(details);
-    console.log(res, "---------------ChangePwdService");
-    return res;
+    return res.data;
 }

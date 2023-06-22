@@ -3,6 +3,7 @@ import React from 'react';
 import HeaderDefault from '../headers/HeaderDefault';
 import HeaderMobile from '../headers/HeaderMobile';
 import FooterFullwidth from '../footers/FooterFullwidth';
+import useDocumentTitle from '../../hooks/useDocumentTitle';
 
 const initHeaders = (
     <>
@@ -25,11 +26,11 @@ const PageContainer = ({
     let titleView;
 
     if (title !== '') {
-        titleView = process.env.title + ' | ' + title;
+        titleView = "AF-CUSTOMER | " + title;
     } else {
-        titleView = process.env.title + ' | ' + process.env.titleDescription;
+        titleView = "AF-CUSTOMER | " + process.env.titleDescription;
     }
-
+    useDocumentTitle(titleView)
     return (
         <>
             {/* <head> */}

@@ -5,9 +5,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import AccountQuickLinksMobile from './AccountQuickLinksMobile';
+import { useAuthContext } from '../../../context/AuthContext';
 
 const MobileHeaderActions = ({ auth, ecomerce }) => {
     // const { cartItems } = ecomerce;
+    const { ctxtUser } = useAuthContext();
     const cartItems = []; //new     
     return (
         <div className="navigation__right">
@@ -20,12 +22,12 @@ const MobileHeaderActions = ({ auth, ecomerce }) => {
                 </div>
             </Link>
 
-            {auth?.isLoggedIn && Boolean(auth?.isLoggedIn) === true ? (
+            {ctxtUser?.token ? (
                 <AccountQuickLinksMobile />
             ) : (
 
                 <Link to="/login">
-                    <div className="header__extra" style={{marginLeft:"10px"}}>
+                    <div className="header__extra" style={{ marginLeft: "10px" }}>
                         <i className="icon-user"></i>
                     </div>
                 </Link>

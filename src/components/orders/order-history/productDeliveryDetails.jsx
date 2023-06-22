@@ -105,7 +105,7 @@ class ProductDeliveryDetails extends Component {
                                                     <div className="ps-product__thumbnail">
 
 
-                                                        <a href={`/product/${product?.id}`}>
+                                                        <a href={`/product/$11`}>
                                                             <LazyLoad>
                                                                 <img
                                                                     src={invoiceProducts[0].thumbnail}

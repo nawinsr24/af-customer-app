@@ -83,3 +83,9 @@ export function genFileName({ strg, ext }) {
       + date.getFullYear() + ext
 }
 
+export function isEmail(input) {
+   // Email pattern regular expression
+   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+   // Check if the input matches the email pattern
+   return emailPattern.test(input);
+}

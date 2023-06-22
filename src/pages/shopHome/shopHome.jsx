@@ -10,7 +10,7 @@ import PageContainer from '../../components/layouts/PageContainer';
 const ShopHomePage = () => {
 
     return (
-        <PageContainer title="Shop layout fullwidth">
+        <PageContainer title="Home">
             <div className="ps-page--shop">
                 <div className="ps-container">
                     <ShopBanner />

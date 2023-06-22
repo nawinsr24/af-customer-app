@@ -5,6 +5,7 @@ import HeaderActions from './modules/HeaderActions';
 import { stickyHeader } from '../../utilities/common-helpers';
 
 const HeaderDefault = () => {
+   
     // useEffect(() => {
     //     if (process?.browser) {
     window.addEventListener('scroll', stickyHeader);

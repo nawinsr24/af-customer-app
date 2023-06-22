@@ -3,18 +3,17 @@ import React from 'react';
 // import Link from 'next/link';
 import MiniCart from './MiniCart';
 import AccountQuickLinks from './AccountQuickLinks';
+import { useAuthContext } from '../../../context/AuthContext';
 
 const HeaderActions = ({ ecomerce, auth }) => {
-
+    const { ctxtUser } = useAuthContext();
     // views
     let headerAuthView;
-    // if (auth?.isLoggedIn && Boolean(auth?.isLoggedIn) === true) {
-    //     headerAuthView = <AccountQuickLinks isLoggedIn={true} />;
-    // } else {
-    //     headerAuthView = <AccountQuickLinks isLoggedIn={false} />;
-    // }
-
-    headerAuthView = <AccountQuickLinks isLoggedIn={true} />;
+    if (ctxtUser?.token) {
+        headerAuthView = <AccountQuickLinks isLoggedIn={true} />;
+    } else {
+        headerAuthView = <AccountQuickLinks isLoggedIn={false} />;
+    }
 
 
     return (
