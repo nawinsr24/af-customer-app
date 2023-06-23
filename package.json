@@ -37,7 +37,7 @@
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"
   },
-  "homepage" : "http://nawinsr24.github.io/af-customer-app",
+  "homepage" : "https://nawinsr24.github.io/af-customer-app",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
