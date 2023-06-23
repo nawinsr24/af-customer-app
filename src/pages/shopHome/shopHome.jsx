@@ -1,9 +1,8 @@
 import React from 'react';
-import ShopBanner from '../../components/shopHome/shopBanner';
 // import ShopBrands from '~/components/partials/shop/ShopBrands';
 // import ShopCategories from '~/components/partials/shop/ShopCategories';
 import ShopItems from '../../components/shop/shopItems/shopItem';
-import ProductGroupByCarousel from '../../components/shopHome/productGropByCarousel/ProductGroupByCarousel';
+// import ProductGroupByCarousel from '../../components/shopHome/productGropByCarousel/ProductGroupByCarousel';
 import PageContainer from '../../components/layouts/PageContainer';
 // import Newletters from '~/components/partials/commons/Newletters';
 
@@ -13,14 +12,14 @@ const ShopHomePage = () => {
         <PageContainer title="Home">
             <div className="ps-page--shop">
                 <div className="ps-container">
-                    <ShopBanner />
+                    {/* <ShopBanner /> */}
                     {/* <ShopBrands /> */}
                     {/* <ShopCategories /> */}
-                    <ProductGroupByCarousel
+                    {/* <ProductGroupByCarousel
                         layout="fullwidth"
                         collectionSlug="shop-best-seller-items"
                         title="Best Sale Items"
-                    />
+                    /> */}
                     {/* <ProductGroupByCarousel
                         layout="fullwidth"
                         collectionSlug="shop-recommend-items"
@@ -31,6 +30,8 @@ const ShopHomePage = () => {
             </div>
             {/* <Newletters /> */}
         </PageContainer>
+
+
     );
 };
 export default ShopHomePage;

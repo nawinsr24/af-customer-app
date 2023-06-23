@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
- axios.defaults.baseURL = "http://3.109.4.44:9005";
+axios.defaults.baseURL = "https://dev.api.amirthafashion.com";
 
 // Add a request interceptor
 axios.interceptors.request.use(
@@ -36,7 +36,7 @@ export async function getData({ urlPath, queryParams }) {
         if (response.status === 200 || response.status === 201)
             return response.data;
     } catch (error) {
-        console.log(error);   
+        console.log(error);
         throw error.response.status
     }
 };

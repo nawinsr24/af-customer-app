@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../context/AuthContext';
 
 import ShopHomePage from './shopHome/shopHome';
+import HomepageDefaultPage from './home';
 
 function HomePage() {
     const { ctxtUser, setLoadingScreen } = useAuthContext();
@@ -29,7 +30,7 @@ function HomePage() {
         //     </main>
         // </PageContainer>
 
-        <ShopHomePage />
+        <HomepageDefaultPage />
     );
 }
 

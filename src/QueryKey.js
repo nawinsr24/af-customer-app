@@ -1,5 +1,5 @@
 const QueryKey = {
-    custList: 'customers',
+    getAllBanners: 'getAllBanners',
 
 }
 
