@@ -78,7 +78,7 @@ function App() {
 
 
             {/* catch all */}
-            <Route path="*" element={<MissingPage />} />
+            <Route path="*" element={<HomePage />} />
           </Routes>
         </MasterLayout>
       </CookiesProvider>
