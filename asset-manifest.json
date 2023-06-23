@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/af-customer-app/static/css/main.3178c9bb.css",
-    "main.js": "/af-customer-app/static/js/main.eda44315.js",
+    "main.css": "/af-customer-app/static/css/main.8d219314.css",
+    "main.js": "/af-customer-app/static/js/main.9cf940d1.js",
     "static/media/Linearicons.ttf": "/af-customer-app/static/media/Linearicons.48ff6f205b2d85900ff8.ttf",
     "static/media/fontawesome-webfont.svg?v=4.6.3": "/af-customer-app/static/media/fontawesome-webfont.3b270ae3f01b143951b0.svg",
     "static/media/fontawesome-webfont.ttf?v=4.6.3": "/af-customer-app/static/media/fontawesome-webfont.f0af1680f082547a7aae.ttf",
@@ -10,11 +10,11 @@
     "static/media/fontawesome-webfont.woff2?v=4.6.3": "/af-customer-app/static/media/fontawesome-webfont.0317d582b93c20f68e05.woff2",
     "static/media/404.svg": "/af-customer-app/static/media/404.bdf1c60c297dc6528f56fe6a382dacdf.svg",
     "index.html": "/af-customer-app/index.html",
-    "main.3178c9bb.css.map": "/af-customer-app/static/css/main.3178c9bb.css.map",
-    "main.eda44315.js.map": "/af-customer-app/static/js/main.eda44315.js.map"
+    "main.8d219314.css.map": "/af-customer-app/static/css/main.8d219314.css.map",
+    "main.9cf940d1.js.map": "/af-customer-app/static/js/main.9cf940d1.js.map"
   },
   "entrypoints": [
-    "static/css/main.3178c9bb.css",
-    "static/js/main.eda44315.js"
+    "static/css/main.8d219314.css",
+    "static/js/main.9cf940d1.js"
   ]
 }
