@@ -52,24 +52,14 @@ function App() {
             <Route path='/payment' element={<PaymentPage />} />
             <Route path='/payment-success' element={<PaymentSuccessPage />} />
             <Route path='/verify' element={<OtpPage />} />
-            <Route path='/user-information' element={<UserInformationPage />} />
-            <Route path='/orders' element={<OrdersPage />} />
-            <Route path='/order-tracking/:id' element={<OrderTrakingPage />} />
-            <Route path='/order-history' element={<OrdersHistoryPage />} />
             <Route path='/delivery-history/:id' element={<ProductDeliveryHistoryPage />} />
 
 
-            <Route element={<RequireAuth allowedRoles={['sa']} />}>
-              <Route path="/sa" element={<Layout />}>
-
-              </Route>
-            </Route>
-
-            <Route element={<RequireAuth allowedRoles={['staff']} />}>
-              <Route path="/bo" element={<Layout />}>
-
-
-              </Route>
+            <Route element={<RequireAuth />}>
+              <Route path='/user-information' element={<UserInformationPage />} />
+              <Route path='/orders' element={<OrdersPage />} />
+              <Route path='/order-tracking/:id' element={<OrderTrakingPage />} />
+              <Route path='/order-history' element={<OrdersHistoryPage />} />
             </Route>
 
 
