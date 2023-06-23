@@ -27,28 +27,7 @@ class ProductDeliveryDetails extends Component {
                 url: '/order-history',
                 icon: 'icon-history',
                 active: true
-            },
-            {
-                text: 'Invoices',
-                url: '/invoices',
-                icon: 'icon-papers',
-
-            },
-            // {
-            //     text: 'Address',
-            //     url: '/account/addresses',
-            //     icon: 'icon-papers',
-            // },
-            // {
-            //     text: 'Recent Viewed Product',
-            //     url: '/account/recent-viewed-product',
-            //     icon: 'icon-papers',
-            // },
-            // {
-            //     text: 'Wishlist',
-            //     url: '/account/wishlist',
-            //     icon: 'icon-papers',
-            // },
+            }
         ];
         const invoiceProducts = [
             {

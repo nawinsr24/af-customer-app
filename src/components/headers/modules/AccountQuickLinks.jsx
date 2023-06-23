@@ -1,15 +1,18 @@
 import React from 'react';
 import { useAuthContext } from '../../../context/AuthContext';
 import { notify } from '../../notify';
+import { useNavigate } from 'react-router-dom';
 // import { logOut } from '~/store/auth/action';
 
 const AccountQuickLinks = (props) => {
     // const dispatch = useDispatch();
     const { ctxtlogout } = useAuthContext();
+    const navigate = useNavigate()
     const handleLogout = (e) => {
         e.preventDefault();
         ctxtlogout();
         notify("success", "Logged out successfully");
+        navigate("/", { replace: true });
         // dispatch(logOut());
     };
     const accountLinks = [
@@ -24,11 +27,7 @@ const AccountQuickLinks = (props) => {
         {
             text: 'Order History',
             url: '/order-history',
-        },
-        {
-            text: 'Invoices',
-            url: '/invoices',
-        },
+        }
         // {
         //     text: 'Address',
         //     url: '/addresses',
@@ -61,6 +60,7 @@ const AccountQuickLinks = (props) => {
                         {linksView}
                         <li className="ps-block__footer">
                             <a href="/" onClick={(e) => handleLogout(e)}>
+                               
                                 Logout
                             </a>
                         </li>
