@@ -26,6 +26,8 @@ import OrdersHistoryPage from "./pages/orderHistory/orderHistory";
 import ProductDeliveryHistoryPage from "./pages/orderHistory/productDeliveryistory";
 import './static/fonts/Linearicons/Font/demo-files/demo.css';
 import './static/fonts/font-awesome/css/font-awesome.min.css';
+import './static/fonts/font-awesome/css/font-awesome.css';
+import './static/fonts/font-awesome/css/font-awesome.css.map';
 import './static/css/bootstrap.min.css';
 import './static/css/slick.min.css';
 import './scss/style.scss';
