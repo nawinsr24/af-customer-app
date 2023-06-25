@@ -24,7 +24,7 @@ import OrdersPage from "./pages/orders/order";
 import OrderTrakingPage from "./pages/order-traking/orderTraking";
 import OrdersHistoryPage from "./pages/orderHistory/orderHistory";
 import ProductDeliveryHistoryPage from "./pages/orderHistory/productDeliveryistory";
-
+import './static/fonts/Linearicons/Font/demo-files/demo.css'
 
 function App() {
 
