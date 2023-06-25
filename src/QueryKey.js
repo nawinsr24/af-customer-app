@@ -1,6 +1,7 @@
 const QueryKey = {
     getAllBanners: 'getAllBanners',
-    getCustomer: 'getCustomer'
+    getCustomer: 'getCustomer',
+    getAllSubCat: 'getAllSubCat'
 }
 
 export default QueryKey;

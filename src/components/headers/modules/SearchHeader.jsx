@@ -5,65 +5,11 @@ import { Link } from 'react-router-dom';
 import { Spin } from 'antd';
 // import ProductRepository from '~/repositories/ProductRepository';
 import ProductSearchResult from '../../ProductSearchResult';
+import { useQuery } from 'react-query';
+import QueryKey from '../../../QueryKey';
+import { getAllSubCatService } from '../../../services/category-service';
+import { customAlert } from '../../notify';
 
-const exampleCategories = [
-    'All',
-    'Babies & Moms',
-    'Books & Office',
-    'Cars & Motocycles',
-    'Clothing & Apparel',
-    ' Accessories',
-    'Bags',
-    'Kid’s Fashion',
-    'Mens',
-    'Shoes',
-    'Sunglasses',
-    'Womens',
-    'Computers & Technologies',
-    'Desktop PC',
-    'Laptop',
-    'Smartphones',
-    'Consumer Electrics',
-    'Air Conditioners',
-    'Accessories',
-    'Type Hanging Cell',
-    'Audios & Theaters',
-    'Headphone',
-    'Home Theater System',
-    'Speakers',
-    'Car Electronics',
-    'Audio & Video',
-    'Car Security',
-    'Radar Detector',
-    'Vehicle GPS',
-    'Office Electronics',
-    'Printers',
-    'Projectors',
-    'Scanners',
-    'Store & Business',
-    'Refrigerators',
-    'TV Televisions',
-    '4K Ultra HD TVs',
-    'LED TVs',
-    'OLED TVs',
-    'Washing Machines',
-    'Type Drying Clothes',
-    'Type Horizontal',
-    'Type Vertical',
-    'Garden & Kitchen',
-    'Cookware',
-    'Decoration',
-    'Furniture',
-    'Garden Tools',
-    'Home Improvement',
-    'Powers And Hand Tools',
-    'Utensil & Gadget',
-    'Health & Beauty',
-    'Equipments',
-    'Hair Care',
-    'Perfumer',
-    'Wine Cabinets',
-];
 
 function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -88,6 +34,8 @@ const SearchHeader = () => {
     const [resultItems, setResultItems] = useState(null);
     const [loading, setLoading] = useState(false);
     const debouncedSearchTerm = useDebounce(keyword, 300);
+    const { isLoading, isError, error, data: subCatData } = useQuery([QueryKey.getAllSubCat], () => getAllSubCatService());
+
 
     function handleClearKeyword() {
         setKeyword('');
@@ -128,11 +76,8 @@ const SearchHeader = () => {
     }, [debouncedSearchTerm]);
 
     // Views
-    let productItemsView,
-        clearTextView,
-        selectOptionView,
-        loadingView,
-        loadMoreView;
+    let productItemsView, clearTextView, selectOptionView, loadingView, loadMoreView;
+
     if (!loading) {
         if (resultItems && resultItems.length > 0) {
             if (resultItems.length > 5) {
@@ -165,11 +110,20 @@ const SearchHeader = () => {
         );
     }
 
-    selectOptionView = exampleCategories.map((option) => (
-        <option value={option} key={option}>
-            {option}
-        </option>
-    ));
+    if (subCatData) {
+       const subCatDataNew = [{ id: "all", sub_category_name: "All" }, ...subCatData]
+        selectOptionView = subCatDataNew.map((obj) => (
+            <option value={obj?.id} key={obj?.id}>
+                {obj?.sub_category_name}
+            </option>
+        ))
+    }
+
+
+    if (isError) {
+        customAlert(error);
+        // return <h2>Something went wrong</h2>
+    }
 
     return (
         <form
@@ -178,7 +132,7 @@ const SearchHeader = () => {
             action="/"
             onSubmit={handleSubmit}>
             <div className="ps-form__categories">
-                <select className="form-control">{selectOptionView}</select>
+                <select className="form-control">{selectOptionView || []}</select>
             </div>
             <div className="ps-form__input">
                 <input
