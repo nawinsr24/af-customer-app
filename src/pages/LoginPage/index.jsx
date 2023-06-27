@@ -1,5 +1,8 @@
 import React, { Component, useState } from 'react';
 import { Form, Input, notification } from 'antd';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
 import BreadCrumb from '../../components/BreadCrumb';
 import FooterFullwidth from '../../components/footers/FooterFullwidth';
 import PageContainer from '../../components/layouts/PageContainer';
@@ -24,6 +27,10 @@ function Login() {
         },
     ];
 
+    const logout = () => {
+        console.log("LOG OUT");
+        googleLogout()
+    }
     async function handleLoginSubmit(values) {
         setIsSubmitClick(true);
         try {
@@ -51,7 +58,7 @@ function Login() {
             navigate("/", { replace: true });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    
+
     return (<>
         <PageContainer footer={<FooterFullwidth />} title="Login">
             <BreadCrumb breacrumb={breadCrumb} />
@@ -122,6 +129,40 @@ function Login() {
                                         {isSubmitClick && <CircularProgress color='inherit' size={20} sx={{ mr: 1 }} />}
                                         Login
                                     </button>
+                                </div>
+                                <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
+                                    <>
+                                        <GoogleOAuthProvider
+                                            clientId="393405406950-5c216279dcnmh1njt9r83afbj9qrpjcq.apps.googleusercontent.com">
+                                            <GoogleLogin
+                                                onSuccess={credentialResponse => {
+                                                    const all_data = jwt_decode(credentialResponse.credential);
+                                                    const {
+                                                        email, name, given_name, family_name
+                                                    } = all_data;
+                                                    const user_detail = {
+                                                        email, name, given_name, family_name
+                                                    }
+                                                    navigate("/", { replace: true });
+                                                    console.log(user_detail);
+                                                }}
+                                                onError={() => {
+                                                    console.log('Login Failed')
+                                                }}
+                                                useOneTap={true}
+                                            />
+                                        </GoogleOAuthProvider>
+                                    </>
+
+                                    {/* <div style={{ marginTop: '10px' }}>
+                                        <button className="ps-btn ps-btn--fullwidth"
+                                            onClick={() => logout()}
+                                        >
+
+                                            Logout
+                                        </button>
+                                    </div> */}
+
                                 </div>
                             </div>
                             {/* <div className="ps-form__footer"> */}
