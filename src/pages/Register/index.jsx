@@ -72,9 +72,10 @@ function Register() {
     }
     return (
         <>
-            <PageContainer footer={<FooterFullwidth />} title="Register">
-                <BreadCrumb breacrumb={breadCrumb} />
-                <div className="ps-my-account" style={{ marginBottom: "10px" }}>
+                <div className="ps-my-account" style={{ display: 'flex', alignItems: 'center', flexDirection: "column" }} >
+                    <a href='/' className="ps-logo" style={{ marginBottom: "50px",  marginTop: "50px"  }}>
+                        <img src={'static/img/logo_light.png'} alt="" />
+                    </a>
                     <div className="container">
                         <Form
 
@@ -232,9 +233,7 @@ function Register() {
                             </div>
                         </Form>
                     </div>
-
                 </div>
-            </PageContainer>
         </>
     )
 }

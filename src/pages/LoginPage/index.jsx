@@ -51,81 +51,82 @@ function Login() {
             navigate("/", { replace: true });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-    
+
     return (<>
-        <PageContainer footer={<FooterFullwidth />} title="Login">
-            <BreadCrumb breacrumb={breadCrumb} />
-            <div className="ps-my-account" style={{ marginBottom: "10px" }}>
-                <div className="container">
-                    <Form
-                        className="ps-form--account"
-                        onFinish={handleLoginSubmit}>
-                        <ul className="ps-tab-list" style={{ marginBottom: "10px" }}>
-                            <li className="active">
-                                <a href="/login">
-                                    Login
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/register">
-                                    Register
-                                </a>
-                            </li>
-                        </ul>
-                        <div className="ps-tab active" id="sign-in" style={{ paddingBottom: "10px" }}>
-                            <div className="ps-form__content">
-                                <h5>Log In Your Account</h5>
-                                <div className="form-group">
-                                    <label htmlFor="username" style={{ marginBottom: 0 }}>Mobile Number or Email address:</label>
-                                    <Form.Item
-                                        name="username"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message:
-                                                    'Please input your email!',
-                                            },
-                                        ]}>
-                                        <Input
-                                            className="form-control"
-                                            type="text"
-                                            placeholder="Mobile Number or Email address"
-                                        />
-                                    </Form.Item>
-                                </div>
-                                <div className="form-group form-forgot">
-                                    <label htmlFor="username" style={{ marginBottom: 0 }}>Password:</label>
-                                    <Form.Item
-                                        name="password"
-                                        rules={[
-                                            {
-                                                required: true,
-                                                message:
-                                                    'Please input your password!',
-                                            },
-                                        ]}>
-                                        <Input
-                                            className="form-control"
-                                            type="password"
-                                            placeholder="Password..."
-                                        />
-                                    </Form.Item>
-                                </div>
-                                <div className="form-group submit" >
-                                    <button
-                                        disabled={isSubmitClick}
-                                        className="ps-btn ps-btn--fullwidth"
-                                        style={{
-                                            display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                            opacity: isSubmitClick ? 0.5 : 1
-                                        }}>
-                                        {isSubmitClick && <CircularProgress color='inherit' size={20} sx={{ mr: 1 }} />}
-                                        Login
-                                    </button>
-                                </div>
+        <div className="ps-my-account" style={{ display: 'flex', alignItems: 'center', flexDirection: "column" }} >
+            <a href='/' className="ps-logo" style={{ marginBottom: "50px" }}>
+                <img src={'static/img/logo_light.png'} alt="" />
+            </a>
+            <div className="container" >
+
+                <Form className="ps-form--account" onFinish={handleLoginSubmit}  >
+
+                    <ul className="ps-tab-list" style={{ marginBottom: "10px" }}>
+                        <li className="active">
+                            <a href="/login">
+                                Login
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/register">
+                                Register
+                            </a>
+                        </li>
+                    </ul>
+                    <div className="ps-tab active" id="sign-in" style={{ paddingBottom: "10px" }}>
+                        <div className="ps-form__content">
+                            <h5>Log In Your Account</h5>
+                            <div className="form-group">
+                                <label htmlFor="username" style={{ marginBottom: 0 }}>Mobile Number or Email address:</label>
+                                <Form.Item
+                                    name="username"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                'Please input your email!',
+                                        },
+                                    ]}>
+                                    <Input
+                                        className="form-control"
+                                        type="text"
+                                        placeholder="Mobile Number or Email address"
+                                    />
+                                </Form.Item>
                             </div>
-                            {/* <div className="ps-form__footer"> */}
-                            {/* <p>Connect with:</p>
+                            <div className="form-group form-forgot">
+                                <label htmlFor="username" style={{ marginBottom: 0 }}>Password:</label>
+                                <Form.Item
+                                    name="password"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                'Please input your password!',
+                                        },
+                                    ]}>
+                                    <Input
+                                        className="form-control"
+                                        type="password"
+                                        placeholder="Password..."
+                                    />
+                                </Form.Item>
+                            </div>
+                            <div className="form-group submit" >
+                                <button
+                                    disabled={isSubmitClick}
+                                    className="ps-btn ps-btn--fullwidth"
+                                    style={{
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                        opacity: isSubmitClick ? 0.5 : 1
+                                    }}>
+                                    {isSubmitClick && <CircularProgress color='inherit' size={20} sx={{ mr: 1 }} />}
+                                    Login
+                                </button>
+                            </div>
+                        </div>
+                        {/* <div className="ps-form__footer"> */}
+                        {/* <p>Connect with:</p>
                             <ul className="ps-list--social">
                                 <li>
                                     <a
@@ -168,12 +169,11 @@ function Login() {
                                     </a>
                                 </li>
                             </ul> */}
-                            {/* </div> */}
-                        </div>
-                    </Form>
-                </div>
+                        {/* </div> */}
+                    </div>
+                </Form>
             </div>
-        </PageContainer>
+        </div>
     </>
 
     )
