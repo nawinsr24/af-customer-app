@@ -8,7 +8,7 @@ import FooterFullwidth from '../../components/footers/FooterFullwidth';
 import PageContainer from '../../components/layouts/PageContainer';
 import { CircularProgress } from '@mui/material';
 import { customAlert, notify } from '../../components/notify';
-import { loginService } from '../../services/login-service';
+import { loginService, socialLogin } from '../../services/login-service';
 import { useAuthContext } from '../../context/AuthContext';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -27,10 +27,7 @@ function Login() {
         },
     ];
 
-    const logout = () => {
-        console.log("LOG OUT");
-        googleLogout()
-    }
+
     async function handleLoginSubmit(values) {
         setIsSubmitClick(true);
         try {
@@ -44,6 +41,25 @@ function Login() {
             console.log("1111111111111")
             console.log(err);
             console.log("222222222")
+            if (err === 401)
+                notify("error", "Invalid Username / Password");
+            else
+                customAlert(err);
+
+        }
+        setIsSubmitClick(false);
+    }
+    async function handleSocialLogin(data) {
+
+        setIsSubmitClick(true);
+        try {
+            const res = await socialLogin(data);
+            ctxtlogin(res);
+            notify("success", "Login successfully");
+            navigate("/", { replace: true });
+
+
+        } catch (err) {
             if (err === 401)
                 notify("error", "Invalid Username / Password");
             else
@@ -138,14 +154,9 @@ function Login() {
                                         <GoogleLogin
                                             onSuccess={credentialResponse => {
                                                 const all_data = jwt_decode(credentialResponse.credential);
-                                                const {
-                                                    email, name, given_name, family_name
-                                                } = all_data;
-                                                const user_detail = {
-                                                    email, name, given_name, family_name
-                                                }
-                                                navigate("/", { replace: true });
-                                                console.log(user_detail);
+                                                const { email, name, given_name, family_name } = all_data;
+                                                const user_detail = { email, name, given_name, family_name }
+                                                handleSocialLogin(user_detail);
                                             }}
                                             onError={() => {
                                                 console.log('Login Failed')
