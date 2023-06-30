@@ -57,20 +57,20 @@ export function convertSlugsQueryString(payload) {
 
 export function StrapiProductPriceExpanded(product) {
     let view;
-    if (product.is_sale === true) {
+    if (product.total_price) {
         view = (
             <p className="ps-product__price sale">
-                ${formatCurrency(product.price)}
+                ₹{formatCurrency(product.base_price)}
                 <del className="ml-2">
-                    ${formatCurrency(product.sale_price)}
+                    ₹{formatCurrency(product.total_price)}
                 </del>
-                <small>18% off</small>
+                <small style={{ paddingLeft: '5px' }}>18% off</small>
             </p>
         );
     } else {
         view = (
             <p className="ps-product__price">
-                ${formatCurrency(product.price)}
+                ₹{formatCurrency(product.base_price)}
             </p>
         );
     }

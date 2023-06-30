@@ -84,7 +84,7 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
     // Views
     let productItemsView;
     let productItems = data.relatedProduct;
-    const loading = false;
+    const loading = true;
     if (!loading) {
         if (productItems && productItems.length > 0) {
             if (listView) {

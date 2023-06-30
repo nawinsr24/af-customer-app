@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import Lightbox from 'react-image-lightbox';
 import NextArrow from '../../arrow/NextArrow';
 import PrevArrow from '../../arrow/PrevArrow';
-
+import Constants from '../../../constants';
 const ProductQuickViewThumbnail = ({ product, vertical = true }) => {
     const galleryCarousel = useRef(null);
     const variantCarousel = useRef(null);
@@ -22,7 +22,7 @@ const ProductQuickViewThumbnail = ({ product, vertical = true }) => {
         let images = [];
         if (product && product.images.length > 0) {
             product.images.map((item) => {
-                images.push(`${item.url}`);
+                images.push(`${Constants.imgUrl}${item.image_url}`);
             });
             setProductImages(images);
         }

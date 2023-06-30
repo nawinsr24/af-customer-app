@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-axios.defaults.baseURL = "https://dev.api.amirthafashion.com";
+axios.defaults.baseURL = "http://127.0.0.1:9005";
 
 // Add a request interceptor
 axios.interceptors.request.use(

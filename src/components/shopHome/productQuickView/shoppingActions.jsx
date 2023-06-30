@@ -11,6 +11,7 @@ const ModuleDetailShoppingActions = ({
     const Router = useNavigate();
     // const { addItem } = useEcomerce();
     function handleAddItemToCart(e) {
+        console.log("ADD to cart", e);
         e.preventDefault();
         // addItem(
         //     { id: product.id, quantity: quantity },
