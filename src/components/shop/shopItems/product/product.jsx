@@ -12,10 +12,10 @@ const Product = ({ product }) => {
         if (payload.total_price) {
             view = (
                 <p className="ps-product__price sale">
-                    <span>$</span>
+                    <span>₹</span>
                     {payload.base_price}
                     <del className="ml-2">
-                        <span>$</span>
+                        <span>₹</span>
                         {payload.total_price}
                     </del>
                 </p>
@@ -23,7 +23,7 @@ const Product = ({ product }) => {
         } else {
             view = (
                 <p className="ps-product__price">
-                    <span>$</span>
+                    <span>₹</span>
                     {payload.base_price}
                 </p>
             );
