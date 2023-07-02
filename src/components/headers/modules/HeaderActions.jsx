@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import { connect } from 'react-redux';
 // import Link from 'next/link';
 import MiniCart from './MiniCart';
 import AccountQuickLinks from './AccountQuickLinks';
 import { useAuthContext } from '../../../context/AuthContext';
+import { getCart } from '../../../services/home-page-service';
 
 const HeaderActions = ({ ecomerce, auth }) => {
     const { ctxtUser } = useAuthContext();
+    const [cartData, setCartData] = useState([]);
+    useEffect(() => {
+        const getData = async () => {
+            console.log("ctxtUser.userId", ctxtUser, ctxtUser.userId);
+            const cartResponse = await getCart(ctxtUser.userId);
+            setCartData(cartResponse);
+            console.log("CART RESOONSE", cartResponse);
+        }
+        getData();
+    }, []);
     // views
     let headerAuthView;
     if (ctxtUser?.token) {
@@ -19,7 +30,7 @@ const HeaderActions = ({ ecomerce, auth }) => {
     return (
         <div className="header__actions">
 
-            <MiniCart />
+            <MiniCart cartProduct={cartData} />
             {headerAuthView}
         </div>
     );

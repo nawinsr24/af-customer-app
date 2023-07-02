@@ -5,8 +5,6 @@ import Rating from '../../../Rating';
 import Constants from '../../../../constants';
 
 const Product = ({ product }) => {
-    // const { thumbnailImage, price, badge, title } = useProduct();
-    console.log("product", product, product.images[0].image_url);
     const price = (payload) => {
         let view;
         if (payload.total_price) {

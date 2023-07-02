@@ -32,6 +32,7 @@ export async function postData({ urlPath, body }) {
 
 export async function getData({ urlPath, queryParams }) {
     try {
+        console.log("urlPath, queryParams", urlPath, queryParams);
         const response = await axios.get(urlPath, { params: queryParams });
         if (response.status === 200 || response.status === 201)
             return response.data;

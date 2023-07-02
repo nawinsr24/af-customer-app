@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import { Modal } from 'antd';
 import ProductDetailQuickView from '../../../shopHome/productQuickView/productQuickView';
+import { addToCart } from '../../../../services/home-page-service';
+import { useAuthContext } from '../../../../context/AuthContext';
 
 const ProductActions = ({ product, ecomerce }) => {
+    const { ctxtUser } = useAuthContext();
     const [isQuickView, setIsQuickView] = useState(false);
     // const { addItem } = useEcomerce();
 
-    function handleAddItemToCart(e) {
-        e.preventDefault();
+    async function handleAddItemToCart(data) {
+        console.log("DATA", data);
+        const response = await addToCart(ctxtUser.userId, data);
+        const modal = Modal.success({
+            centered: true,
+            title: 'Success!',
+            content: `This item has been added to your cart`,
+        });
+        modal.update();
         // addItem({ id: product.id, quantity: 1 }, ecomerce.cartItems, 'cart');
     }
 
@@ -46,20 +56,21 @@ const ProductActions = ({ product, ecomerce }) => {
         <ul className="ps-product__actions">
             <li>
                 <a
-                    href="#"
+                    style={{ cursor: 'pointer' }}
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Add To Cart"
-                    onClick={handleAddItemToCart}>
+                    onClick={() => handleAddItemToCart(product)}>
                     <i className="icon-bag2"></i>
                 </a>
             </li>
             <li>
                 <a
-                    href="#"
+                    style={{ cursor: 'pointer' }}
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Quick View"
+                    click
                     onClick={handleShowQuickView}>
                     <i className="icon-eye"></i>
                 </a>

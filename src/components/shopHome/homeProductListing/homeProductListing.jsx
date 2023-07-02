@@ -37,10 +37,8 @@ const HomeDefaultProductListing = ({ stock, collectionSlug, title }) => {
             const resData = await getStockByType(stock.type);
             setProductItems(resData.data)
             setLoading(false);
-            console.log(resData);
         }
         getData();
-        // getProductsByCollection(collectionSlug);
     }, [stock.type]);
 
     const sectionLinksView = sectionLinks.map((link) => (

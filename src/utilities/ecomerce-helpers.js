@@ -91,7 +91,7 @@ export function removeCartItemHelper(product) {
 
 export function calculateAmount(obj) {
     return Object.values(obj)
-        .reduce((acc, { quantity, price }) => acc + quantity * price, 0)
+        .reduce((acc, { quantity, base_price }) => acc + (quantity || 1) * base_price, 0)
         .toFixed(2);
 }
 

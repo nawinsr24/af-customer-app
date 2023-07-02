@@ -7,6 +7,7 @@ const ModuleDetailShoppingActions = ({
     product,
     extended = false,
 }) => {
+    console.log("QUICK", product);
     const [quantity, setQuantity] = useState(1);
     const Router = useNavigate();
     // const { addItem } = useEcomerce();
@@ -93,7 +94,7 @@ const ModuleDetailShoppingActions = ({
                 <a
                     className="ps-btn ps-btn--black"
                     href="#"
-                    onClick={(e) => handleAddItemToCart(e)}>
+                    onClick={(e) => handleAddItemToCart(product)}>
                     Add to cart
                 </a>
                 <a className="ps-btn" href="#" onClick={(e) => handleBuynow(e)}>
@@ -137,7 +138,7 @@ const ModuleDetailShoppingActions = ({
                     <a
                         className="ps-btn ps-btn--black"
                         href="#"
-                        onClick={(e) => handleAddItemToCart(e)}>
+                        onClick={(e) => handleAddItemToCart(product)}>
                         Add to cart
                     </a>
                     <div className="ps-product__actions">

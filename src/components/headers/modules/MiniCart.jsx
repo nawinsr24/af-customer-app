@@ -2,11 +2,9 @@ import React, { useEffect } from 'react';
 // import { connect } from 'react-redux';
 // import Link from 'next/link';
 import ProductOnCart from '../../ProductOnCart';
-// import useEcomerce from '~/hooks/useEcomerce';
 import { calculateAmount } from '../../../utilities/ecomerce-helpers';
-import data from '../../../static/data/product.json';
 
-const MiniCart = ({ ecomerce }) => {
+const MiniCart = ({ cartProduct }) => {
     // const { products, removeItem, removeItems, getProducts } = useEcomerce();
 
     function handleRemoveItem(e, productId) {
@@ -16,15 +14,16 @@ const MiniCart = ({ ecomerce }) => {
 
     useEffect(() => {
         // getProducts(ecomerce.cartItems, 'cart');
-    }, [ecomerce]);
+    }, [cartProduct]);
 
     let cartItemsView;
-    let products = data.relatedProduct;
+    console.log("CART PRO", cartProduct);
+    let products = cartProduct;
     if (products && products.length > 0) {
         const amount = calculateAmount(products);
         const productItems = products.map((item) => {
             return (
-                <ProductOnCart product={item} key={item.id}>
+                <ProductOnCart product={item} key={item.product_id}>
                     <a
                         className="ps-product__remove"
                         onClick={(e) => handleRemoveItem(e)}>
