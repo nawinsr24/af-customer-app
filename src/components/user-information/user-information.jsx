@@ -1,8 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 
 import FormChangeUserInformation from './formchangesUserInformation';
+import { customAlert, notify } from '../notify';
+import { useAuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import { getCustomerService } from '../../services/customer-service';
+import QueryKey from '../../QueryKey';
+import UserInfo from './userInfoView';
+import UserInfoView from './userInfoView';
+import { AccountCircle } from '@mui/icons-material';
 
 const UserInformation = () => {
+    const { ctxtlogout, ctxtUser } = useAuthContext();
+    const navigate = useNavigate();
+    const { isLoading, isError, error, data: custData } = useQuery([QueryKey.getAllBanners], () => getCustomerService({ userId: ctxtUser?.userId }));
+    const [isEdit, setIsEdit] = useState(false)
     const accountLinks = [
         {
             text: 'Account Information',
@@ -19,51 +32,38 @@ const UserInformation = () => {
             text: 'Order History',
             url: '/order-history',
             icon: 'icon-history',
-        },
-        {
-            text: 'Invoices',
-            url: '/invoices',
-            icon: 'icon-papers',
-        },
-        // {
-        //     text: 'Address',
-        //     url: '/addresses',
-        //     icon: 'icon-map-marker',
-        // },
-        // {
-        //     text: 'Recent Viewed Product',
-        //     url: '/account/recent-viewed-product',
-        //     icon: 'icon-store',
-        // },
-        // {
-        //     text: 'Wishlist',
-        //     url: '/account/wishlist',
-        //     icon: 'icon-heart',
-        // },
+        }
     ];
 
-    //Views
-    const accountLinkView = accountLinks.map((item) => (
-        <li key={item.text} className={item.active ? 'active' : ''}>
-            <a href={item.url}>
-                <i className={item.icon}></i>
-                {item.text}
-            </a>
-        </li>
-    ));
+    function updateIsEdit(b) {
+        setIsEdit(b);
+    }
 
+    async function handleLogout(e) {
+        e.preventDefault();
+        ctxtlogout();
+        notify("success", "Logged out successfully");
+        navigate("/", { replace: true });
+    }
+
+
+    if (isError) {
+        customAlert(error);
+        // return <h2>Something went wrong</h2>
+    }
     return (
-        <section className="ps-my-account ps-page--account">
+        <section className="ps-my-account ps-page--account" style={{ paddingTop: "0px" }}>
             <div className="container">
                 <div className="row">
                     <div className="col-lg-3">
                         <div className="ps-section__left">
                             <aside className="ps-widget--account-dashboard">
                                 <div className="ps-widget__header">
-                                    <img src="/static/img/users/3.jpg" />
+                                    <img src="/static/img/users/1.png" />
+
                                     <figure>
                                         <figcaption>Hello</figcaption>
-                                        <p>username@gmail.com</p>
+                                        <p>{custData?.name}</p>
                                     </figure>
                                 </div>
                                 <div className="ps-widget__content">
@@ -84,7 +84,7 @@ const UserInformation = () => {
                                             </li>
                                         ))}
                                         <li>
-                                            <a href="/">
+                                            <a href="/" onClick={(e) => handleLogout(e)}>
                                                 <i className="icon-power-switch"></i>
                                                 Logout
                                             </a>
@@ -96,7 +96,8 @@ const UserInformation = () => {
                     </div>
                     <div className="col-lg-9">
                         <div className="ps-page__content">
-                            <FormChangeUserInformation />
+                            {!isEdit && <UserInfoView custData={custData} updateIsEdit={updateIsEdit} />}
+                            {isEdit && <FormChangeUserInformation custData={custData} userId={ctxtUser?.userId} updateIsEdit={updateIsEdit}/>}
                         </div>
                     </div>
                 </div>

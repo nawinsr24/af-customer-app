@@ -26,28 +26,7 @@ class OrderDetails extends Component {
                 text: 'Order History',
                 url: '/order-history',
                 icon: 'icon-history',
-            },
-            {
-                text: 'Invoices',
-                url: '/invoices',
-                icon: 'icon-papers',
-
-            },
-            // {
-            //     text: 'Address',
-            //     url: '/account/addresses',
-            //     icon: 'icon-papers',
-            // },
-            // {
-            //     text: 'Recent Viewed Product',
-            //     url: '/account/recent-viewed-product',
-            //     icon: 'icon-papers',
-            // },
-            // {
-            //     text: 'Wishlist',
-            //     url: '/account/wishlist',
-            //     icon: 'icon-papers',
-            // },
+            }
         ];
         const invoiceProducts = [
             {
@@ -242,7 +221,7 @@ class OrderDetails extends Component {
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
         );
     }
 }

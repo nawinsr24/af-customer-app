@@ -20,13 +20,27 @@ import PaymentPage from "./pages/payment/payment";
 import PaymentSuccessPage from "./pages/payment/payment-success";
 import OtpPage from "./pages/otpPage/otp";
 import UserInformationPage from "./pages/user-information/userInformation";
-import InvoicePage from "./pages/invoices/invoices";
-import InvoiceDetailPage from "./pages/invoices/invoice-details";
 import OrdersPage from "./pages/orders/order";
 import OrderTrakingPage from "./pages/order-traking/orderTraking";
 import OrdersHistoryPage from "./pages/orderHistory/orderHistory";
 import ProductDeliveryHistoryPage from "./pages/orderHistory/productDeliveryistory";
-
+import './static/fonts/Linearicons/Font/demo-files/demo.css';
+import './static/fonts/font-awesome/css/font-awesome.min.css';
+import './static/fonts/font-awesome/css/font-awesome.css';
+import './static/fonts/font-awesome/css/font-awesome.css.map';
+import './static/css/bootstrap.min.css';
+import './static/css/slick.min.css';
+import './scss/style.scss';
+import './scss/home-default.scss';
+import './scss/market-place-1.scss';
+import './scss/market-place-2.scss';
+import './scss/market-place-3.scss';
+import './scss/market-place-4.scss';
+import './scss/electronic.scss';
+import './scss/furniture.scss';
+import './scss/organic.scss';
+import './scss/technology.scss';
+import './scss/autopart.scss';
 
 function App() {
 
@@ -54,26 +68,14 @@ function App() {
             <Route path='/payment' element={<PaymentPage />} />
             <Route path='/payment-success' element={<PaymentSuccessPage />} />
             <Route path='/verify' element={<OtpPage />} />
-            <Route path='/user-information' element={<UserInformationPage />} />
-            <Route path='/invoices' element={<InvoicePage />} />
-            <Route path='/invoice-detail' element={<InvoiceDetailPage />} />
-            <Route path='/orders' element={<OrdersPage />} />
-            <Route path='/order-tracking/:id' element={<OrderTrakingPage />} />
-            <Route path='/order-history' element={<OrdersHistoryPage />} />
             <Route path='/delivery-history/:id' element={<ProductDeliveryHistoryPage />} />
 
 
-            <Route element={<RequireAuth allowedRoles={['sa']} />}>
-              <Route path="/sa" element={<Layout />}>
-
-              </Route>
-            </Route>
-
-            <Route element={<RequireAuth allowedRoles={['staff']} />}>
-              <Route path="/bo" element={<Layout />}>
-
-
-              </Route>
+            <Route element={<RequireAuth />}>
+              <Route path='/user-information' element={<UserInformationPage />} />
+              <Route path='/orders' element={<OrdersPage />} />
+              <Route path='/order-tracking/:id' element={<OrderTrakingPage />} />
+              <Route path='/order-history' element={<OrdersHistoryPage />} />
             </Route>
 
 

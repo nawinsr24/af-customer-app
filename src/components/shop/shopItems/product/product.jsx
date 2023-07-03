@@ -2,28 +2,29 @@ import React from 'react';
 import LazyLoad from 'react-lazyload';
 import ProductActions from '../productAction/productAction';
 import Rating from '../../../Rating';
+import Constants from '../../../../constants';
 
 const Product = ({ product }) => {
     // const { thumbnailImage, price, badge, title } = useProduct();
-
+    console.log("product", product, product.images[0].image_url);
     const price = (payload) => {
         let view;
-        if (payload.sale_price) {
+        if (payload.total_price) {
             view = (
                 <p className="ps-product__price sale">
-                    <span>$</span>
-                    {payload.sale_price}
+                    <span>₹</span>
+                    {payload.base_price}
                     <del className="ml-2">
-                        <span>$</span>
-                        {payload.price}
+                        <span>₹</span>
+                        {payload.total_price}
                     </del>
                 </p>
             );
         } else {
             view = (
                 <p className="ps-product__price">
-                    <span>$</span>
-                    {payload.price}
+                    <span>₹</span>
+                    {payload.base_price}
                 </p>
             );
         }
@@ -71,11 +72,11 @@ const Product = ({ product }) => {
     return (
         <div className="ps-product">
             <div className="ps-product__thumbnail">
-                <a href={`/product/${product.id}`} >
+                <a href={`/product/${product.product_id}`} >
                     <LazyLoad>
                         <img
-                            src={product.thumbnail.url}
-                            alt={product.thumbnail.url}
+                            src={`${Constants.imgUrl}${product?.images[0]?.image_url}`}
+                            alt={product?.images[0]?.image_url}
                         />
                     </LazyLoad>
                 </a>
@@ -87,8 +88,8 @@ const Product = ({ product }) => {
                     Young Shop
                 </a>
                 <div className="ps-product__content">
-                    {<a className="ps-product__title" href="/product/[pid]" as={`/product/${product.id}`}>
-                        {product.title}
+                    {<a className="ps-product__title" href={`/product/${product.product_id}`}>
+                        {product.name}
                     </a>}
                     <div className="ps-product__rating">
                         <Rating />
@@ -97,8 +98,8 @@ const Product = ({ product }) => {
                     {price(product)}
                 </div>
                 <div className="ps-product__content hover">
-                    {<a className="ps-product__title" href="/product/[pid]" as={`/product/${product.id}`}>
-                        {product.title}
+                    {<a className="ps-product__title" href={`/product/${product.product_id}`}>
+                        {product.name}
                     </a>}
                     {price(product)}
                 </div>

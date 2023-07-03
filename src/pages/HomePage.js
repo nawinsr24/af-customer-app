@@ -24,12 +24,6 @@ function HomePage() {
     // }, []);
 
     return (
-        // <PageContainer title="Multipurpose Marketplace React Ecommerce Template">
-        //     <main id="homepage-1">
-
-        //     </main>
-        // </PageContainer>
-
         <HomepageDefaultPage />
     );
 }

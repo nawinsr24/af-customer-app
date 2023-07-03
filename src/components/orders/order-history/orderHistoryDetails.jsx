@@ -12,7 +12,7 @@ class OrdersHistoryDetails extends Component {
     render() {
         const accountLinks = [
             {
-                text: 'Account Information',
+                text: 'Information',
                 url: '/user-information',
                 icon: 'icon-user',
             },
@@ -27,13 +27,7 @@ class OrdersHistoryDetails extends Component {
                 url: '/order-history',
                 icon: 'icon-history',
                 active: true
-            },
-            {
-                text: 'Invoices',
-                url: '/invoices',
-                icon: 'icon-papers',
-
-            },
+            }
             // {
             //     text: 'Address',
             //     url: '/account/addresses',
@@ -210,7 +204,7 @@ class OrdersHistoryDetails extends Component {
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
         );
     }
 }
