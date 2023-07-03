@@ -11,13 +11,12 @@ const HeaderActions = ({ ecomerce, auth }) => {
     const [cartData, setCartData] = useState([]);
     useEffect(() => {
         const getData = async () => {
-            console.log("ctxtUser.userId", ctxtUser, ctxtUser.userId);
             const cartResponse = await getCart(ctxtUser.userId);
             setCartData(cartResponse);
-            console.log("CART RESOONSE", cartResponse);
         }
         getData();
     }, []);
+
     // views
     let headerAuthView;
     if (ctxtUser?.token) {

@@ -1,32 +1,46 @@
-import React, { useEffect } from 'react';
-// import { connect } from 'react-redux';
-// import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import ProductOnCart from '../../ProductOnCart';
 import { calculateAmount } from '../../../utilities/ecomerce-helpers';
+import { useAuthContext } from '../../../context/AuthContext';
+import { getCart, deleteCart } from '../../../services/home-page-service';
+import { notify } from '../../notify';
 
-const MiniCart = ({ cartProduct }) => {
-    // const { products, removeItem, removeItems, getProducts } = useEcomerce();
-
-    function handleRemoveItem(e, productId) {
-        e.preventDefault();
-        // removeItem({ id: productId }, ecomerce.cartItems, 'cart');
+const MiniCart = ({ isRefresh }) => {
+    console.log("isRefresh", isRefresh);
+    const { ctxtUser } = useAuthContext();
+    const [cartData, setCartData] = useState([]);
+    const [cart2, setcart2] = useState();
+    const getcartData = async () => {
+        // setCartData([]);
+        const cartResponse = await getCart(ctxtUser.userId);
+        console.log("cartResponse", cartResponse);
+        setCartData(cartResponse);
+        setcart2(cartResponse);
+        console.log(":cartData", cartData);
+        console.log(":cartData2", cart2);
+    }
+    async function handleRemoveItem(cart) {
+        await deleteCart(ctxtUser.userId, cart.cart_id);
+        notify("success", `${cart.name} removed from cart`)
+        getcartData();
     }
 
     useEffect(() => {
-        // getProducts(ecomerce.cartItems, 'cart');
-    }, [cartProduct]);
+        getcartData();
+    }, [isRefresh]);
 
+    useEffect(() => {
+        console.log("Updated cartData:", cartData);
+    }, [cartData, isRefresh]);
     let cartItemsView;
-    console.log("CART PRO", cartProduct);
-    let products = cartProduct;
-    if (products && products.length > 0) {
-        const amount = calculateAmount(products);
-        const productItems = products.map((item) => {
+    if (cartData && cartData.length > 0) {
+        const amount = calculateAmount(cartData);
+        const productItems = cartData.map((item) => {
             return (
                 <ProductOnCart product={item} key={item.product_id}>
                     <a
                         className="ps-product__remove"
-                        onClick={(e) => handleRemoveItem(e)}>
+                        onClick={(e) => handleRemoveItem(item)}>
                         <i className="icon-cross"></i>
                     </a>
                 </ProductOnCart>
@@ -62,12 +76,13 @@ const MiniCart = ({ cartProduct }) => {
             <a className="header__extra" href="/#">
                 <i className="icon-bag2"></i>
                 <span>
-                    <i>{products ? products.length : 0}</i>
+                    <i>{cartData ? cartData.length : 0}</i>
                 </span>
             </a>
             {cartItemsView}
         </div>
     );
 };
+// cartRefresh();
 
 export default MiniCart;

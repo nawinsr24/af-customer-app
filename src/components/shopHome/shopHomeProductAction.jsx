@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Modal } from 'antd';
 import ProductDetailQuickView from './productQuickView/productQuickView';
-
+import { useAuthContext } from '../../context/AuthContext';
+import { addToCart } from '../../services/home-page-service';
+import { notify } from '../notify';
 const ModuleProductActions = ({ product, ecomerce }) => {
     const [isQuickView, setIsQuickView] = useState(false);
-    // const { addItem } = useEcomerce();
+    const { ctxtUser } = useAuthContext();
+    async function handleAddItemToCart(data) {
+        await addToCart(ctxtUser.userId, data);
+        notify("success", `${data.name} added to your cart`)
 
-    function handleAddItemToCart(e) {
-        e.preventDefault();
-        // addItem({ id: product.id, quantity: 1 }, ecomerce.cartItems, 'cart');
     }
 
     function handleAddItemToWishlist(e) {
@@ -50,7 +52,7 @@ const ModuleProductActions = ({ product, ecomerce }) => {
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Add To Cart"
-                    onClick={handleAddItemToCart}>
+                    onClick={() => handleAddItemToCart(product)}>
                     <i className="icon-bag2"></i>
                 </a>
             </li>

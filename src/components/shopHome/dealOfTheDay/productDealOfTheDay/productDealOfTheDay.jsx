@@ -48,7 +48,7 @@ const ProductDealOfDay = ({ product }) => {
     return (
         <div className="ps-product ps-product--inner">
             <div className="ps-product__thumbnail">
-                <a href={`/product/${product.product_id}`}>
+                <a href={`/product/${product.stock_id}`}>
                     <>
                         <LazyLoad>
                             <img

@@ -9,15 +9,15 @@ import DetailActionsMobile from './detailActionsMobile';
 const ProductDetail = ({ product }) => {
     let priceView;
     if (product) {
-        if (product.is_sale === true) {
+        if (product.total_price === true) {
             priceView = (
                 <h4 className="ps-product__price sale">
-                    <del className="mr-2">${product.sale_price}</del>$
-                    {product.price}
+                    <del className="mr-2">₹{product.total_price}</del>₹
+                    {product.base_price}
                 </h4>
             );
         } else {
-            priceView = <h4 className="ps-product__price">${product.price}</h4>;
+            priceView = <h4 className="ps-product__price">₹{product.base_price}</h4>;
         }
         return (
             <div className="ps-product--detail ps-product--full-content">
@@ -27,7 +27,7 @@ const ProductDetail = ({ product }) => {
                         <div className="ps-product__info">
                             <DetailTopInformation product={product} />
                             <ProductDetailDescription product={product} />
-                            <DetailActionsMobile />
+                            <DetailActionsMobile product={product} />
                         </div>
                     </div>
                     <div className="ps-product__price-right">

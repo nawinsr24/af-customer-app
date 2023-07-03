@@ -2,15 +2,14 @@ import { getData } from "./rest-api-helper"
 import axios from "axios";
 
 export async function fileUploadService(file) {
-    const res = await getData({ urlPath: "/s3/new" });
+    try {
+        const res = await getData({ urlPath: "/s3/new" });
+        const res01 = await s3FileUpload({ urlPath: res.url, file })
+        return res.key;
+    } catch (error) {
+        return;
+    }
 
-    const res01 = await s3FileUpload({ urlPath: res.url, file })
-
-    console.log("res01---------------------", res01)
-    console.log(res, "---------------fileUploadService");
-
-    // if (res01.status === 200 || res01.status === 201)
-    return res.key;
 }
 
 
@@ -39,29 +38,35 @@ export async function fileUploadService(file) {
 
 
 async function s3FileUpload({ urlPath, file }) {
-    console.log({ urlPath, file, 'Content-Type': file.type })
-    // var body = new FormData();
-    // body.append('file', file);
 
-    const myHeaders = new Headers();
-    myHeaders.append('Content-Type', file.type);
+    try {
+        const myHeaders = new Headers();
+        myHeaders.append('Content-Type', file.type);
 
-    let res = await fetch(urlPath, { method: 'PUT', headers: myHeaders, body: file });
+        let res = await fetch(urlPath, { method: 'PUT', headers: myHeaders, body: file });
 
-    if (res.status === 200 || res.status === 201)
-        return res;
-    else
-        // eslint-disable-next-line no-throw-literal
-        throw "apiError"
+        if (res.status === 200 || res.status === 201)
+            return res;
+        else
+            // eslint-disable-next-line no-throw-literal
+            throw "apiError"
+    } catch (error) {
+        return
+    }
+
 };
 
 export async function getFileUrl({ fileKey }) {
-    const details = {
-        urlPath: "/s3/get",
-        queryParams: { key: fileKey }
+    try {
+        const details = {
+            urlPath: "/s3/get",
+            queryParams: { key: fileKey }
+        }
+
+        const res = await getData(details);
+        return res.url;
+    } catch (error) {
+        return;
     }
 
-    const res = await getData(details);
-    console.log(res + "---------------getFileUrl");
-    return res.url;
 }

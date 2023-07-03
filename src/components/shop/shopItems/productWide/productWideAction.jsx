@@ -1,10 +1,10 @@
 import React from 'react';
-// import { connect } from 'react-redux';
 import { Modal } from 'antd';
-// import useProduct from '~/hooks/useProduct';
-// import useEcomerce from '~/hooks/useEcomerce';
-
+import { useAuthContext } from '../../../../context/AuthContext';
+import { addToCart } from '../../../../services/home-page-service';
+import { notify } from '../../../notify';
 const ModuleProductWideActions = ({ ecomerce, product }) => {
+    const { ctxtUser } = useAuthContext();
 
     const price = (payload) => {
         let view;
@@ -31,9 +31,9 @@ const ModuleProductWideActions = ({ ecomerce, product }) => {
     }
     // const { price } = useProduct();
     // const { addItem } = useEcomerce();
-    function handleAddItemToCart(e) {
-        e.preventDefault();
-        // addItem({ id: product.id, quantity: 1 }, ecomerce.cartItems, 'cart');
+    async function handleAddItemToCart(data) {
+        await addToCart(ctxtUser.userId, data);
+        notify("success", `${data.name} added to your cart`)
     }
 
     function handleAddItemToWishlist(e) {
@@ -64,7 +64,7 @@ const ModuleProductWideActions = ({ ecomerce, product }) => {
             <a
                 className="ps-btn"
                 href="#"
-                onClick={(e) => handleAddItemToCart(e)}>
+                onClick={(e) => handleAddItemToCart(product)}>
                 Add to cart
             </a>
             {/* <ul className="ps-product__actions">

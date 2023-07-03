@@ -1,6 +1,7 @@
 import axios from "axios";
 
 
+// axios.defaults.baseURL = "https://dev.api.amirthafashion.com";
 axios.defaults.baseURL = "http://127.0.0.1:9005";
 
 // Add a request interceptor
@@ -26,19 +27,18 @@ export async function postData({ urlPath, body }) {
             return response.data;
     } catch (error) {
         console.log(error);
-        throw error.response.status
+        throw error.response.data
     }
 };
 
 export async function getData({ urlPath, queryParams }) {
     try {
-        console.log("urlPath, queryParams", urlPath, queryParams);
         const response = await axios.get(urlPath, { params: queryParams });
         if (response.status === 200 || response.status === 201)
             return response.data;
     } catch (error) {
         console.log(error);
-        throw error.response.status
+        throw error.response.data
     }
 };
 
@@ -50,7 +50,7 @@ export async function putData({ urlPath, body, queryParams }) {
             return response.data;
     } catch (error) {
         console.log(error);
-        throw error.response.status
+        throw error.response.data
     }
 };
 
@@ -62,7 +62,7 @@ export async function deleteData({ urlPath, body, queryParams }) {
             return response.data;
     } catch (error) {
         console.log(error);
-        throw error.response.status
+        throw error.response.data
     }
 };
 

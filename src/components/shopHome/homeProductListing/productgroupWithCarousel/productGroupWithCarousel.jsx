@@ -12,7 +12,7 @@ export const ProductGroupWithCarousel = ({ products, type = 'normal' }) => {
                 infinite={products.length > 7 ? true : false}
                 className='ps-carousel outside'>
                 {products.map((item) => (
-                    <div className='ps-carousel-item' key={item.product_id}>
+                    <div className='ps-carousel-item' key={item.stock_id}>
                         <Product product={item} />
                     </div>
                 ))}

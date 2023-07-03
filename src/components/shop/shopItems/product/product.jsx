@@ -70,7 +70,7 @@ const Product = ({ product }) => {
     return (
         <div className="ps-product">
             <div className="ps-product__thumbnail">
-                <a href={`/product/${product.product_id}`} >
+                <a href={`/product/${product.stock_id}`} >
                     <LazyLoad>
                         <img
                             src={`${Constants.imgUrl}${product?.images[0]?.image_url}`}
@@ -86,7 +86,7 @@ const Product = ({ product }) => {
                     Young Shop
                 </a>
                 <div className="ps-product__content">
-                    {<a className="ps-product__title" href={`/product/${product.product_id}`}>
+                    {<a className="ps-product__title" href={`/product/${product.stock_id}`}>
                         {product.name}
                     </a>}
                     <div className="ps-product__rating">
@@ -96,7 +96,7 @@ const Product = ({ product }) => {
                     {price(product)}
                 </div>
                 <div className="ps-product__content hover">
-                    {<a className="ps-product__title" href={`/product/${product.product_id}`}>
+                    {<a className="ps-product__title" href={`/product/${product.stock_id}`}>
                         {product.name}
                     </a>}
                     {price(product)}

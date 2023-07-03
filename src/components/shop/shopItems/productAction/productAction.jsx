@@ -3,27 +3,33 @@ import { Modal } from 'antd';
 import ProductDetailQuickView from '../../../shopHome/productQuickView/productQuickView';
 import { addToCart } from '../../../../services/home-page-service';
 import { useAuthContext } from '../../../../context/AuthContext';
+import { notify } from '../../../notify';
+import MiniCart from '../../../headers/modules/MiniCart';
 
 const ProductActions = ({ product, ecomerce }) => {
     const { ctxtUser } = useAuthContext();
     const [isQuickView, setIsQuickView] = useState(false);
+    const [reFreshCart, setReFreshCart] = useState(false);
     // const { addItem } = useEcomerce();
 
     async function handleAddItemToCart(data) {
-        console.log("DATA", data);
-        const response = await addToCart(ctxtUser.userId, data);
-        const modal = Modal.success({
-            centered: true,
-            title: 'Success!',
-            content: `This item has been added to your cart`,
-        });
-        modal.update();
-        // addItem({ id: product.id, quantity: 1 }, ecomerce.cartItems, 'cart');
+        await addToCart(ctxtUser.userId, data);
+        // const refreshCart = MiniCart({ isRefresh: true });
+        setReFreshCart(true);
+        setTimeout(() => {
+            setReFreshCart(false);
+        }, 100);
+        notify("success", `${data.name} added to your cart`)
+        // const modal = Modal.success({
+        //     centered: true,
+        //     title: 'Success!',
+        //     content: `This item has been added to your cart`,
+        // });
+        // modal.update();
     }
 
     function handleAddItemToWishlist(e) {
         e.preventDefault();
-        // addItem({ id: product.id }, ecomerce.wishlistItems, 'wishlist');
         const modal = Modal.success({
             centered: true,
             title: 'Success!',
@@ -34,7 +40,6 @@ const ProductActions = ({ product, ecomerce }) => {
 
     function handleAddItemToCompare(e) {
         e.preventDefault();
-        // addItem({ id: product.id }, ecomerce.compareItems, 'compare');
         const modal = Modal.success({
             centered: true,
             title: 'Success!',
@@ -63,6 +68,10 @@ const ProductActions = ({ product, ecomerce }) => {
                     onClick={() => handleAddItemToCart(product)}>
                     <i className="icon-bag2"></i>
                 </a>
+                <div style={{ display: 'none' }}>
+                    {reFreshCart && < MiniCart isRefresh={reFreshCart} />}
+
+                </div>
             </li>
             <li>
                 <a

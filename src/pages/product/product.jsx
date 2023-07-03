@@ -5,35 +5,40 @@ import ProductDetail from '../../components/product/productDetail/productDetail'
 // import CustomerBought from '~/components/partials/product/CustomerBought';
 // import RelatedProduct from '~/components/partials/product/RelatedProduct';
 import PageContainer from '../../components/layouts/PageContainer';
+import { getProductData } from '../../services/product-service';
+import { useNavigate, useParams } from 'react-router-dom';
+import { notify } from '../../components/notify';
+
 
 const ProductDetailPage = () => {
-    const { pid } = 3;
-    const [product, setProduct] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const { pid } = useParams();
+    const Router = useNavigate();
+    console.log("pid", pid);
+    const [product, setProduct] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    async function getProduct(pid) {
-        // setLoading(true);
-        // const responseData = await ProductRepository.getProductsById(pid);
-        // if (responseData) {
-        setProduct({
-            title: 'Mobile',
-            is_sale: true,
-            sale_price: 12,
-            price: 21
+    async function getData() {
+        if (pid) {
+            const res = await getProductData(pid);
+            console.log("RES", res);
+            if (res?.length) {
+                console.log(res);
+                setProduct(res[0]);
+                console.log("product", product);
+                setLoading(false);
+            } else {
+                // Router('/');
+                notify("error", "Not Found")
+            }
 
+        } else {
+            Router('/');
+        }
 
-        });
-        //     setTimeout(
-        //         function () {
-        //             setLoading(false);
-        //         }.bind(this),
-        //         250
-        //     );
-        // }
     }
 
     useEffect(() => {
-        getProduct(pid);
+        getData(pid);
     }, [pid]);
 
     const breadCrumb = [
@@ -46,17 +51,14 @@ const ProductDetailPage = () => {
             url: '/shop',
         },
         {
-            text: product ? product.title : 'Loading...',
+            text: product ? product.name : 'Loading...',
         },
     ];
     // Views
     let productView;
     if (!loading) {
-        if (true) {
+        productView = <ProductDetail product={product} />;
 
-            productView = <ProductDetail product={product} />;
-        } else {
-        }
     } else {
         productView = <SkeletonProductDetail />;
     }

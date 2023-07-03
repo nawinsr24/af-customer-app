@@ -16,7 +16,7 @@ const ProductOnCart = ({ product, children }) => {
     return (
         <div className="ps-product--cart-mobile">
             <div className="ps-product__thumbnail">
-                <a href={`/product/${product.product_id}`} >
+                <a href={`/product/${product.stock_id}`} >
                     <LazyLoad>
                         <img
                             src={`${Constants.imgUrl}${product.images[0].image_url}`}

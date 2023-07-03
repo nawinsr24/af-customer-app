@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import { Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
-
-const ActionsSidebar = ({ ecomerce, product }) => {
+import { useAuthContext } from '../../../context/AuthContext';
+import { addToCart } from '../../../services/home-page-service';
+import { notify } from '../../notify';
+const ActionsSidebar = ({ product }) => {
     const Router = useNavigate();
     const [quantity, setQuantity] = useState(1);
+    const { ctxtUser } = useAuthContext();
     // const { addItem } = useEcomerce();
 
-    function handleAddItemToCart(e) {
-        e.preventDefault();
-        Router('/checkout')
-        // addItem(
-        //     { id: product.id, quantity: quantity },
-        //     ecomerce.cartItems,
-        //     'cart'
-        // );
+    async function handleAddItemToCart(data) {
+        await addToCart(ctxtUser.userId, data);
+        notify("success", `${data.name} added to your cart`)
     }
 
     function handleAddItemToCompare(e) {
@@ -78,7 +76,7 @@ const ActionsSidebar = ({ ecomerce, product }) => {
             <a
                 className="ps-btn ps-btn--black"
                 href="#"
-                onClick={(e) => handleAddItemToCart(e)}>
+                onClick={(e) => handleAddItemToCart(product)}>
                 Add to cart
             </a>
             <a

@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import Lightbox from 'react-image-lightbox';
 import NextArrow from '../../arrow/NextArrow';
 import PrevArrow from '../../arrow/PrevArrow';
+import Constants from '../../../constants';
 
 const Thumbnail = ({ product, vertical = true }) => {
     const galleryCarousel = useRef(null);
@@ -20,12 +21,11 @@ const Thumbnail = ({ product, vertical = true }) => {
     };
 
     useEffect(() => {
-        let images = ['https://beta.apinouthemes.com/uploads/e98492a0c2b24ae5892641009bf21056.jpg',
-            'https://beta.apinouthemes.com/uploads/55fbf669c1804ea994ace81b7aa58896.jpg', 'https://beta.apinouthemes.com/uploads/b6bf4ec3c620428ca2c3876d31b28252.jpg'];
-        let baseUrl;
+        let images = [];
+        let baseUrl = Constants.imgUrl;
         if (product && product?.images?.length > 0) {
             product.images.map((item) => {
-                images.push(`${baseUrl}${item.url}`);
+                images.push(`${baseUrl}${item.image_url}`);
             });
             setProductImages(images);
         }
