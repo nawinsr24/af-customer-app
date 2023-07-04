@@ -1,24 +1,66 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Radio } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import FormCheckoutInformation from '../../components/checkout/formCheckoutInformation';
+import { Form, Input } from 'antd';
 import ModulePaymentOrderSummary from '../../components/checkout/paymentOrderSummary';
+import { useAuthContext } from '../../context/AuthContext';
+import { getAddress, postOrder } from '../../services/checkout-service';
+import { useLocation } from 'react-router-dom';
+import { notify } from '../notify';
+import { getProductData } from '../../services/product-service';
+import { getCart } from '../../services/home-page-service';
+
 const Checkout = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+    // Access query parameters
+    const stock_id = queryParams.get('id');
+    const { ctxtUser } = useAuthContext();
     const Router = useNavigate();
     const [is_add_adrress, isAddAddress] = useState(false);
-    const [address, setAddress] = useState(false);
+    const [checkoutAddress, setCheckoutAddress] = useState('');
+    const [addressList, setaddressList] = useState([]);
+    const [checkoutProducts, setcheckoutProducts] = useState([]);
+    const getAddressData = async () => {
+        const addressRes = await getAddress(ctxtUser.userId);
+        setaddressList(addressRes);
+    }
+    async function getSingleProduct() {
+        const productRes = await getProductData(stock_id);
+        setcheckoutProducts(productRes);
+    }
+    async function getCartProducts() {
+        const productRes = await getCart(ctxtUser.userId);
+        setcheckoutProducts(productRes);
+
+    }
+    useEffect(() => {
+        getAddressData();
+        if (stock_id) {
+            getSingleProduct();
+        } else {
+            getCartProducts();
+        }
+    }, [is_add_adrress]);
     const handleAddressChange = (e) => {
-        setAddress(e.target.value);
+        console.log(e.target.value);
+        setCheckoutAddress(e.target.value);
     }
 
     function isAddAddressFn(showAddressList) {
-        console.log("showAddressList", showAddressList);
         isAddAddress(showAddressList)
-
     }
 
-    const submit = () => {
-        Router('/shipping')
+    const submit = async () => {
+        const reqObj = {
+            ...checkoutAddress,
+            checkout_products: checkoutProducts
+        }
+        await postOrder(reqObj);
+        console.log(reqObj);
+        // Router('/shipping')
     }
 
     return (
@@ -40,57 +82,76 @@ const Checkout = () => {
                                                 <button className="ps-btn" onClick={e => isAddAddress(true)}>Add Address</button>
                                             </div>
                                         </div>
-                                            <div style={{ padding: '30px 20px', borderRadius: '4px', backgroundColor: '#fff', border: '2px solid #eaeaea', marginBottom: '10px', marginTop: '22px' }}>
-                                                <div >
-                                                    <Radio.Group style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}
-                                                        onChange={(e) => handleAddressChange(e)}
-                                                        value={address}>
-                                                        <Radio value={'address 1'}>
-                                                            <figure style={{ border: '1.5px solid #eaeaea', padding: '10px' }}>
-                                                                <figcaption>
-                                                                    {`12345 Grand Boulevard
-                                                                                    Suite 5678, Building C
-                                                                                    City Center Complex
-                                                                                    Metropolis City
-                                                                                    State of Prosperity
-                                                                                    Country of Success
-                                                                                    Postal Code: 67890`}
-                                                                </figcaption>
-                                                            </figure> </Radio>
-                                                        <Radio value={'address 2'}>
-                                                            <figure style={{ border: '1.5px solid #eaeaea', padding: '10px' }}>
-                                                                <figcaption>
-                                                                    {`12345 Grand Boulevard
-                                                                                    Suite 5678, Building C
-                                                                                    City Center Complex
-                                                                                    Metropolis City
-                                                                                    State of Prosperity
-                                                                                    Country of Success
-                                                                                    Postal Code: 67890`}
-                                                                </figcaption>
-                                                            </figure>
-                                                        </Radio>
-                                                    </Radio.Group>
-                                                </div>
-                                            </div>
-                                            <div className="ps-form__submit">
+                                            {
+                                                addressList?.length
+                                                    ? <><div style={{ padding: '30px 20px', borderRadius: '4px', backgroundColor: '#fff', border: '2px solid #eaeaea', marginBottom: '10px', marginTop: '22px' }}>
+                                                        <div>
+                                                            <Form
+                                                                className="ps-form__billing-info"
+                                                                onFinish={submit}>
+                                                                <Form.Item
+                                                                    name="address"
+                                                                    rules={[
+                                                                        {
+                                                                            required: true,
+                                                                            message: 'Select shipping address!',
+                                                                        },
+                                                                    ]}>
+                                                                    <Radio.Group style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}
+                                                                        onChange={(e) => handleAddressChange(e)}
+                                                                        value={checkoutAddress}>
+                                                                        {addressList.map((a) => {
+                                                                            return (
+                                                                                <Radio value={a} style={{ width: "100%", padding: '10px', background: 'rgb(245 245 245)', borderRadius: "10px" }}>
+                                                                                    <figure>
+                                                                                        <figcaption>
+                                                                                            {a.delivery_name + ' , ' + a.house_flat_number}
+                                                                                            <br />
+                                                                                            {a.area + ', ' + a.city + ', ' + a.state
 
-                                                <a href="/shopping-cart">
-                                                    <i className="icon-arrow-left mr-2"></i>
-                                                    Return to shopping cart
-                                                </a>
+                                                                                            }
+                                                                                            <br />
+                                                                                            {a.pincode}
+                                                                                            <br />
+                                                                                            contact : {a.delivery_mobile_1}
+                                                                                            <br />
+                                                                                            Emergency contact : {a.delivery_mobile_2}
+                                                                                        </figcaption>
+                                                                                    </figure> </Radio>
+                                                                            )
+                                                                        })}
+                                                                    </Radio.Group>
+                                                                </Form.Item>
+                                                                <div className="ps-form__submit">
 
-                                                <div className="ps-block__footer">
-                                                    <button className="ps-btn" onClick={submit}>Continue to shipping</button>
-                                                </div>
-                                            </div>
+                                                                    <a href="/shopping-cart">
+                                                                        <i className="icon-arrow-left mr-2"></i>
+                                                                        Return to shopping cart
+                                                                    </a>
+
+                                                                    <div className="ps-block__footer">
+                                                                        <button className="ps-btn">Continue to shipping</button>
+                                                                    </div>
+                                                                </div>
+                                                            </Form>
+
+                                                        </div>
+                                                    </div>
+                                                    </>
+                                                    : <figure style={{ border: '1.5px solid #eaeaea', margin: '3rem 0rem', padding: '10px', fontWeight: "bold", color: "red" }}>
+                                                        <figcaption>
+                                                            {`To proceed to the next step, please provide the address !`}
+                                                        </figcaption>
+                                                    </figure>
+                                            }
+
                                         </>}
 
                                 </div>
                                 <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12  ps-block--checkout-order">
                                     <div className="ps-form__orders">
                                         <h3>Your order</h3>
-                                        <ModulePaymentOrderSummary />
+                                        <ModulePaymentOrderSummary products={checkoutProducts} />
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +159,7 @@ const Checkout = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

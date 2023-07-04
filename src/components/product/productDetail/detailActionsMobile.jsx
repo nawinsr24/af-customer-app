@@ -13,23 +13,19 @@ const DetailActionsMobile = ({ product }) => {
     };
 
     const handleBuyNow = (e) => {
-
-
         e.preventDefault();
-        // addItem({ id: product.id, quantity: 1 }, ecomerce.cartItems, 'cart');
-        // Router.push('/account/checkout');
-        Router('/checkout');
+        Router(`/checkout/?id=${product.stock_id}`);
     };
 
     return (
         <div className="ps-product__actions-mobile">
             <a
                 className="ps-btn ps-btn--black"
-                href="#"
+
                 onClick={(e) => handleAddItemToCart(product)}>
                 Add to cart
             </a>
-            <a className="ps-btn" href="#" onClick={(e) => handleBuyNow(e)}>
+            <a className="ps-btn" onClick={(e) => handleBuyNow(e)}>
                 Buy Now
             </a>
         </div>

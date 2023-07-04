@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 // import useEcomerce from '~/hooks/useEcomerce';
 import { calculateAmount } from '../../utilities/ecomerce-helpers';
 
-const ModulePaymentOrderSummary = ({ ecomerce, shipping }) => {
+const ModulePaymentOrderSummary = ({ ecomerce, shipping, products }) => {
     // const { products, getProducts } = useEcomerce();
 
     useEffect(() => {
@@ -16,20 +16,16 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping }) => {
     // view
     let listItemsView, shippingView, totalView;
     let amount;
-    let products = [{ id: 1, quantity: 1, price: 200, thumbnail: 'https://beta.apinouthemes.com/uploads/e98492a0c2b24ae5892641009bf21056.jpg', title: 'Sleeve Linen Blend Caro Pane Shirt' },
-    { id: 2, quantity: 2, price: 200, thumbnail: 'https://beta.apinouthemes.com/uploads/e98492a0c2b24ae5892641009bf21056.jpg', title: 'Sleeve Linen Blend Caro Pane Shirt' }];;
     if (products && products.length > 0) {
         amount = calculateAmount(products);
-        listItemsView = products.map((item) => (
-
-            <a href="/" key={item.id}>
+        listItemsView = products.map((item, i) => (
+            <a href={`/product/${item.stock_id}`} key={`${item.stock_id}+${i}`}>
                 <strong>
-                    {item.title}
-                    <span>x{item.quantity}</span>
+                    {item.name}
+                    <span>x{item.quantity || 1}</span>
                 </strong>
-                <small>${item.quantity * item.price}</small>
+                <small>₹{(item.quantity || 1) * item.base_price}</small>
             </a>
-
         ));
     } else {
         listItemsView = <p>No Product.</p>;
@@ -39,7 +35,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping }) => {
             <figure>
                 <figcaption>
                     <strong>Shipping Fee</strong>
-                    <small>$20.00</small>
+                    <small>₹20.00</small>
                 </figcaption>
             </figure>
         );
@@ -47,7 +43,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping }) => {
             <figure className="ps-block__total">
                 <h3>
                     Total
-                    <strong>${parseInt(amount) + 20}.00</strong>
+                    <strong>₹{parseInt(amount) + 20}.00</strong>
                 </h3>
             </figure>
         );
@@ -56,7 +52,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping }) => {
             <figure className="ps-block__total">
                 <h3>
                     Total
-                    <strong>${parseInt(amount)}.00</strong>
+                    <strong>₹{parseInt(amount)}.00</strong>
                 </h3>
             </figure>
         );
@@ -74,7 +70,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping }) => {
                 <figure>
                     <figcaption>
                         <strong>Subtotal</strong>
-                        <small>${amount}</small>
+                        <small>₹{amount}</small>
                     </figcaption>
                 </figure>
                 {shippingView}

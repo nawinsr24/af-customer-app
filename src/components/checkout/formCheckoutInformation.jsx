@@ -1,22 +1,63 @@
-import React, { Component } from 'react';
-// import Link from 'next/link';
-// import Router from 'next/router';
+import React, { useState } from 'react';
 import { Form, Input } from 'antd';
-
+import { addAddress } from '../../services/checkout-service';
+import { notify } from '../notify';
+import { useAuthContext } from '../../context/AuthContext';
 const FormCheckoutInformation = ({ onValueChange }) => {
-
-
-    const handleFormSubmit = () => {
-        onValueChange(false);
+    const { ctxtUser } = useAuthContext();
+    const [temp, setTemp] = useState(false);
+    const handleFormSubmit = async (data) => {
+        data.user_id = ctxtUser.userId;
+        await addAddress(data);
+        notify("success", "Address Added !");
+        setTemp(!temp)
+        onValueChange(temp);
     };
 
-    // render() {
     return (
         <Form
             className="ps-form__billing-info"
             onFinish={handleFormSubmit}>
             <h3 className="ps-form__heading">Contact information</h3>
-            <div className="form-group">
+            <div className="row">
+                <div className="col-sm-6">
+                    <div className="form-group">
+                        <Form.Item
+                            name="delivery_name"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Enter your name!',
+                                },
+                            ]}>
+                            <Input
+                                className="form-control"
+                                type="text"
+                                placeholder="Name"
+                            />
+                        </Form.Item>
+                    </div>
+                </div>
+                <div className="col-sm-6">
+                    <div className="form-group">
+                        <Form.Item
+                            name="delivery_mobile_1"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Enter your contact number!',
+                                },
+                            ]}>
+                            <Input
+                                className="form-control"
+                                type="text"
+                                placeholder="Contact Number"
+                            />
+                        </Form.Item>
+                    </div>
+                </div>
+            </div>
+            {/* <div className="form-group">
                 <Form.Item
                     name="name"
                     rules={[
@@ -32,7 +73,7 @@ const FormCheckoutInformation = ({ onValueChange }) => {
                         placeholder="Email or phone number"
                     />
                 </Form.Item>
-            </div>
+            </div> */}
             {/* <div className="form-group">
                     <div className="ps-checkbox">
                         <input
@@ -50,17 +91,17 @@ const FormCheckoutInformation = ({ onValueChange }) => {
                 <div className="col-sm-6">
                     <div className="form-group">
                         <Form.Item
-                            name="firstName"
+                            name="house_flat_number"
                             rules={[
                                 {
-                                    required: false,
-                                    message: 'Enter your first name!',
+                                    required: true,
+                                    message: 'Enter your house/flat number!',
                                 },
                             ]}>
                             <Input
                                 className="form-control"
                                 type="text"
-                                placeholder="First Name"
+                                placeholder="House/Flat Number"
                             />
                         </Form.Item>
                     </div>
@@ -68,23 +109,23 @@ const FormCheckoutInformation = ({ onValueChange }) => {
                 <div className="col-sm-6">
                     <div className="form-group">
                         <Form.Item
-                            name="lastName"
+                            name="area"
                             rules={[
                                 {
-                                    required: false,
-                                    message: 'Enter your last name!',
+                                    required: true,
+                                    message: 'Enter your area!',
                                 },
                             ]}>
                             <Input
                                 className="form-control"
                                 type="text"
-                                placeholder="Last Name"
+                                placeholder="Area"
                             />
                         </Form.Item>
                     </div>
                 </div>
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
                 <Form.Item
                     name="address"
                     rules={[
@@ -99,8 +140,8 @@ const FormCheckoutInformation = ({ onValueChange }) => {
                         placeholder="Address"
                     />
                 </Form.Item>
-            </div>
-            <div className="form-group">
+            </div> */}
+            {/* <div className="form-group">
                 <Form.Item
                     name="apartment"
                     rules={[
@@ -115,7 +156,7 @@ const FormCheckoutInformation = ({ onValueChange }) => {
                         placeholder="Apartment, suite, etc. (optional)"
                     />
                 </Form.Item>
-            </div>
+            </div> */}
             <div className="row">
                 <div className="col-sm-6">
                     <div className="form-group">
@@ -123,13 +164,13 @@ const FormCheckoutInformation = ({ onValueChange }) => {
                             name="city"
                             rules={[
                                 {
-                                    required: false,
+                                    required: true,
                                     message: 'Enter a city!',
                                 },
                             ]}>
                             <Input
                                 className="form-control"
-                                type="city"
+                                type="text"
                                 placeholder="City"
                             />
                         </Form.Item>
@@ -138,20 +179,80 @@ const FormCheckoutInformation = ({ onValueChange }) => {
                 <div className="col-sm-6">
                     <div className="form-group">
                         <Form.Item
-                            name="postalCode"
+                            name="state"
                             rules={[
                                 {
-                                    required: false,
-                                    message: 'Enter a postal oce!',
+                                    required: true,
+                                    message: 'Enter your state!',
                                 },
                             ]}>
                             <Input
                                 className="form-control"
-                                type="postalCode"
-                                placeholder="Postal Code"
+                                type="text"
+                                placeholder="State"
                             />
                         </Form.Item>
                     </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-sm-6">
+                    <div className="form-group">
+                        <Form.Item
+                            name="Pincode"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Enter a pincode!',
+                                },
+                            ]}>
+                            <Input
+                                className="form-control"
+                                type="text"
+                                placeholder="Pincode"
+                            />
+                        </Form.Item>
+                    </div>
+                </div>
+                <div className="col-sm-6">
+                    <div className="form-group">
+                        <Form.Item
+                            name="delivery_mobile_2"
+                            rules={[
+                                {
+                                    required: false,
+                                    message: 'Enter Emergency Contact Number!',
+                                },
+                            ]}>
+                            <Input
+                                className="form-control"
+                                type="text"
+                                placeholder="Emergency Contact Number (optional)"
+                            />
+                        </Form.Item>
+                    </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-sm-6">
+                    <div className="form-group">
+                        <Form.Item
+                            name="address_type"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Enter address type!',
+                                },
+                            ]}>
+                            <Input
+                                className="form-control"
+                                type="text"
+                                placeholder="address type"
+                            />
+                        </Form.Item>
+                    </div>
+                </div>
+                <div className="col-sm-6">
                 </div>
             </div>
             {/* <div className="form-group">
@@ -166,17 +267,26 @@ const FormCheckoutInformation = ({ onValueChange }) => {
                     </label>
                 </div>
             </div> */}
-            <div className="ps-form__submit">
+            <div className="row" style={{ paddingLeft: "10px", gap: "10px" }}>
+                <div className="ps-form__submit">
 
-                {/* <a href="/shopping-cart">
-                    <i className="icon-arrow-left mr-2"></i>
-                    Return to shopping cart
-                </a> */}
+                    {/* <a href="/shopping-cart">
+    <i className="icon-arrow-left mr-2"></i>
+    Return to shopping cart
+</a> */}
 
-                <div className="ps-block__footer">
-                    <button className="ps-btn">Add</button>
+                    <div className="ps-block__footer">
+                        <button className="ps-btn">Add</button>
+                    </div>
                 </div>
+
+                <button className="ps-btn ps-btn--black" style={{ color: "white" }}
+                    onClick={() => {
+                        setTemp(!temp)
+                        onValueChange(temp)
+                    }}>Return</button>
             </div>
+
         </Form>
     );
 }

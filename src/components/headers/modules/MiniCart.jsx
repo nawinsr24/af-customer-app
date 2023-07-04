@@ -26,9 +26,9 @@ const MiniCart = ({ isRefresh }) => {
     let cartItemsView;
     if (cartData && cartData.length > 0) {
         const amount = calculateAmount(cartData);
-        const productItems = cartData.map((item) => {
+        const productItems = cartData.map((item, i) => {
             return (
-                <ProductOnCart product={item} key={item.product_id}>
+                <ProductOnCart product={item} key={`${item.product_id}+${i}`}>
                     <a
                         className="ps-product__remove"
                         onClick={(e) => handleRemoveItem(item)}>

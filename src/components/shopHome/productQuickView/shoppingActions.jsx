@@ -1,36 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from 'antd';
-
+import { useAuthContext } from '../../../context/AuthContext';
+import { notify } from '../../notify';
+import { addToCart } from '../../../services/home-page-service';
 const ModuleDetailShoppingActions = ({
     ecomerce,
     product,
     extended = false,
 }) => {
-    console.log("QUICK", product);
+    const { ctxtUser } = useAuthContext();
     const [quantity, setQuantity] = useState(1);
     const Router = useNavigate();
-    // const { addItem } = useEcomerce();
-    function handleAddItemToCart(e) {
-        console.log("ADD to cart", e);
-        e.preventDefault();
-        // addItem(
-        //     { id: product.id, quantity: quantity },
-        //     ecomerce.cartItems,
-        //     'cart'
-        // );
+    async function handleAddItemToCart(data) {
+        await addToCart(ctxtUser.userId, data);
+        notify("success", `${data.name} added to your cart`)
     }
 
-    function handleBuynow(e) {
-        // e.preventDefault();
-        // addItem(
-        //     { id: product.id, quantity: quantity },
-        //     ecomerce.cartItems,
-        //     'cart'
-        // );
-        setTimeout(function () {
-            Router('/checkout');
-        }, 1000);
+    function handleBuynow(data) {
+        Router(`/checkout/?id=${data.stock_id}`);
     }
 
     const handleAddItemToCompare = (e) => {
@@ -150,7 +138,7 @@ const ModuleDetailShoppingActions = ({
                         </a>
                     </div>
                 </div>
-                <a className="ps-btn" onClick={(e) => handleBuynow(e)}>
+                <a className="ps-btn" onClick={(e) => handleBuynow(product)}>
                     Buy Now
                 </a>
             </div>

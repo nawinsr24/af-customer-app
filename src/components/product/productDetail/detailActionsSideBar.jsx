@@ -13,6 +13,9 @@ const ActionsSidebar = ({ product }) => {
         await addToCart(ctxtUser.userId, data);
         notify("success", `${data.name} added to your cart`)
     }
+    async function handleBuyItem(data) {
+        Router(`/checkout/?id=${data.stock_id}`);
+    }
 
     function handleAddItemToCompare(e) {
         e.preventDefault();
@@ -79,7 +82,7 @@ const ActionsSidebar = ({ product }) => {
             </a>
             <a
                 className="ps-btn"
-                onClick={(e) => handleAddItemToCart(e)}>
+                onClick={(e) => handleBuyItem(product)}>
                 Buy Now
             </a>
             {/* <div className="ps-product__actions">
