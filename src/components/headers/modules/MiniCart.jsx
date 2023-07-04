@@ -9,15 +9,9 @@ const MiniCart = ({ isRefresh }) => {
     console.log("isRefresh", isRefresh);
     const { ctxtUser } = useAuthContext();
     const [cartData, setCartData] = useState([]);
-    const [cart2, setcart2] = useState();
     const getcartData = async () => {
-        // setCartData([]);
         const cartResponse = await getCart(ctxtUser.userId);
-        console.log("cartResponse", cartResponse);
         setCartData(cartResponse);
-        setcart2(cartResponse);
-        console.log(":cartData", cartData);
-        console.log(":cartData2", cart2);
     }
     async function handleRemoveItem(cart) {
         await deleteCart(ctxtUser.userId, cart.cart_id);
@@ -29,9 +23,6 @@ const MiniCart = ({ isRefresh }) => {
         getcartData();
     }, [isRefresh]);
 
-    useEffect(() => {
-        console.log("Updated cartData:", cartData);
-    }, [cartData, isRefresh]);
     let cartItemsView;
     if (cartData && cartData.length > 0) {
         const amount = calculateAmount(cartData);
@@ -55,7 +46,7 @@ const MiniCart = ({ isRefresh }) => {
                         <strong>${amount ? amount : 0}</strong>
                     </h3>
                     <figure>
-                        <a href='/shopping-cart"' className="ps-btn">View Cart</a>
+                        <a href='/shopping-cart' className="ps-btn">View Cart</a>
                         <a href='/checkout' className="ps-btn">Checkout</a>
                     </figure>
                 </div>
@@ -73,7 +64,7 @@ const MiniCart = ({ isRefresh }) => {
 
     return (
         <div className="ps-cart--mini">
-            <a className="header__extra" href="/#">
+            <a className="header__extra" href="/shopping-cart">
                 <i className="icon-bag2"></i>
                 <span>
                     <i>{cartData ? cartData.length : 0}</i>
@@ -83,6 +74,5 @@ const MiniCart = ({ isRefresh }) => {
         </div>
     );
 };
-// cartRefresh();
 
 export default MiniCart;

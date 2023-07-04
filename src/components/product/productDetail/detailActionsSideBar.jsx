@@ -8,7 +8,6 @@ const ActionsSidebar = ({ product }) => {
     const Router = useNavigate();
     const [quantity, setQuantity] = useState(1);
     const { ctxtUser } = useAuthContext();
-    // const { addItem } = useEcomerce();
 
     async function handleAddItemToCart(data) {
         await addToCart(ctxtUser.userId, data);
@@ -75,26 +74,24 @@ const ActionsSidebar = ({ product }) => {
             </figure>
             <a
                 className="ps-btn ps-btn--black"
-                href="#"
                 onClick={(e) => handleAddItemToCart(product)}>
                 Add to cart
             </a>
             <a
                 className="ps-btn"
-                href="#"
                 onClick={(e) => handleAddItemToCart(e)}>
                 Buy Now
             </a>
-            <div className="ps-product__actions">
-                <a href="#" onClick={(e) => handleAddItemToWishlist(e)}>
+            {/* <div className="ps-product__actions">
+                <a onClick={(e) => handleAddItemToWishlist(e)}>
                     <i className="icon-heart mr-1"></i>
                     Add to wishlist
                 </a>
-                <a href="#" onClick={(e) => handleAddItemToCompare(e)}>
+                <a onClick={(e) => handleAddItemToCompare(e)}>
                     <i className="icon-chart-bars mr-1"></i>
                     Compare
                 </a>
-            </div>
+            </div> */}
         </div>
     );
 };

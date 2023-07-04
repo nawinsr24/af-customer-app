@@ -1,60 +1,62 @@
 import React from 'react';
 import { Result } from 'antd';
 import ProductCart from '../cartItems/productCartItems';
+import { useAuthContext } from '../../../context/AuthContext';
+import { notify } from '../../notify';
+import { deleteCart } from '../../../services/home-page-service';
 
-const CartItems = ({ ecomerce, cartItems }) => {
+const CartItems = ({ cartItems, callBackFn }) => {
+    const { ctxtUser } = useAuthContext();
 
-    function handleRemoveItem(e, productId) {
-        e.preventDefault();
-        // removeItem({ id: productId }, ecomerce.cartItems, 'cart');
+    async function handleRemoveItem(cart) {
+        await deleteCart(ctxtUser.userId, cart.cart_id);
+        notify("success", `${cart.name} removed from cart`);
+        callBackFn(cart.cart_id);
     }
 
-    function handleIncreaseItemQty(e, productId) {
-        e.preventDefault();
-        // increaseQty({ id: productId }, ecomerce.cartItems);
+    function handleIncreaseItemQty(data) {
+
     }
 
-    function handleDecreaseItemQty(e, productId) {
-        e.preventDefault();
-        // decreaseQty({ id: productId }, ecomerce.cartItems);
+    function handleDecreaseItemQty(data) {
     }
 
     // View
     let cartItemsViews;
     if (cartItems && cartItems.length > 0) {
-        const items = cartItems.map((item) => (
-            <tr key={item.id}>
+        const items = cartItems.map((item, i) => (
+            <tr key={`${item.stock_id}+${i}`}>
                 <td>
                     <ProductCart product={item} />
                 </td>
                 <td data-label="price" className="price">
-                    ${item.price}
+                    ₹{item.base_price}
                 </td>
                 <td data-label="quantity">
                     <div className="form-group--number">
                         <button
                             className="up"
-                            onClick={(e) => handleIncreaseItemQty(e, item.id)}>
+                            onClick={(e) => handleIncreaseItemQty(item)}>
                             +
                         </button>
                         <button
                             className="down"
-                            onClick={(e) => handleDecreaseItemQty(e, item.id)}>
+                            onClick={(e) => handleDecreaseItemQty(item)}>
                             -
                         </button>
                         <input
                             className="form-control"
                             type="text"
-                            placeholder={item.quantity}
+                            placeholder={item.quantity || 1}
                             disabled={true}
                         />
                     </div>
                 </td>
                 <td data-label="total">
-                    <strong>${(item.price * item.quantity).toFixed(2)}</strong>
+                    <strong>₹{(item.base_price * (item.quantity || 1)).toFixed(2)}</strong>
                 </td>
                 <td>
-                    <a href="#" onClick={(e) => handleRemoveItem(e, item.id)}>
+                    <a onClick={(e) => handleRemoveItem(item)}>
                         <i className="icon-cross"></i>
                     </a>
                 </td>

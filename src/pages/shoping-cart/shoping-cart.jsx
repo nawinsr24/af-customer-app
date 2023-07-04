@@ -1,18 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import BreadCrumb from '../../components/BreadCrumb';
 import PageContainer from '../../components/layouts/PageContainer';
 import FooterDefault from '../../components/footers/FooterFullwidth';
 import CartItems from '../../components/shopping-cart/cartItems/cartItems';
 import CartSummary from '../../components/shopping-cart/cart-summary';
-
+import { useAuthContext } from '../../context/AuthContext';
+import { getCart } from '../../services/home-page-service';
 const ShoppingCart = ({ ecomerce }) => {
-    // const { products, getProducts } = useEcomerce();
+    const { ctxtUser } = useAuthContext();
+    const [cartData, setCartData] = useState([]);
+    const [cartRefresh, setCartRefresh] = useState(false);
+    const getcartData = async () => {
+        const cartResponse = await getCart(ctxtUser.userId);
+        setCartData(cartResponse);
+    }
+
+    const isCartRefresh = (isRefresh) => {
+        setCartRefresh(isRefresh);
+    }
 
     useEffect(() => {
-        // if (ecomerce.cartItems) {
-        // getProducts(ecomerce.cartItems, 'cart');
-        // }
-    }, [ecomerce]);
+        getcartData();
+    }, [cartRefresh]);
 
     const breadCrumb = [
         {
@@ -26,22 +35,20 @@ const ShoppingCart = ({ ecomerce }) => {
 
     // View
     let contentView;
-    let products = [{ id: 1, quantity: 1, price: 200, thumbnail: 'https://beta.apinouthemes.com/uploads/e98492a0c2b24ae5892641009bf21056.jpg', title: 'Sleeve Linen Blend Caro Pane Shirt' },
-    { id: 2, quantity: 2, price: 200, thumbnail: 'https://beta.apinouthemes.com/uploads/e98492a0c2b24ae5892641009bf21056.jpg', title: 'Sleeve Linen Blend Caro Pane Shirt' }];
-    if (products) {
-        if (products.length > 0) {
-            contentView = (
-                <>
-                    <div className="ps-section__content">
-                        <CartItems cartItems={products} />
-                        <div className="ps-section__cart-actions">
-                            <a href="/" className="ps-btn">Back to Shop</a>
-                        </div>
+    let products = cartData;
+    if (products && products.length > 0) {
+        contentView = (
+            <>
+                <div className="ps-section__content">
+                    <CartItems cartItems={products} callBackFn={isCartRefresh} />
+                    <div className="ps-section__cart-actions">
+                        <a href="/shop" className="ps-btn">Back to Shop</a>
                     </div>
-                    <div className="ps-section__footer">
-                        <div className="row justify-space-between">
-                            <div className="col-xl-8 col-lg-4 col-md-12 col-sm-12 col-12 ">
-                                {/* <div className="row">
+                </div>
+                <div className="ps-section__footer">
+                    <div className="row justify-space-between">
+                        <div className="col-xl-8 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                            {/* <div className="row">
                                     <div className="col-lg-6">
                                         <figure>
                                             <figcaption>
@@ -62,40 +69,39 @@ const ShoppingCart = ({ ecomerce }) => {
                                         </figure>
                                     </div>
                                 </div> */}
-                            </div>
-                            <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
-                                <CartSummary source={products} />
-
-                                <a href="/checkout" className="ps-btn ps-btn--fullwidth">
-                                    Proceed to checkout
-                                </a>
-
-                            </div>
                         </div>
-                    </div>
-                </>
-            );
-        } else {
-            contentView = (
-                <>
-                    <div className="ps-section__content">
-                        <div className="alert alert-info">
-                            <p className="mb-0">
-                                Your cart is currently empty.
-                            </p>
-                        </div>
+                        <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                            <CartSummary source={products} />
 
-                        <div className="ps-section__cart-actions">
-
-                            <a href="/" className="ps-btn">Back to Shop</a>
+                            <a href="/checkout" className="ps-btn ps-btn--fullwidth">
+                                Proceed to checkout
+                            </a>
 
                         </div>
                     </div>
-                </>
-            );
-        }
+                </div>
+            </>
+        );
     } else {
+        contentView = (
+            <>
+                <div className="ps-section__content">
+                    <div className="alert alert-info">
+                        <p className="mb-0">
+                            Your cart is currently empty.
+                        </p>
+                    </div>
+
+                    <div className="ps-section__cart-actions">
+
+                        <a href="/" className="ps-btn">Back to Shop</a>
+
+                    </div>
+                </div>
+            </>
+        );
     }
+
 
     return (
         <>

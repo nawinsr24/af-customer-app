@@ -41,11 +41,11 @@ const HomeDefaultProductListing = ({ stock, collectionSlug, title }) => {
         getData();
     }, [stock.type]);
 
-    const sectionLinksView = sectionLinks.map((link) => (
+    const sectionLinksView = sectionLinks.map((link, i) => (
         <li
             className={currentCollection === link.name ? 'active' : ''}
-            key={link.name}>
-            <a href="#" onClick={(e) => handleChangeTab(e, link)}>
+            key={link.stock_id + i}>
+            <a onClick={(e) => handleChangeTab(e, link)}>
                 {link.title}
             </a>
         </li>

@@ -5,16 +5,16 @@ const CustomPagination = () => {
         <div className="ps-pagination">
             <ul className="pagination">
                 <li className="active">
-                    <a href="#">1</a>
+                    <a>1</a>
                 </li>
                 <li>
-                    <a href="#">2</a>
+                    <a>2</a>
                 </li>
                 <li>
-                    <a href="#">3</a>
+                    <a>3</a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a>
                         Next Page
                         <i className="icon-chevron-right"></i>
                     </a>

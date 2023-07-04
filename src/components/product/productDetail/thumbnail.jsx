@@ -88,7 +88,7 @@ const Thumbnail = ({ product, vertical = true }) => {
         ));
         galleryImagesView = productImages.map((item, index) => (
             <div className="item" key={item}>
-                <a href="#" onClick={(e) => handleOpenLightbox(e, index)}>
+                <a onClick={(e) => handleOpenLightbox(e, index)}>
                     <img src={item} alt={item} />
                 </a>
             </div>

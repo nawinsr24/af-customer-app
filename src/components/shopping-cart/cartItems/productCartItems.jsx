@@ -1,40 +1,29 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
+import Constants from '../../../constants';
 const ProductCart = ({ product }) => {
 
-    const thumbnailImage = (payload) => {
-        if (payload) {
-            if (payload.thumbnail) {
-                return (
-                    <>
-                        <LazyLoad>
-                            <img
-                                src={payload.thumbnail}
-                                alt={payload.thumbnail}
-                            />
-                        </LazyLoad>
-                    </>
-                );
-            }
-        }
-    }
-    const title = (payload) => {
-        let view = (
-            <a href={`/product/${payload.id}`}>
-                <a className="ps-product__title">{payload.title}</a>
-            </a>
-        );
-        return view;
-    }
     return (
         <div className="ps-product--cart">
             <div className="ps-product__thumbnail">
 
-                <a href={`/product/${product.id}`}>{thumbnailImage({ thumbnail: product.thumbnail })}
+                <a href={`/product/${product.stock_id}`}>
+                    <>
+                        <LazyLoad>
+                            <img
+                                src={`${Constants.imgUrl}${product.images[0].image_url}`}
+                                alt={`${Constants.imgUrl}${product.images[0].image_url}`}
+                            />
+                        </LazyLoad>
+                    </>
                 </a>
 
             </div>
-            <div className="ps-product__content">{title({ title: product.title })}</div>
+            <div className="ps-product__content">
+                <a href={`/product/${product.stock_id}`}>
+                    <a className="ps-product__title">{product.name}</a>
+                </a>
+            </div>
         </div>
     );
 };

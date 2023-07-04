@@ -10,9 +10,9 @@ const CartSummary = ({ source }) => {
             <li key={item.id}>
                 <span className="ps-block__estimate">
 
-                    <a href={`/product/${item.id}`} className="ps-product__title">
-                        {item.title}
-                        <br /> x {item.quantity}
+                    <a href={`/product/${item.stock_id}`} className="ps-product__title">
+                        {item.name}
+                        <br /> x {item.quantity || 1}
                     </a>
 
                 </span>

@@ -63,7 +63,6 @@ const ModuleProductWideActions = ({ ecomerce, product }) => {
             {price(product)}
             <a
                 className="ps-btn"
-                href="#"
                 onClick={(e) => handleAddItemToCart(product)}>
                 Add to cart
             </a>

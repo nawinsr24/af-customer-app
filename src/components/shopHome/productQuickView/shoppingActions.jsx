@@ -93,18 +93,18 @@ const ModuleDetailShoppingActions = ({
                 </figure>
                 <a
                     className="ps-btn ps-btn--black"
-                    href="#"
+
                     onClick={(e) => handleAddItemToCart(product)}>
                     Add to cart
                 </a>
-                <a className="ps-btn" href="#" onClick={(e) => handleBuynow(e)}>
+                <a className="ps-btn" onClick={(e) => handleBuynow(e)}>
                     Buy Now
                 </a>
                 <div className="ps-product__actions">
-                    <a href="#" onClick={(e) => handleAddItemToWishlist(e)}>
+                    <a onClick={(e) => handleAddItemToWishlist(e)}>
                         <i className="icon-heart"></i>
                     </a>
-                    <a href="#" onClick={(e) => handleAddItemToCompare(e)}>
+                    <a onClick={(e) => handleAddItemToCompare(e)}>
                         <i className="icon-chart-bars"></i>
                     </a>
                 </div>
@@ -137,20 +137,20 @@ const ModuleDetailShoppingActions = ({
                     </figure>
                     <a
                         className="ps-btn ps-btn--black"
-                        href="#"
+
                         onClick={(e) => handleAddItemToCart(product)}>
                         Add to cart
                     </a>
                     <div className="ps-product__actions">
-                        <a href="#" onClick={(e) => handleAddItemToWishlist(e)}>
+                        <a onClick={(e) => handleAddItemToWishlist(e)}>
                             <i className="icon-heart"></i>
                         </a>
-                        <a href="#" onClick={(e) => handleAddItemToCompare(e)}>
+                        <a onClick={(e) => handleAddItemToCompare(e)}>
                             <i className="icon-chart-bars"></i>
                         </a>
                     </div>
                 </div>
-                <a className="ps-btn" href="#" onClick={(e) => handleBuynow(e)}>
+                <a className="ps-btn" onClick={(e) => handleBuynow(e)}>
                     Buy Now
                 </a>
             </div>
