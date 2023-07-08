@@ -4,7 +4,6 @@ import './App.scss';
 import { Route, Routes } from "react-router-dom";
 import MissingPage from "./pages/MissingPage";
 import RequireAuth from "./components/RequireAuth";
-import HomePage from "./pages/HomePage";
 import LoadingScreen from "./components/loadingScreen";
 import { useAuthContext } from "./context/AuthContext";
 import MasterLayout from "./components/layouts/MasterLayout";
@@ -40,6 +39,7 @@ import './scss/furniture.scss';
 import './scss/organic.scss';
 import './scss/technology.scss';
 import './scss/autopart.scss';
+import HomepageDefaultPage from "./pages/home";
 // import SearchPage from "./pages/search/search";
 
 function App() {
@@ -57,7 +57,7 @@ function App() {
         <MasterLayout>
           {loading && <LoadingScreen />}
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomepageDefaultPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/product/:pid" element={<ProductDetailPage />} />

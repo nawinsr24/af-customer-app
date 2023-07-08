@@ -4,18 +4,19 @@ import { calculateAmount } from '../../../utilities/ecomerce-helpers';
 import { useAuthContext } from '../../../context/AuthContext';
 import { getCart, deleteCart } from '../../../services/home-page-service';
 import { notify } from '../../notify';
+import { useNavigate } from 'react-router-dom';
 
 const MiniCart = ({ isRefresh }) => {
-    console.log("isRefresh", isRefresh);
+    const Router = useNavigate();
     const { ctxtUser } = useAuthContext();
     const [cartData, setCartData] = useState([]);
     const getcartData = async () => {
         const cartResponse = await getCart(ctxtUser.userId);
         setCartData(cartResponse);
-    }
+    };
     async function handleRemoveItem(cart) {
         await deleteCart(ctxtUser.userId, cart.cart_id);
-        notify("success", `${cart.name} removed from cart`)
+        notify("success", `${cart.name} removed from cart`);
         getcartData();
     }
 
@@ -46,8 +47,7 @@ const MiniCart = ({ isRefresh }) => {
                         <strong>${amount ? amount : 0}</strong>
                     </h3>
                     <figure>
-                        <a href='/shopping-cart' className="ps-btn">View Cart</a>
-                        <a href='/checkout' className="ps-btn">Checkout</a>
+                        <a onClick={() => Router("/shopping-cart")} className="ps-btn">View Cart</a>
                     </figure>
                 </div>
             </div>
@@ -64,7 +64,7 @@ const MiniCart = ({ isRefresh }) => {
 
     return (
         <div className="ps-cart--mini">
-            <a className="header__extra" href="/shopping-cart">
+            <a className="header__extra" onClick={() => Router("/shopping-cart")}>
                 <i className="icon-bag2"></i>
                 <span>
                     <i>{cartData ? cartData.length : 0}</i>

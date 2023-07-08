@@ -10,8 +10,17 @@ const ActionsSidebar = ({ product }) => {
     const { ctxtUser } = useAuthContext();
 
     async function handleAddItemToCart(data) {
-        await addToCart(ctxtUser.userId, data);
-        notify("success", `${data.name} added to your cart`)
+        const reqObj = [{
+            user_id: ctxtUser.userId,
+            stock_id: data.stock_id,
+            quantity
+        }];
+        const res = await addToCart(reqObj);
+        if (res.success) {
+            notify("success", `${data.name} added to your cart`);
+        } else {
+            notify("error", `Failed to add items to cart.`);
+        }
     }
     async function handleBuyItem(data) {
         Router(`/checkout/?id=${data.stock_id}`);

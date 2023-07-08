@@ -12,7 +12,7 @@ const CartSummary = ({ source }) => {
 
                     <a href={`/product/${item.stock_id}`} className="ps-product__title">
                         {item.name}
-                        <br /> x {item.quantity || 1}
+                        <br /> x {item.cart_quantity}
                     </a>
 
                 </span>

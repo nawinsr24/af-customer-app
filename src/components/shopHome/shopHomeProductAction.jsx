@@ -8,8 +8,17 @@ const ModuleProductActions = ({ product, ecomerce }) => {
     const [isQuickView, setIsQuickView] = useState(false);
     const { ctxtUser } = useAuthContext();
     async function handleAddItemToCart(data) {
-        await addToCart(ctxtUser.userId, data);
-        notify("success", `${data.name} added to your cart`)
+        const reqObj = [{
+            user_id: ctxtUser.userId,
+            stock_id: data.stock_id,
+            cart_quantity: 1
+        }];
+        const res = await addToCart(reqObj);
+        if (res.success) {
+            notify("success", `${data.name} added to your cart`);
+        } else {
+            notify("error", `Failed to add items to cart.`);
+        }
 
     }
 
@@ -48,7 +57,6 @@ const ModuleProductActions = ({ product, ecomerce }) => {
         <ul className="ps-product__actions">
             <li>
                 <a
-                    href="#"
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Add To Cart"
@@ -58,7 +66,6 @@ const ModuleProductActions = ({ product, ecomerce }) => {
             </li>
             <li>
                 <a
-                    href="#"
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Quick View"

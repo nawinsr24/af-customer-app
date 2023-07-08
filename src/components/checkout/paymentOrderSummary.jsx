@@ -22,9 +22,9 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, products }) => {
             <a href={`/product/${item.stock_id}`} key={`${item.stock_id}+${i}`}>
                 <strong>
                     {item.name}
-                    <span>x{item.quantity || 1}</span>
+                    <span>x{item.cart_quantity || 1}</span>
                 </strong>
-                <small>₹{(item.quantity || 1) * item.base_price}</small>
+                <small>₹{(item.cart_quantity || 1) * item.base_price}</small>
             </a>
         ));
     } else {

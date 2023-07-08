@@ -5,7 +5,9 @@ import { StrapiProductPriceExpanded } from '../../../../utilities/product-helper
 import ModuleProductProgressbar from './productProgressBar';
 import ModuleProductActions from '../../shopHomeProductAction';
 import Constants from '../../../../constants';
+import { useNavigate } from 'react-router-dom';
 const ProductDealOfDay = ({ product }) => {
+    const Router = useNavigate();
     const badge = (payload) => {
         let view;
         if (payload.badge && payload.badge !== null) {
@@ -42,13 +44,13 @@ const ProductDealOfDay = ({ product }) => {
             );
         }
         return view;
-    }
+    };
 
 
     return (
         <div className="ps-product ps-product--inner">
             <div className="ps-product__thumbnail">
-                <a href={`/product/${product.stock_id}`}>
+                <a style={{ cursor: "pointer" }} onClick={() => Router(`/product/${product.stock_id}`)}>
                     <>
                         <LazyLoad>
                             <img
@@ -63,12 +65,12 @@ const ProductDealOfDay = ({ product }) => {
             </div>
             <div className="ps-product__container">
 
-                <a className="ps-product__vendor" href="/shop">Young Shop</a>
+                <a className="ps-product__vendor" style={{ cursor: "pointer" }} onClick={() => Router(`/shop`)}>Young Shop</a>
 
                 <div className="ps-product__content">
                     {StrapiProductPriceExpanded(product)}
                     {
-                        <a className="ps-product__title" href={`/product/${product.id}`}>{product.name}</a>
+                        <a className="ps-product__title" style={{ cursor: "pointer" }} onClick={() => Router(`/product/${product.stock_id}`)}>{product.name}</a>
                     }
                     <div className="ps-product__rating">
                         <Rating />

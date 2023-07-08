@@ -1,54 +1,61 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { calculateAmount } from '../../../utilities/ecomerce-helpers';
 import LazyLoad from 'react-lazyload';
+import { useAuthContext } from '../../../context/AuthContext';
+import { deleteCart, getCart } from '../../../services/home-page-service';
+import Constants from '../../../constants';
+import { notify } from '../../notify';
 const PanelCartMobile = ({ ecomerce }) => {
-    const products =[];
-    // const { title, thumbnailImage } = useProduct();
+    const [cartProduct, setCartProduct] = useState([]);
+    const { ctxtUser } = useAuthContext();
+    const getcartData = async () => {
+        const cartResponse = await getCart(ctxtUser.userId);
+        setCartProduct(cartResponse);
+    };
 
-    function handleRemoveCartItem(e, product) {
-        e.preventDefault();
-        // removeItem(product, ecomerce.cartItems, 'cart');
+    async function handleRemoveCartItem(cart) {
+        await deleteCart(ctxtUser.userId, cart.cart_id);
+        notify("success", `${cart.name} removed from cart`);
+        getcartData();
     }
 
     useEffect(() => {
-        // if (ecomerce.cartItems) {
-        //     // getProducts(ecomerce.cartItems);
-        // }
-    }, [ecomerce]);
+        getcartData();
+    }, []);
     //view
     let cartItemsView, footerView;
 
-    if (products && products.length > 0) {
-        const amount = calculateAmount(products);
-        const items = products.map((item) => (
-            <div className="ps-product--cart-mobile" key={item.id}>
+    if (cartProduct && cartProduct.length > 0) {
+        const amount = calculateAmount(cartProduct);
+        const items = cartProduct.map((item, i) => (
+            <div className="ps-product--cart-mobile" key={`${item.id}+${i}`}>
                 <div className="ps-product__thumbnail">
-                    
-                        <a  href={`/product/${item.stock_id}`}>{ <>
-                            <LazyLoad>
-                                <img
-                                    src={(item.iamges[0].image_url)}
-                                    alt={(item.iamges[0].image_url)}
-                                />
-                            </LazyLoad>
-                        </>}</a>
-                    
+
+                    <a href={`/product/${item.stock_id}`}>{<>
+                        <LazyLoad>
+                            <img
+                                src={`${Constants.imgUrl}${item.images[0].image_url}`}
+                                alt={`${Constants.imgUrl}${item.images[0].image_url}`}
+                            />
+                        </LazyLoad>
+                    </>}</a>
+
                 </div>
                 <div className="ps-product__content">
                     <a
                         className="ps-product__remove"
-                        onClick={(e) => handleRemoveCartItem(e, item)}>
+                        onClick={(e) => handleRemoveCartItem(item)}>
                         <i className="icon-cross"></i>
                     </a>
                     <a className="ps-product__title">{item.name}</a>
-                    
-                        <a href={`/product/${item.stock_id}`} className="ps-product__title">{item.name}</a>
-                
+
+                    <a href={`/product/${item.stock_id}`} className="ps-product__title">{item.name}</a>
+
                     <p>
-                        <strong>Sold by:</strong> {item.vendor}
+                        {/* <strong>Sold by:</strong> {item.vendor} */}
                     </p>
                     <small>
-                        {item.quantity} x ${item.price}
+                        {item.quantity || 1} x ₹{item.base_price}
                     </small>
                 </div>
             </div>
@@ -57,15 +64,15 @@ const PanelCartMobile = ({ ecomerce }) => {
         footerView = (
             <div className="ps-cart__footer">
                 <h3>
-                    Sub Total:<strong>${amount}</strong>
+                    Sub Total:<strong>₹{amount}</strong>
                 </h3>
                 <figure>
-                  
-                        <a  href="shopping-cart" className="ps-btn">View Cart</a>
-                    
-                   
-                        <a href="/checkout" className="ps-btn">Checkout</a>
-                    
+
+                    <a href="/shopping-cart" className="ps-btn">View Cart</a>
+
+
+                    <a href="/checkout" className="ps-btn">Checkout</a>
+
                 </figure>
             </div>
         );
@@ -73,9 +80,9 @@ const PanelCartMobile = ({ ecomerce }) => {
         cartItemsView = <p>Cart empty!</p>;
         footerView = (
             <div className="ps-cart__footer">
-               
-                    <a href="/shop" className="ps-btn ps-btn--fullwidth">Shop now</a>
-                
+
+                <a href="/shop" className="ps-btn ps-btn--fullwidth">Shop now</a>
+
             </div>
         );
     }

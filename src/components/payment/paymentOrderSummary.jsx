@@ -1,31 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { calculateAmount } from '../../utilities/ecomerce-helpers';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { getProductData } from '../../services/product-service';
+import { getCart } from '../../services/home-page-service';
+import { useAuthContext } from '../../context/AuthContext';
 
 const ModulePaymentOrderSummary = ({ ecomerce, shipping }) => {
-    // const { products, getProducts } = useEcomerce();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const [checkoutProducts, setcheckoutProducts] = useState([]);
 
-    // useEffect(() => {
-    //     if (ecomerce.cartItems) {
-    //         getProducts(ecomerce.cartItems, 'cart');
-    //     }
-    // }, [ecomerce]);
 
-    // view
+    // Access query parameters
+    const stock_id = queryParams.get('id');
+    const { ctxtUser } = useAuthContext();
+    const Router = useNavigate();
+    async function getSingleProduct() {
+        const productRes = await getProductData(stock_id);
+        setcheckoutProducts(productRes);
+    }
+    async function getCartProducts() {
+        const productRes = await getCart(ctxtUser.userId);
+        setcheckoutProducts(productRes);
+
+    }
+    useEffect(() => {
+        if (stock_id) {
+            getSingleProduct();
+        } else {
+            getCartProducts();
+        }
+    }, []);
     let listItemsView, shippingView, totalView;
     let amount;
 
-    let products = [{ id: 1, quantity: 1, price: 200, thumbnail: 'https://beta.apinouthemes.com/uploads/e98492a0c2b24ae5892641009bf21056.jpg', title: 'Sleeve Linen Blend Caro Pane Shirt' },
-    { id: 2, quantity: 2, price: 200, thumbnail: 'https://beta.apinouthemes.com/uploads/e98492a0c2b24ae5892641009bf21056.jpg', title: 'Sleeve Linen Blend Caro Pane Shirt' }];;
-    if (products && products.length > 0) {
-        amount = calculateAmount(products);
-        listItemsView = products.map((item) => (
 
-            <a href="/" key={item.id}>
+    if (checkoutProducts && checkoutProducts.length > 0) {
+        amount = calculateAmount(checkoutProducts);
+        listItemsView = checkoutProducts.map((item, i) => (
+
+            <a onClick={() => Router(`product/${item.stock_id}`)} key={`${item.stock_id}${i}`}>
                 <strong>
-                    {item.title}
-                    <span>x{item.quantity}</span>
+                    {item.name}
+                    <span>x{item.cart_quantity || 1}</span>
                 </strong>
-                <small>${item.quantity * item.price}</small>
+                <small>${(item.cart_quantity || 1) * item.base_price}</small>
             </a>
 
         ));

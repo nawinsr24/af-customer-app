@@ -26,7 +26,7 @@ const Checkout = () => {
     const getAddressData = async () => {
         const addressRes = await getAddress(ctxtUser.userId);
         setaddressList(addressRes);
-    }
+    };
     async function getSingleProduct() {
         const productRes = await getProductData(stock_id);
         setcheckoutProducts(productRes);
@@ -47,21 +47,27 @@ const Checkout = () => {
     const handleAddressChange = (e) => {
         console.log(e.target.value);
         setCheckoutAddress(e.target.value);
-    }
+    };
 
     function isAddAddressFn(showAddressList) {
-        isAddAddress(showAddressList)
+        isAddAddress(showAddressList);
     }
 
     const submit = async () => {
-        const reqObj = {
-            ...checkoutAddress,
-            checkout_products: checkoutProducts
+        // const reqObj = {
+        //     ...checkoutAddress,
+        //     checkout_products: checkoutProducts
+        // }
+        // await postOrder(reqObj);
+        localStorage.setItem("delivary_address", JSON.stringify(checkoutAddress));
+        // console.log(reqObj);
+        if (stock_id) {
+            Router(`/shipping/?id=${stock_id}`);
+        } else {
+            Router(`/shipping`);
+
         }
-        await postOrder(reqObj);
-        console.log(reqObj);
-        // Router('/shipping')
-    }
+    };
 
     return (
         <div className="ps-checkout ps-section--shopping">
@@ -118,13 +124,13 @@ const Checkout = () => {
                                                                                             Emergency contact : {a.delivery_mobile_2}
                                                                                         </figcaption>
                                                                                     </figure> </Radio>
-                                                                            )
+                                                                            );
                                                                         })}
                                                                     </Radio.Group>
                                                                 </Form.Item>
                                                                 <div className="ps-form__submit">
 
-                                                                    <a href="/shopping-cart">
+                                                                    <a onClick={() => Router('/shopping-cart')}>
                                                                         <i className="icon-arrow-left mr-2"></i>
                                                                         Return to shopping cart
                                                                     </a>

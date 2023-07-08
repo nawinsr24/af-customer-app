@@ -1,24 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Result } from 'antd';
 import ProductCart from '../cartItems/productCartItems';
 import { useAuthContext } from '../../../context/AuthContext';
 import { notify } from '../../notify';
 import { deleteCart } from '../../../services/home-page-service';
 
-const CartItems = ({ cartItems, callBackFn }) => {
+const CartItems = ({ cartItems, callBackFn, increaseCart, decreaseCart }) => {
     const { ctxtUser } = useAuthContext();
+    const [temp, setTemp] = useState(false);
 
     async function handleRemoveItem(cart) {
         await deleteCart(ctxtUser.userId, cart.cart_id);
         notify("success", `${cart.name} removed from cart`);
-        callBackFn(cart.cart_id);
+        setTemp(!temp);
+        callBackFn(temp);
     }
 
     function handleIncreaseItemQty(data) {
-
+        increaseCart(data);
     }
 
     function handleDecreaseItemQty(data) {
+        decreaseCart(data);
     }
 
     // View
@@ -47,13 +50,13 @@ const CartItems = ({ cartItems, callBackFn }) => {
                         <input
                             className="form-control"
                             type="text"
-                            placeholder={item.quantity || 1}
+                            placeholder={item.cart_quantity}
                             disabled={true}
                         />
                     </div>
                 </td>
                 <td data-label="total">
-                    <strong>₹{(item.base_price * (item.quantity || 1)).toFixed(2)}</strong>
+                    <strong>₹{(item.base_price * (item.cart_quantity)).toFixed(2)}</strong>
                 </td>
                 <td>
                     <a onClick={(e) => handleRemoveItem(item)}>

@@ -4,30 +4,21 @@ import React, { useEffect } from 'react';
 // import useEcomerce from '~/hooks/useEcomerce';
 import { calculateAmount } from '../../utilities/ecomerce-helpers';
 
-const shippingPaymentOrderSummary = ({ ecomerce, shipping }) => {
-    // const { products, getProducts } = useEcomerce();
-
-    // useEffect(() => {
-    //     if (ecomerce?.cartItems) {
-    //         // getProducts(ecomerce.cartItems, 'cart');
-    //     }
-    // }, []);
+const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, shipping }) => {
 
     // view
     let listItemsView, shippingView, totalView;
     let amount;
-    let products = [{ id: 1, quantity: 1, price: 200, thumbnail: 'https://beta.apinouthemes.com/uploads/e98492a0c2b24ae5892641009bf21056.jpg', title: 'Sleeve Linen Blend Caro Pane Shirt' },
-    { id: 2, quantity: 2, price: 200, thumbnail: 'https://beta.apinouthemes.com/uploads/e98492a0c2b24ae5892641009bf21056.jpg', title: 'Sleeve Linen Blend Caro Pane Shirt' }];;
-    if (products && products.length > 0) {
-        amount = calculateAmount(products);
-        listItemsView = products.map((item) => (
+    if (checkoutProducts && checkoutProducts.length > 0) {
+        amount = calculateAmount(checkoutProducts);
+        listItemsView = checkoutProducts.map((item, i) => (
 
-            <a href="/" key={item.id}>
+            <a href="/" key={`${item.stock_id}=${i}`}>
                 <strong>
-                    {item.title}
-                    <span>x{item.quantity}</span>
+                    {item.name}
+                    <span>x{item.cart_quantity || 1}</span>
                 </strong>
-                <small>${item.quantity * item.price}</small>
+                <small>${(item.cart_quantity || 1) * item.base_price}</small>
             </a>
 
         ));

@@ -5,13 +5,13 @@ export async function getDealOfTheDay(page, limit) {
         const details = {
             urlPath: `/customer/stockByType?Page=${page || 1}&limit=${limit || 10}`,
             body: { type: "deal_of_the_day" }
-        }
+        };
 
         const res = await postData(details);
         console.log(res, "---------------getDealOfTheDay");
         return res.data;
     } catch (error) {
-        return;
+        return error;
     }
 
 }
@@ -21,7 +21,7 @@ export async function getStockByType(type, page, limit) {
         const details = {
             urlPath: `/customer/stockByType?Page=${page || 1}&limit=${limit || 10}`,
             body: { type: type }
-        }
+        };
 
         const res = await postData(details);
         console.log(res, `---------------get${type}`);
@@ -32,19 +32,16 @@ export async function getStockByType(type, page, limit) {
 
 }
 
-export async function addToCart(user_id, data) {
+export async function addToCart(data) {
     try {
         const details = {
             urlPath: `/customer/addtocart`,
-            body: {
-                user_id,
-                stock_id: data?.stock_id
-            }
-        }
+            body: data
+        };
         const res = await postData(details);
-        return res.data;
+        return res;
     } catch (error) {
-        return;
+        return error;
     }
 }
 
@@ -52,7 +49,7 @@ export async function getCart(user_id) {
     try {
         const details = {
             urlPath: `/customer/cart/${user_id}`,
-        }
+        };
         const res = await getData(details);
         return res.data;
     } catch (error) {
@@ -65,11 +62,11 @@ export async function deleteCart(user_id, cart_id) {
     try {
         const details = {
             urlPath: `/customer/cart/?user_id=${user_id}&cart_id=${cart_id}`,
-        }
+        };
         const res = await deleteData(details);
         return res.data;
     } catch (error) {
-        return;
+        return error;
     }
 
 }

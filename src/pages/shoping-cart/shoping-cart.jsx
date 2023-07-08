@@ -5,19 +5,22 @@ import FooterDefault from '../../components/footers/FooterFullwidth';
 import CartItems from '../../components/shopping-cart/cartItems/cartItems';
 import CartSummary from '../../components/shopping-cart/cart-summary';
 import { useAuthContext } from '../../context/AuthContext';
-import { getCart } from '../../services/home-page-service';
+import { addToCart, getCart } from '../../services/home-page-service';
+import { useNavigate } from 'react-router-dom';
+import { notify } from '../../components/notify';
 const ShoppingCart = ({ ecomerce }) => {
     const { ctxtUser } = useAuthContext();
-    const [cartData, setCartData] = useState([]);
+    const Router = useNavigate();
+    const [cartProduts, setCartProducts] = useState([]);
     const [cartRefresh, setCartRefresh] = useState(false);
     const getcartData = async () => {
         const cartResponse = await getCart(ctxtUser.userId);
-        setCartData(cartResponse);
-    }
+        setCartProducts(cartResponse);
+    };
 
     const isCartRefresh = (isRefresh) => {
         setCartRefresh(isRefresh);
-    }
+    };
 
     useEffect(() => {
         getcartData();
@@ -33,16 +36,58 @@ const ShoppingCart = ({ ecomerce }) => {
         },
     ];
 
+
+
+    const increaseCartCount = (data) => {
+        console.log("INCREATSE", data);
+        const updateCartData = cartProduts.map((item) => {
+            if (item.stock_id === data.stock_id) {
+                return {
+                    ...item,
+                    cart_quantity: item.cart_quantity + 1
+                };
+            }
+            return item;
+        });
+        setCartProducts(updateCartData);
+
+    };
+    const decreaseCartCount = (data) => {
+        console.log("decreaseCartCount", data);
+        const updateCartData = cartProduts.map((item) => {
+            if (item.stock_id === data.stock_id && item.cart_quantity > 1) {
+                return {
+                    ...item,
+                    cart_quantity: item.cart_quantity - 1
+                };
+            }
+            return item;
+        });
+        setCartProducts(updateCartData);
+    };
+
+    const handleCheckOut = async () => {
+        const addCartReq = await addToCart(cartProduts);
+        if (addCartReq?.success) {
+
+            Router("/checkout");
+        } else {
+            notify("error", "something went wrong");
+        }
+        console.log("CHECKOUT DATA", cartProduts);
+    };
+
     // View
     let contentView;
-    let products = cartData;
+    let products = cartProduts;
     if (products && products.length > 0) {
         contentView = (
             <>
                 <div className="ps-section__content">
-                    <CartItems cartItems={products} callBackFn={isCartRefresh} />
+                    <CartItems cartItems={products} callBackFn={isCartRefresh}
+                        increaseCart={increaseCartCount} decreaseCart={decreaseCartCount} />
                     <div className="ps-section__cart-actions">
-                        <a href="/shop" className="ps-btn">Back to Shop</a>
+                        <a onClick={() => Router("/shop")} className="ps-btn">Back to Shop</a>
                     </div>
                 </div>
                 <div className="ps-section__footer">
@@ -73,7 +118,7 @@ const ShoppingCart = ({ ecomerce }) => {
                         <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
                             <CartSummary source={products} />
 
-                            <a href="/checkout" className="ps-btn ps-btn--fullwidth">
+                            <a onClick={() => handleCheckOut()} className="ps-btn ps-btn--fullwidth">
                                 Proceed to checkout
                             </a>
 
@@ -94,7 +139,7 @@ const ShoppingCart = ({ ecomerce }) => {
 
                     <div className="ps-section__cart-actions">
 
-                        <a href="/" className="ps-btn">Back to Shop</a>
+                        <a onClick={() => Router("/shop")} className="ps-btn">Back to Shop</a>
 
                     </div>
                 </div>

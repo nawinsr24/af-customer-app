@@ -2,29 +2,32 @@ import React from 'react';
 import LazyLoad from 'react-lazyload';
 // import Link from 'next/link';
 import ModuleProductWideActions from './productWideAction';
+import { useNavigate } from 'react-router-dom';
+import Constants from '../../../../constants';
 // import useProduct from '~/hooks/useProduct';
 
 const ProductWide = ({ product }) => {
+    const Router = useNavigate();
     return (
         <div className="ps-product ps-product--wide">
             <div className="ps-product__thumbnail">
 
-                <a href={`/product/${product.id}`}>{
+                <a onClick={() => Router(`/procuct/${product.stock_id}`)}>{
                     <LazyLoad>
                         <img
-                            src={product.thumbnail.url}
-                            alt={product.thumbnail.url}
+                            src={`${Constants.imgUrl}${product.images[0].image_url}`}
+                            alt={`${Constants.imgUrl}${product.images[0].image_url}`}
                         />
                     </LazyLoad>}</a>
 
             </div>
             <div className="ps-product__container">
                 <div className="ps-product__content">
-                    <a href={`/product/${product.id}`} className="ps-product__title">{product.title}</a>
+                    <a onClick={() => Router(`/procuct/${product.stock_id}`)} className="ps-product__title">{product.title}</a>
 
                     <p className="ps-product__vendor">
                         Sold by:
-                        <a href="/shop">
+                        <a onClick={() => Router(`/shop`)}>
                             <a>{product.vendor}</a>
                         </a>
                     </p>

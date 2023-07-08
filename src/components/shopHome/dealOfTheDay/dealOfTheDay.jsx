@@ -6,18 +6,19 @@ import CountDownSimple from './countDown';
 import ProductDealOfDay from './productDealOfTheDay/productDealOfTheDay';
 import { generateTempArray } from '../../../utilities/common-helpers';
 import { getDealOfTheDay } from '../../../services/home-page-service';
+import { useNavigate } from 'react-router-dom';
 
 const HomeDefaultDealOfDay = ({ collectionSlug }) => {
     const [productItems, setProductItems] = useState([]);
     const [loading, setLoading] = useState(true);
-    // const { productItems, loading, getProductsByCollection } = useGetProducts();
+    const Router = useNavigate();
     useEffect(() => {
         const getData = async () => {
             const dealOfTheDayResponse = await getDealOfTheDay();
             setProductItems(dealOfTheDayResponse?.data);
-            setLoading(false)
+            setLoading(false);
             console.log(dealOfTheDayResponse);
-        }
+        };
         getData();
 
     }, []);
@@ -65,7 +66,7 @@ const HomeDefaultDealOfDay = ({ collectionSlug }) => {
                         </div>
                     </div>
 
-                    <a href="/shop">View all</a>
+                    <a onClick={() => Router("/shop")}>View all</a>
 
                 </div>
                 <div className="ps-section__content">{productItemsView}</div>

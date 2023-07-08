@@ -3,8 +3,10 @@ import React from 'react';
 import ModulePaymentOrderSummary from '../../components/payment/paymentOrderSummary';
 import ModulePaymentShipping from '../../components/payment/paymentShipping';
 import ModulePaymentMethods from '../../components/payment/paymentMethods';
+import { useNavigate } from 'react-router-dom';
 
 const Payment = () => {
+    const Router = useNavigate();
     return (
         <div className="ps-checkout ps-section--shopping">
             <div className="container">
@@ -19,7 +21,7 @@ const Payment = () => {
                                 <ModulePaymentMethods />
                                 <div className="ps-block__footer">
 
-                                    <a href="/shipping">
+                                    <a onClick={() => Router('/shipping')}>
                                         <i className="icon-arrow-left mr-2"></i>
                                         Return to shipping
                                     </a>

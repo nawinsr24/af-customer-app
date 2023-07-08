@@ -1,21 +1,30 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const ModulePaymentShipping = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const address_data = localStorage.getItem('delivary_address') ? JSON.parse(localStorage.getItem('delivary_address')) : null;
+    const Router = useNavigate();
+    // Access query parameters
+    const stock_id = queryParams.get('id');
+
     return (
         <>
             <div className="ps-block__panel">
                 <figure>
-                    <small>Contact</small>
+                    {/* <small>Contact</small>
                     <p>test@gmail.com</p>
 
-                    <a href="/checkout">Change</a>
+                    <a onClick={stock_id ? `/checkout/?id=${stock_id}` : "/checkout"}>Change</a> */}
 
                 </figure>
                 <figure>
                     <small>Ship to</small>
-                    <p>2015 South Street, Midland, Texas</p>
+                    <p>{address_data ?
+                        address_data.house_flat_number + ", " + address_data.delivery_name + ", " + address_data.area + ", " + address_data.city + ", " + address_data.state + ", " + address_data.pincode : '--'}</p>
 
-                    <a href="/checkout">Change</a>
+                    <a style={{ cursor: "pointer" }} onClick={stock_id ? Router(`/checkout/?id=${stock_id}`) : Router("/checkout")}>Change</a>
 
                 </figure>
             </div>

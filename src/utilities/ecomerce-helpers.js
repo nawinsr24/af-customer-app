@@ -91,12 +91,12 @@ export function removeCartItemHelper(product) {
 
 export function calculateAmount(obj) {
     return Object.values(obj)
-        .reduce((acc, { quantity, base_price }) => acc + (quantity || 1) * base_price, 0)
+        .reduce((acc, { cart_quantity, base_price }) => acc + (cart_quantity || 1) * base_price, 0)
         .toFixed(2);
 }
 
 export function calculateCartQuantity(obj) {
-    return Object.values(obj).reduce((acc, { quantity }) => acc + quantity, 0);
+    return Object.values(obj).reduce((acc, { cart_quantity }) => acc + cart_quantity || 1, 0);
 }
 
 export function caculateArrayQuantity(obj) {

@@ -1,5 +1,5 @@
 import { isEmail } from "../utils/format";
-import { postData } from "./rest-api-helper"
+import { postData } from "./rest-api-helper";
 
 export async function signupService({ username }) {
     try {
@@ -10,11 +10,11 @@ export async function signupService({ username }) {
                 ...(isEmailBool && { email: username }),
                 ...(!isEmailBool && { mobile: username })
             }
-        }
+        };
         const res = await postData(details);
         return res;
     } catch (error) {
-        return;
+        return error;
     }
 
 }
@@ -26,13 +26,13 @@ export async function verifyCustOtpService({ otp, username, custName, password }
             body: {
                 username, custName, password
             }
-        }
+        };
 
         const res = await postData(details);
         console.log(res, "---------------verifyCustOtpService");
         return res;
     } catch (error) {
-        return;
+        return error;
     }
 
 }

@@ -8,8 +8,17 @@ const DetailActionsMobile = ({ product }) => {
     const { ctxtUser } = useAuthContext();
     const Router = useNavigate();
     const handleAddItemToCart = async (data) => {
-        await addToCart(ctxtUser.userId, data);
-        notify("success", `${data.name} added to your cart`)
+        const reqObj = [{
+            user_id: ctxtUser.userId,
+            stock_id: data.stock_id,
+            cart_quantity: 1
+        }];
+        const res = await addToCart(reqObj);
+        if (res?.success) {
+            notify("success", `${data.name} added to your cart`);
+        } else {
+            notify("error", `Failed to add items to cart.`);
+        }
     };
 
     const handleBuyNow = (e) => {

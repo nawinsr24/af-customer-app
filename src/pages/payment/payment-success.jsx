@@ -4,8 +4,10 @@ import PageContainer from '../../components/layouts/PageContainer';
 import FooterDefault from '../../components/footers/FooterFullwidth';
 
 import ModulePaymentOrderSummary from '../../components/payment/paymentOrderSummary';
+import { useNavigate } from 'react-router-dom';
 
 const PaymentSuccessPage = () => {
+    const Router = useNavigate();
     const breadCrumb = [
         {
             text: 'Home',
@@ -60,7 +62,7 @@ const PaymentSuccessPage = () => {
                                             </div>
                                             <div className="ps-block__bottom">
 
-                                                <a href="/" className="ps-btn">
+                                                <a onClick={() => Router('/shop')} className="ps-btn">
                                                     <i className="icon-arrow-left mr-2"></i>
                                                     Back to shop
                                                 </a>

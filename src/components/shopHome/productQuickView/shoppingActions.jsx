@@ -10,11 +10,20 @@ const ModuleDetailShoppingActions = ({
     extended = false,
 }) => {
     const { ctxtUser } = useAuthContext();
-    const [quantity, setQuantity] = useState(1);
+    const [cart_quantity, setQuantity] = useState(1);
     const Router = useNavigate();
     async function handleAddItemToCart(data) {
-        await addToCart(ctxtUser.userId, data);
-        notify("success", `${data.name} added to your cart`)
+        const reqObj = [{
+            user_id: ctxtUser.userId,
+            stock_id: data.stock_id,
+            cart_quantity
+        }];
+        const res = await addToCart(reqObj);
+        if (res.success) {
+            notify("success", `${data.name} added to your cart`);
+        } else {
+            notify("error", `Failed to add items to cart.`);
+        }
     }
 
     function handleBuynow(data) {
@@ -46,13 +55,13 @@ const ModuleDetailShoppingActions = ({
 
     function handleIncreaseItemQty(e) {
         e.preventDefault();
-        setQuantity(quantity + 1);
+        setQuantity(cart_quantity + 1);
     }
 
     function handleDecreaseItemQty(e) {
         e.preventDefault();
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
+        if (cart_quantity > 1) {
+            setQuantity(cart_quantity - 1);
         }
     }
     if (!extended) {
@@ -74,7 +83,7 @@ const ModuleDetailShoppingActions = ({
                         <input
                             className="form-control"
                             type="text"
-                            placeholder={quantity}
+                            placeholder={cart_quantity}
                             disabled
                         />
                     </div>
@@ -118,7 +127,7 @@ const ModuleDetailShoppingActions = ({
                             <input
                                 className="form-control"
                                 type="text"
-                                placeholder={quantity}
+                                placeholder={cart_quantity}
                                 disabled
                             />
                         </div>
@@ -129,14 +138,14 @@ const ModuleDetailShoppingActions = ({
                         onClick={(e) => handleAddItemToCart(product)}>
                         Add to cart
                     </a>
-                    <div className="ps-product__actions">
+                    {/* <div className="ps-product__actions">
                         <a onClick={(e) => handleAddItemToWishlist(e)}>
                             <i className="icon-heart"></i>
                         </a>
                         <a onClick={(e) => handleAddItemToCompare(e)}>
                             <i className="icon-chart-bars"></i>
                         </a>
-                    </div>
+                    </div> */}
                 </div>
                 <a className="ps-btn" onClick={(e) => handleBuynow(product)}>
                     Buy Now

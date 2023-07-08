@@ -44,6 +44,7 @@ const SearchHeader = () => {
     function handleSubmit(e) {
         e.preventDefault();
         Router(`/shop?keyword=${keyword}`);
+        setIsSearch(false);
     }
     async function getproduct() {
         const reqObj = { keyword };

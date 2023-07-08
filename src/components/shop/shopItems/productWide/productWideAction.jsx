@@ -8,32 +8,41 @@ const ModuleProductWideActions = ({ ecomerce, product }) => {
 
     const price = (payload) => {
         let view;
-        if (payload.sale_price) {
+        if (payload.total_price) {
             view = (
                 <p className="ps-product__price sale">
-                    <span>$</span>
-                    {payload.sale_price}
+                    <span>₹</span>
+                    {payload.total_price}
                     <del className="ml-2">
-                        <span>$</span>
-                        {payload.price}
+                        <span>₹</span>
+                        {payload.base_price}
                     </del>
                 </p>
             );
         } else {
             view = (
                 <p className="ps-product__price">
-                    <span>$</span>
-                    {payload.price}
+                    <span>₹</span>
+                    {payload.base_price}
                 </p>
             );
         }
         return view;
-    }
+    };
     // const { price } = useProduct();
     // const { addItem } = useEcomerce();
     async function handleAddItemToCart(data) {
-        await addToCart(ctxtUser.userId, data);
-        notify("success", `${data.name} added to your cart`)
+        const reqObj = [{
+            user_id: ctxtUser.userId,
+            stock_id: data.stock_id,
+            cart_quantity: 1
+        }];
+        const res = await addToCart(reqObj);
+        if (res.success) {
+            notify("success", `${data.name} added to your cart`);
+        } else {
+            notify("error", `Failed to add items to cart.`);
+        }
     }
 
     function handleAddItemToWishlist(e) {

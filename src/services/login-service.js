@@ -1,4 +1,4 @@
-import { postData } from "./rest-api-helper"
+import { postData } from "./rest-api-helper";
 
 export async function loginService({ username, password }) {
     try {
@@ -7,12 +7,12 @@ export async function loginService({ username, password }) {
             body: {
                 username, password
             }
-        }
+        };
 
         const res = await postData(details);
         return res.data;
     } catch (error) {
-        return;
+        return error;
     }
 
 }
@@ -21,12 +21,12 @@ export async function socialLogin(data) {
         const details = {
             urlPath: "/customer/socialLogin",
             body: data
-        }
+        };
 
         const res = await postData(details);
         return res.data;
     } catch (error) {
-        return;
+        return error;
     }
 
 }

@@ -3,8 +3,10 @@ import LazyLoad from 'react-lazyload';
 import ProductActions from '../productAction/productAction';
 import Rating from '../../../Rating';
 import Constants from '../../../../constants';
+import { useNavigate } from 'react-router-dom';
 
 const Product = ({ product }) => {
+    const Router = useNavigate();
     const price = (payload) => {
         let view;
         if (payload.total_price) {
@@ -65,12 +67,12 @@ const Product = ({ product }) => {
             );
         }
         return view;
-    }
+    };
 
     return (
         <div className="ps-product">
             <div className="ps-product__thumbnail">
-                <a href={`/product/${product.stock_id}`} >
+                <a style={{ cursor: "pointer" }} onClick={() => Router(`/product/${product.stock_id}`)}>
                     <LazyLoad>
                         <img
                             src={`${Constants.imgUrl}${product?.images[0]?.image_url}`}
@@ -82,11 +84,11 @@ const Product = ({ product }) => {
                 <ProductActions product={product} />
             </div>
             <div className="ps-product__container">
-                <a className="ps-product__vendor" href="/shop">
+                <a className="ps-product__vendor" style={{ cursor: "pointer" }} onClick={() => Router(`/shop`)}>
                     Young Shop
                 </a>
                 <div className="ps-product__content">
-                    {<a className="ps-product__title" href={`/product/${product.stock_id}`}>
+                    {<a className="ps-product__title" style={{ cursor: "pointer" }} onClick={() => Router(`/product/${product.stock_id}`)}>
                         {product.name}
                     </a>}
                     <div className="ps-product__rating">
@@ -96,7 +98,7 @@ const Product = ({ product }) => {
                     {price(product)}
                 </div>
                 <div className="ps-product__content hover">
-                    {<a className="ps-product__title" href={`/product/${product.stock_id}`}>
+                    {<a className="ps-product__title" style={{ cursor: "pointer" }} onClick={() => Router(`/product/${product.stock_id}`)}>
                         {product.name}
                     </a>}
                     {price(product)}
