@@ -1,15 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-// import Link from 'next/link';
-import { Link } from 'react-router-dom';
-// import Router from 'next/router';
 import { Spin } from 'antd';
-// import ProductRepository from '~/repositories/ProductRepository';
 import ProductSearchResult from '../../ProductSearchResult';
 import { useQuery } from 'react-query';
 import QueryKey from '../../../QueryKey';
 import { getAllSubCatService } from '../../../services/category-service';
 import { customAlert } from '../../notify';
-
+import { useNavigate } from 'react-router-dom';
+import { searchProduct } from '../../../services/search-service';
 
 function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);
@@ -28,10 +25,11 @@ function useDebounce(value, delay) {
 }
 
 const SearchHeader = () => {
+    const Router = useNavigate();
     const inputEl = useRef(null);
     const [isSearch, setIsSearch] = useState(false);
     const [keyword, setKeyword] = useState('');
-    const [resultItems, setResultItems] = useState(null);
+    const [resultItems, setResultItems] = useState([]);
     const [loading, setLoading] = useState(false);
     const debouncedSearchTerm = useDebounce(keyword, 300);
     const { isLoading, isError, error, data: subCatData } = useQuery([QueryKey.getAllSubCat], () => getAllSubCatService());
@@ -45,23 +43,20 @@ const SearchHeader = () => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        // Router.push(`/search?keyword=${keyword}`);
+        Router(`/shop?keyword=${keyword}`);
     }
-
+    async function getproduct() {
+        const reqObj = { keyword };
+        const searchRes = await searchProduct(reqObj);
+        setLoading(false);
+        setResultItems(searchRes.data);
+        setIsSearch(true);
+    }
     useEffect(() => {
         if (debouncedSearchTerm) {
             setLoading(true);
             if (keyword) {
-                const queries = {
-                    _limit: 5,
-                    title_contains: keyword,
-                };
-                // const products = ProductRepository.getRecords(queries);
-                // products.then((result) => {
-                //     setLoading(false);
-                //     setResultItems(result);
-                //     setIsSearch(true);
-                // });
+                getproduct();
             } else {
                 setIsSearch(false);
                 setKeyword('');
@@ -73,7 +68,7 @@ const SearchHeader = () => {
             setLoading(false);
             setIsSearch(false);
         }
-    }, [debouncedSearchTerm]);
+    }, [debouncedSearchTerm, keyword]);
 
     // Views
     let productItemsView, clearTextView, selectOptionView, loadingView, loadMoreView;
@@ -89,8 +84,8 @@ const SearchHeader = () => {
                     </div>
                 );
             }
-            productItemsView = resultItems.map((product) => (
-                <ProductSearchResult product={product} key={product.id} />
+            productItemsView = resultItems.map((product, i) => (
+                <ProductSearchResult product={product} key={`${product.stock_id}+${i}`} />
             ));
         } else {
             productItemsView = <p>No product found.</p>;
@@ -111,12 +106,12 @@ const SearchHeader = () => {
     }
 
     if (subCatData) {
-       const subCatDataNew = [{ id: "all", sub_category_name: "All" }, ...subCatData]
+        const subCatDataNew = [{ id: "all", sub_category_name: "All" }, ...subCatData];
         selectOptionView = subCatDataNew.map((obj) => (
             <option value={obj?.id} key={obj?.id}>
                 {obj?.sub_category_name}
             </option>
-        ))
+        ));
     }
 
 

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import SearchHeader from './modules/SearchHeader';
-// import NavigationDefault from '../navigation/NavigationDefault';
+import NavigationDefault from '../navigation/NavigationDefault';
 import HeaderActions from './modules/HeaderActions';
 import { stickyHeader } from '../../utilities/common-helpers';
 
@@ -34,7 +34,7 @@ const HeaderDefault = () => {
                     </div>
                 </div>
             </div>
-            {/* <NavigationDefault /> */}
+            <NavigationDefault />
         </header>
     );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Radio } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import FormCheckoutInformation from '../../components/checkout/formCheckoutInformation';
-import { Form, Input } from 'antd';
+import { Form } from 'antd';
 import ModulePaymentOrderSummary from '../../components/checkout/paymentOrderSummary';
 import { useAuthContext } from '../../context/AuthContext';
 import { getAddress, postOrder } from '../../services/checkout-service';

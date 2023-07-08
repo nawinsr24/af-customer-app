@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { CookiesProvider } from 'react-cookie';
 import './App.scss';
 import { Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout";
 import MissingPage from "./pages/MissingPage";
 import RequireAuth from "./components/RequireAuth";
 import HomePage from "./pages/HomePage";
@@ -41,6 +40,7 @@ import './scss/furniture.scss';
 import './scss/organic.scss';
 import './scss/technology.scss';
 import './scss/autopart.scss';
+// import SearchPage from "./pages/search/search";
 
 function App() {
 
@@ -69,6 +69,7 @@ function App() {
             <Route path='/payment-success' element={<PaymentSuccessPage />} />
             <Route path='/verify' element={<OtpPage />} />
             <Route path='/delivery-history/:id' element={<ProductDeliveryHistoryPage />} />
+            {/* <Route path='/search' element={<SearchPage />} /> */}
 
 
             <Route element={<RequireAuth />}>

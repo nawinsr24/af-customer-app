@@ -9,12 +9,44 @@ import { generateTempArray } from '../../../utilities/common-helpers';
 import SkeletonProduct from './skeletonProduct';
 
 import data from '../../../static/data/product.json';
+import { useLocation } from 'react-router-dom';
+import { searchProduct } from '../../../services/search-service';
 // import useGetProducts from '~/hooks/useGetProducts';
 
 const ShopItems = ({ columns = 4, pageSize = 12 }) => {
     // const Router = useRouter();
+    // const [pageSize] = useState(100);
+    const [keyword, setKeyword] = useState('');
+    const [productItems, setProductItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    // Access query parameters
+    const query_keyword = queryParams.get('keyword');
+    const getProducts = async () => {
+        const reqObj = { keyword: query_keyword };
+        const searchRes = await searchProduct(reqObj);
+        setLoading(false);
+        setProductItems(searchRes.data);
+        setTotal(searchRes.data?.length);
+        console.log("searchRes", searchRes);
+    };
+    function handleSetKeyword() {
+        if (query_keyword && query_keyword.length > 0) {
+            setKeyword(query_keyword);
+        } else {
+            setKeyword('');
+        }
+    }
+
+    useEffect(() => {
+        if (query_keyword && query_keyword.length > 0) {
+            handleSetKeyword(query_keyword);
+            getProducts();
+        }
+    }, [query_keyword]);
     const { page } = 1;
-    const { query } = { page: 1 };
+    // const { query } = { page: 1 };
     const [listView, setListView] = useState(true);
     const [total, setTotal] = useState(0);
     const [classes, setClasses] = useState(
@@ -61,14 +93,14 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
 
     useEffect(() => {
         let params;
-        if (query) {
-            if (query.page) {
+        if (query_keyword) {
+            if (query_keyword) {
                 params = {
                     _start: page * pageSize,
                     _limit: pageSize,
                 };
             } else {
-                params = query;
+                params = query_keyword;
                 params._limit = pageSize;
             }
         } else {
@@ -79,12 +111,12 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
         getTotalRecords();
         // getProducts(params);
         handleSetColumns();
-    }, [query]);
+    }, [query_keyword]);
 
     // Views
     let productItemsView;
-    let productItems = data.relatedProduct;
-    const loading = true;
+    // let productItems = data.relatedProduct;
+    // const loading = true;
     if (!loading) {
         if (productItems && productItems.length > 0) {
             if (listView) {
@@ -119,7 +151,7 @@ const ShopItems = ({ columns = 4, pageSize = 12 }) => {
         <div className="ps-shopping">
             <div className="ps-shopping__header">
                 <p>
-                    <strong className="mr-2">{total}</strong>
+                    <strong className="mr-2">{productItems?.length || 0}</strong>
                     Products found
                 </p>
                 <div className="ps-shopping__actions">
