@@ -26,11 +26,11 @@ const PageContainer = ({
     let titleView;
 
     if (title !== '') {
-        titleView = "AF-CUSTOMER | " + title;
+        titleView = "Amirtha Fashion | " + title;
     } else {
-        titleView = "AF-CUSTOMER | " + process.env.titleDescription;
+        titleView = "Amirtha Fashion | " + process.env.titleDescription;
     }
-    useDocumentTitle(titleView)
+    useDocumentTitle(titleView);
     return (
         <>
             {/* <head> */}
