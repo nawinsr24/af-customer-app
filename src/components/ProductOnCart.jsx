@@ -5,7 +5,7 @@ import Constants from '../constants';
 
 const ProductOnCart = ({ product, children }) => {
     // const { thumbnailImage, title } = useProduct();
-    console.log("product?.images",product);
+    console.log("product?.images", product);
     const title = (payload) => {
         let view = (
             <a href={`/product/${payload.product_id}`}>
@@ -13,15 +13,15 @@ const ProductOnCart = ({ product, children }) => {
             </a>
         );
         return view;
-    }
+    };
     return (
         <div className="ps-product--cart-mobile">
             <div className="ps-product__thumbnail">
                 <a href={`/product/${product.stock_id}`} >
                     <LazyLoad>
                         <img
-                            src={`${Constants.imgUrl}${product?.images[0]?.image_url}`}
-                            alt={`${Constants.imgUrl}${product?.images[0]?.image_url}`}
+                            src={`${Constants.imgUrl}${product?.images?.length && product?.images[0]?.image_url}`}
+                            alt={`${Constants.imgUrl}${product?.images?.length && product?.images[0]?.image_url}`}
                         />
                     </LazyLoad>
                 </a>

@@ -35,8 +35,8 @@ const ProductSearchResult = ({ product }) => {
                     <>
                         <LazyLoad>
                             <img
-                                src={`${Constants.imgUrl}${product.images[0].image_url}`}
-                                alt={`${Constants.imgUrl}${product.images[0].image_url}`}
+                                src={`${Constants.imgUrl}${product?.images?.length && product.images[0].image_url}`}
+                                alt={`${Constants.imgUrl}${product?.images?.length && product.images[0].image_url}`}
                             />
                         </LazyLoad>
                     </></a>

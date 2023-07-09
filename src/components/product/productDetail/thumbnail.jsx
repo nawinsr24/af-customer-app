@@ -25,7 +25,7 @@ const Thumbnail = ({ product, vertical = true }) => {
         let baseUrl = Constants.imgUrl;
         if (product && product?.images?.length > 0) {
             product.images.map((item) => {
-                images.push(`${baseUrl}${item.image_url}`);
+                images.push(`${baseUrl}${item?.image_url}`);
             });
             setProductImages(images);
         }

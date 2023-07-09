@@ -22,7 +22,7 @@ const ProductQuickViewThumbnail = ({ product, vertical = true }) => {
         let images = [];
         if (product && product.images.length > 0) {
             product.images.map((item) => {
-                images.push(`${Constants.imgUrl}${item.image_url}`);
+                images.push(`${Constants.imgUrl}${item?.image_url}`);
             });
             setProductImages(images);
         }

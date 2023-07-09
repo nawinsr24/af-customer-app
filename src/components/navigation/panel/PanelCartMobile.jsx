@@ -38,8 +38,8 @@ const PanelCartMobile = ({ ecomerce }) => {
                     <a href={`/product/${item.stock_id}`}>{<>
                         <LazyLoad>
                             <img
-                                src={`${Constants.imgUrl}${item.images[0].image_url}`}
-                                alt={`${Constants.imgUrl}${item.images[0].image_url}`}
+                                src={`${Constants.imgUrl}${item?.images?.length && item.images[0].image_url}`}
+                                alt={`${Constants.imgUrl}${item?.images?.length && item.images[0].image_url}`}
                             />
                         </LazyLoad>
                     </>}</a>
