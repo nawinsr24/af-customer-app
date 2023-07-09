@@ -35,9 +35,9 @@ const HomeDefaultProductListing = ({ stock, collectionSlug, title }) => {
     useEffect(() => {
         const getData = async () => {
             const resData = await getStockByType(stock.type);
-            setProductItems(resData.data)
+            setProductItems(resData.data);
             setLoading(false);
-        }
+        };
         getData();
     }, [stock.type]);
 
@@ -79,7 +79,7 @@ const HomeDefaultProductListing = ({ stock, collectionSlug, title }) => {
                 <div className="ps-section__header">
                     <h3>{title}</h3>
                     <ul className="ps-section__links">
-                        {sectionLinksView}
+                        {/* {sectionLinksView} */}
                         <li>
                             <a href={`/shop`}>View All</a>
                         </li>

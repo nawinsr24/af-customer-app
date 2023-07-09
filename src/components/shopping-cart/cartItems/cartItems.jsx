@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Result } from 'antd';
 import ProductCart from '../cartItems/productCartItems';
 import { useAuthContext } from '../../../context/AuthContext';
 import { notify } from '../../notify';
 import { deleteCart } from '../../../services/home-page-service';
+import { CartContext } from '../../../context/cartContext';
 
 const CartItems = ({ cartItems, callBackFn, increaseCart, decreaseCart }) => {
     const { ctxtUser } = useAuthContext();
-    const [temp, setTemp] = useState(false);
-
+    const { removeFromCartContext } = useContext(CartContext);
     async function handleRemoveItem(cart) {
         await deleteCart(ctxtUser.userId, cart.cart_id);
+        removeFromCartContext(cart);
         notify("success", `${cart.name} removed from cart`);
-        setTemp(!temp);
-        callBackFn(temp);
+        // setTemp(!temp);
+        callBackFn(cart);
     }
 
     function handleIncreaseItemQty(data) {
