@@ -11,10 +11,10 @@ const Product = ({ product }) => {
         let view;
         if (payload.total_price) {
             view = (
-                <p className="ps-product__price sale">
+                <p style={{ display: "flex", flexWrap: "wrap", gap: "3px" }} className="ps-product__price sale">
                     <span>₹</span>
                     {payload.base_price}
-                    <del className="ml-2">
+                    <del>
                         <span>₹</span>
                         {payload.total_price}
                     </del>
@@ -91,7 +91,7 @@ const Product = ({ product }) => {
                     {<a className="ps-product__title" style={{ cursor: "pointer" }} onClick={() => Router(`/product/${product.stock_id}`)}>
                         {product.name}
                     </a>}
-                    <div className="ps-product__rating">
+                    <div style={{ display: "flex" }} className="ps-product__rating">
                         <Rating />
                         <span>02</span>
                     </div>

@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import AccountQuickLinksMobile from './AccountQuickLinksMobile';
 import { useAuthContext } from '../../../context/AuthContext';
 import { getCart } from '../../../services/home-page-service';
 import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../../../context/cartContext';
 const MobileHeaderActions = ({ auth, ecomerce }) => {
     const { ctxtUser } = useAuthContext();
+    const { contextCartItems } = useContext(CartContext);
+
     const [cartData, setCartData] = useState([]);
     const Router = useNavigate();
     const getcartData = async () => {
@@ -19,7 +22,7 @@ const MobileHeaderActions = ({ auth, ecomerce }) => {
     // }
     useEffect(() => {
         getcartData();
-    }, []);
+    }, [contextCartItems]);
     const cartItems = cartData;
     return (
         <div className="navigation__right">

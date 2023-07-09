@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Modal } from 'antd';
 import ProductDetailQuickView from '../../../shopHome/productQuickView/productQuickView';
 import { addToCart } from '../../../../services/home-page-service';
 import { useAuthContext } from '../../../../context/AuthContext';
 import { notify } from '../../../notify';
-import MiniCart from '../../../headers/modules/MiniCart';
+import { CartContext } from '../../../../context/cartContext';
 
 const ProductActions = ({ product, ecomerce }) => {
     const { ctxtUser } = useAuthContext();
     const [isQuickView, setIsQuickView] = useState(false);
     const [reFreshCart, setReFreshCart] = useState(false);
+    const { addToCartContext } = useContext(CartContext);
+
     // const { addItem } = useEcomerce();
 
     async function handleAddItemToCart(data) {
@@ -23,6 +25,7 @@ const ProductActions = ({ product, ecomerce }) => {
             cart_quantity: 1
         }];
         const res = await addToCart(reqObj);
+        addToCartContext(data);
         if (res.success) {
             notify("success", `${data.name} added to your cart`);
         } else {
@@ -76,10 +79,6 @@ const ProductActions = ({ product, ecomerce }) => {
                     onClick={() => handleAddItemToCart(product)}>
                     <i className="icon-bag2"></i>
                 </a>
-                <div style={{ display: 'none' }}>
-                    {reFreshCart && < MiniCart isRefresh={reFreshCart} />}
-
-                </div>
             </li>
             <li>
                 <a

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Modal } from 'antd';
 import { useAuthContext } from '../../../../context/AuthContext';
 import { addToCart } from '../../../../services/home-page-service';
 import { notify } from '../../../notify';
+import { CartContext } from '../../../../context/cartContext';
 const ModuleProductWideActions = ({ ecomerce, product }) => {
     const { ctxtUser } = useAuthContext();
-
+    const { addToCartContext } = useContext(CartContext);
     const price = (payload) => {
         let view;
         if (payload.total_price) {
@@ -38,6 +39,7 @@ const ModuleProductWideActions = ({ ecomerce, product }) => {
             cart_quantity: 1
         }];
         const res = await addToCart(reqObj);
+        addToCartContext(data);
         if (res.success) {
             notify("success", `${data.name} added to your cart`);
         } else {

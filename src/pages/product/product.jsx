@@ -20,15 +20,13 @@ const ProductDetailPage = () => {
     async function getData() {
         if (pid) {
             const res = await getProductData(pid);
-            console.log("RES", res);
             if (res?.length) {
                 console.log(res);
                 setProduct(res[0]);
-                console.log("product", product);
                 setLoading(false);
             } else {
                 // Router('/');
-                notify("error", "Not Found")
+                notify("error", "Not Found");
             }
 
         } else {

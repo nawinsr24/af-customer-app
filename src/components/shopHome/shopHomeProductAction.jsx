@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Modal } from 'antd';
 import ProductDetailQuickView from './productQuickView/productQuickView';
 import { useAuthContext } from '../../context/AuthContext';
 import { addToCart } from '../../services/home-page-service';
 import { notify } from '../notify';
+import { CartContext } from '../../context/cartContext';
 const ModuleProductActions = ({ product, ecomerce }) => {
     const [isQuickView, setIsQuickView] = useState(false);
     const { ctxtUser } = useAuthContext();
+    const { addToCartContext } = useContext(CartContext);
     async function handleAddItemToCart(data) {
         const reqObj = [{
             user_id: ctxtUser.userId,
@@ -14,6 +16,7 @@ const ModuleProductActions = ({ product, ecomerce }) => {
             cart_quantity: 1
         }];
         const res = await addToCart(reqObj);
+        addToCartContext(data);
         if (res.success) {
             notify("success", `${data.name} added to your cart`);
         } else {

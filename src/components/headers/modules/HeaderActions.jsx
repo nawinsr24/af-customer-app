@@ -13,7 +13,7 @@ const HeaderActions = ({ ecomerce, auth }) => {
         const getData = async () => {
             const cartResponse = await getCart(ctxtUser.userId);
             setCartData(cartResponse);
-        }
+        };
         getData();
     }, []);
 
@@ -28,9 +28,9 @@ const HeaderActions = ({ ecomerce, auth }) => {
 
     return (
         <div className="header__actions">
-
             <MiniCart cartProduct={cartData} />
             {headerAuthView}
+
         </div>
     );
 };

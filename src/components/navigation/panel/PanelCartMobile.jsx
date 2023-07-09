@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { calculateAmount } from '../../../utilities/ecomerce-helpers';
 import LazyLoad from 'react-lazyload';
 import { useAuthContext } from '../../../context/AuthContext';
 import { deleteCart, getCart } from '../../../services/home-page-service';
 import Constants from '../../../constants';
 import { notify } from '../../notify';
+import { CartContext } from '../../../context/cartContext';
 const PanelCartMobile = ({ ecomerce }) => {
     const [cartProduct, setCartProduct] = useState([]);
     const { ctxtUser } = useAuthContext();
+    const { removeFromCartContext } = useContext(CartContext);
+
     const getcartData = async () => {
         const cartResponse = await getCart(ctxtUser.userId);
         setCartProduct(cartResponse);
@@ -15,6 +18,7 @@ const PanelCartMobile = ({ ecomerce }) => {
 
     async function handleRemoveCartItem(cart) {
         await deleteCart(ctxtUser.userId, cart.cart_id);
+        removeFromCartContext(cart);
         notify("success", `${cart.name} removed from cart`);
         getcartData();
     }

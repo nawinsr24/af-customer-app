@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import BreadCrumb from '../../components/BreadCrumb';
 import PageContainer from '../../components/layouts/PageContainer';
 import FooterDefault from '../../components/footers/FooterFullwidth';
@@ -8,11 +8,14 @@ import { useAuthContext } from '../../context/AuthContext';
 import { addToCart, getCart } from '../../services/home-page-service';
 import { useNavigate } from 'react-router-dom';
 import { notify } from '../../components/notify';
+import { CartContext } from '../../context/cartContext';
 const ShoppingCart = ({ ecomerce }) => {
     const { ctxtUser } = useAuthContext();
     const Router = useNavigate();
     const [cartProduts, setCartProducts] = useState([]);
     const [cartRefresh, setCartRefresh] = useState(false);
+    const { addToCartContext } = useContext(CartContext);
+
     const getcartData = async () => {
         const cartResponse = await getCart(ctxtUser.userId);
         setCartProducts(cartResponse);
@@ -39,7 +42,6 @@ const ShoppingCart = ({ ecomerce }) => {
 
 
     const increaseCartCount = (data) => {
-        console.log("INCREATSE", data);
         const updateCartData = cartProduts.map((item) => {
             if (item.stock_id === data.stock_id) {
                 return {
@@ -53,7 +55,6 @@ const ShoppingCart = ({ ecomerce }) => {
 
     };
     const decreaseCartCount = (data) => {
-        console.log("decreaseCartCount", data);
         const updateCartData = cartProduts.map((item) => {
             if (item.stock_id === data.stock_id && item.cart_quantity > 1) {
                 return {
@@ -68,6 +69,7 @@ const ShoppingCart = ({ ecomerce }) => {
 
     const handleCheckOut = async () => {
         const addCartReq = await addToCart(cartProduts);
+        addToCartContext(cartProduts);
         if (addCartReq?.success) {
 
             Router("/checkout");

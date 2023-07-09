@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from 'antd';
 import { useAuthContext } from '../../../context/AuthContext';
 import { notify } from '../../notify';
 import { addToCart } from '../../../services/home-page-service';
+import { CartContext } from '../../../context/cartContext';
 const ModuleDetailShoppingActions = ({
     ecomerce,
     product,
     extended = false,
 }) => {
     const { ctxtUser } = useAuthContext();
+    const { addToCartContext } = useContext(CartContext);
+
     const [cart_quantity, setQuantity] = useState(1);
     const Router = useNavigate();
     async function handleAddItemToCart(data) {
@@ -19,6 +22,7 @@ const ModuleDetailShoppingActions = ({
             cart_quantity
         }];
         const res = await addToCart(reqObj);
+        addToCartContext(data);
         if (res.success) {
             notify("success", `${data.name} added to your cart`);
         } else {

@@ -40,6 +40,7 @@ import './scss/organic.scss';
 import './scss/technology.scss';
 import './scss/autopart.scss';
 import HomepageDefaultPage from "./pages/home";
+import { CartProvider } from "./context/cartContext";
 // import SearchPage from "./pages/search/search";
 
 function App() {
@@ -54,36 +55,38 @@ function App() {
   return (
     <>
       <CookiesProvider>
-        <MasterLayout>
-          {loading && <LoadingScreen />}
-          <Routes>
-            <Route path="/" element={<HomepageDefaultPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/product/:pid" element={<ProductDetailPage />} />
-            <Route path="/shopping-cart" element={<ShoppingCart />} />
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path='/checkout' element={<CheckoutPage />} />
-            <Route path='/shipping' element={<ShippingPage />} />
-            <Route path='/payment' element={<PaymentPage />} />
-            <Route path='/payment-success' element={<PaymentSuccessPage />} />
-            <Route path='/verify' element={<OtpPage />} />
-            <Route path='/delivery-history/:id' element={<ProductDeliveryHistoryPage />} />
-            {/* <Route path='/search' element={<SearchPage />} /> */}
+        <CartProvider>
+          <MasterLayout>
+            {loading && <LoadingScreen />}
+            <Routes>
+              <Route path="/" element={<HomepageDefaultPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/product/:pid" element={<ProductDetailPage />} />
+              <Route path="/shopping-cart" element={<ShoppingCart />} />
+              <Route path="/shop" element={<ShopPage />} />
+              <Route path='/checkout' element={<CheckoutPage />} />
+              <Route path='/shipping' element={<ShippingPage />} />
+              <Route path='/payment' element={<PaymentPage />} />
+              <Route path='/payment-success' element={<PaymentSuccessPage />} />
+              <Route path='/verify' element={<OtpPage />} />
+              <Route path='/delivery-history/:id' element={<ProductDeliveryHistoryPage />} />
+              {/* <Route path='/search' element={<SearchPage />} /> */}
 
 
-            <Route element={<RequireAuth />}>
-              <Route path='/user-information' element={<UserInformationPage />} />
-              <Route path='/orders' element={<OrdersPage />} />
-              <Route path='/order-tracking/:id' element={<OrderTrakingPage />} />
-              <Route path='/order-history' element={<OrdersHistoryPage />} />
-            </Route>
+              <Route element={<RequireAuth />}>
+                <Route path='/user-information' element={<UserInformationPage />} />
+                <Route path='/orders' element={<OrdersPage />} />
+                <Route path='/order-tracking/:id' element={<OrderTrakingPage />} />
+                <Route path='/order-history' element={<OrdersHistoryPage />} />
+              </Route>
 
 
-            {/* catch all */}
-            <Route path="*" element={<MissingPage />} />
-          </Routes>
-        </MasterLayout>
+              {/* catch all */}
+              <Route path="*" element={<MissingPage />} />
+            </Routes>
+          </MasterLayout>
+        </CartProvider>
       </CookiesProvider>
     </>
 

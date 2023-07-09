@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../context/AuthContext';
 import { addToCart } from '../../../services/home-page-service';
 import { notify } from '../../notify';
+import { CartContext } from '../../../context/cartContext';
 const ActionsSidebar = ({ product }) => {
     const Router = useNavigate();
-    const [quantity, setQuantity] = useState(1);
+    const [cart_quantity, setQuantity] = useState(1);
     const { ctxtUser } = useAuthContext();
-
+    const { addToCartContext } = useContext(CartContext);
     async function handleAddItemToCart(data) {
         const reqObj = [{
             user_id: ctxtUser.userId,
             stock_id: data.stock_id,
-            quantity
+            cart_quantity
         }];
         const res = await addToCart(reqObj);
+        addToCartContext(data);
         if (res.success) {
             notify("success", `${data.name} added to your cart`);
         } else {
@@ -51,13 +53,13 @@ const ActionsSidebar = ({ product }) => {
 
     function handleIncreaseItemQty(e) {
         e.preventDefault();
-        setQuantity(quantity + 1);
+        setQuantity(cart_quantity + 1);
     }
 
     function handleDecreaseItemQty(e) {
         e.preventDefault();
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
+        if (cart_quantity > 1) {
+            setQuantity(cart_quantity - 1);
         }
     }
 
@@ -79,7 +81,7 @@ const ActionsSidebar = ({ product }) => {
                     <input
                         className="form-control"
                         type="text"
-                        placeholder={quantity}
+                        placeholder={cart_quantity}
                         disabled
                     />
                 </div>

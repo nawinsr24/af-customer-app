@@ -59,9 +59,9 @@ export function StrapiProductPriceExpanded(product) {
     let view;
     if (product.total_price) {
         view = (
-            <p className="ps-product__price sale">
+            <p style={{ display: "flex", flexWrap: "wrap", gap: "3px" }} className="ps-product__price sale">
                 ₹{formatCurrency(product.base_price)}
-                <del className="ml-2">
+                <del>
                     ₹{formatCurrency(product.total_price)}
                 </del>
                 <small style={{ paddingLeft: '5px' }}>18% off</small>

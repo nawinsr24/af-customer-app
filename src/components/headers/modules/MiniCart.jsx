@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ProductOnCart from '../../ProductOnCart';
 import { calculateAmount } from '../../../utilities/ecomerce-helpers';
 import { useAuthContext } from '../../../context/AuthContext';
 import { getCart, deleteCart } from '../../../services/home-page-service';
 import { notify } from '../../notify';
 import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../../../context/cartContext';
 
 const MiniCart = ({ isRefresh }) => {
+    const { contextCartItems } = useContext(CartContext);
     const Router = useNavigate();
     const { ctxtUser } = useAuthContext();
     const [cartData, setCartData] = useState([]);
@@ -22,7 +24,7 @@ const MiniCart = ({ isRefresh }) => {
 
     useEffect(() => {
         getcartData();
-    }, [isRefresh]);
+    }, [contextCartItems]);
 
     let cartItemsView;
     if (cartData && cartData.length > 0) {

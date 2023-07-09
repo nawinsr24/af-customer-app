@@ -27,8 +27,8 @@ const HomeDefaultDealOfDay = ({ collectionSlug }) => {
     let productItemsView;
     if (!loading) {
         if (productItems && productItems.length > 0) {
-            const slideItems = productItems.map((item) => (
-                <ProductDealOfDay product={item} key={item.product_id} />
+            const slideItems = productItems.map((item, i) => (
+                <ProductDealOfDay product={item} key={`${item.stock_id}+${i}`} />
             ));
             productItemsView = (
                 <Slider {...carouselFullwidth} className="ps-carousel outside">
