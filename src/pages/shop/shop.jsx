@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import BreadCrumb from '../../components/BreadCrumb';
 import ShopItems from '../../components/shop/shopItems/shopItem';
 // import ProductGroupByCarousel from '~/components/partials/product/ProductGroupByCarousel';
-import ShopCategories from '../../components/shop/shopCategories';
+// import ShopCategories from '../../components/shop/shopCategories';
 // import ShopBrands from '~/components/partials/shop/ShopBrands';
 // import ShopBanner from '~/components/partials/shop/ShopBanner';
 import WidgetShopCategories from '../../components/shop/widgetShopCategories';
@@ -35,8 +35,8 @@ const ShopPage = () => {
                 <div className="ps-container">
                     {/* <ShopBanner /> */}
                     {/* <ShopBrands /> */}
-                    <ShopCategories />
-                    <div className="ps-layout--shop">
+                    {/* <ShopCategories /> */}
+                    <div className="ps-layout--shop" style={{ marginTop: '10px' }}>
                         <div className="ps-layout__left">
                             <WidgetShopCategories />
                             {/* <WidgetShopBrands /> */}

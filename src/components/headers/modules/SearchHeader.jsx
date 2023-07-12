@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 import QueryKey from '../../../QueryKey';
 import { getAllSubCatService } from '../../../services/category-service';
 import { customAlert } from '../../notify';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { searchProduct } from '../../../services/search-service';
 
 function useDebounce(value, delay) {
@@ -25,10 +25,15 @@ function useDebounce(value, delay) {
 }
 
 const SearchHeader = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const query_sub_cat = queryParams.get('sub_cat');
+    const query_keyword = queryParams.get('keyword');
     const Router = useNavigate();
     const inputEl = useRef(null);
     const [isSearch, setIsSearch] = useState(false);
-    const [keyword, setKeyword] = useState('');
+    const [keyword, setKeyword] = useState(query_keyword || '');
+    const [sub_category, setSubcategory] = useState(query_sub_cat);
     const [resultItems, setResultItems] = useState([]);
     const [loading, setLoading] = useState(false);
     const debouncedSearchTerm = useDebounce(keyword, 300);
@@ -37,13 +42,18 @@ const SearchHeader = () => {
 
     function handleClearKeyword() {
         setKeyword('');
+        setSubcategory('');
         setIsSearch(false);
         setLoading(false);
+        Router(`/shop`);
+
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        Router(`/shop?keyword=${keyword}`);
+        if (keyword?.length) {
+            Router(`/shop?keyword=${keyword || ''}${sub_category ? '&sub_cat=' + sub_category : ''}`);
+        }
         setIsSearch(false);
     }
     async function getproduct() {
@@ -53,6 +63,18 @@ const SearchHeader = () => {
         setResultItems(searchRes.data);
         setIsSearch(true);
     }
+
+    const subCategoryChange = (id) => {
+        setSubcategory(id);
+        console.log(sub_category);
+        if (id === 'all') {
+            Router(`/shop`);
+        } else {
+            Router(`/shop?sub_cat=${id || ''}`);
+        }
+
+    };
+
     useEffect(() => {
         if (debouncedSearchTerm) {
             setLoading(true);
@@ -80,7 +102,7 @@ const SearchHeader = () => {
                 loadMoreView = (
                     <div className="ps-panel__footer text-center">
                         {/* <Link to="/search"> */}
-                        <a href='/search'>See all results</a>
+                        <a href='/shop'>See all results</a>
                         {/* </Link> */}
                     </div>
                 );
@@ -126,9 +148,12 @@ const SearchHeader = () => {
             className="ps-form--quick-search"
             method="get"
             action="/"
-            onSubmit={handleSubmit}>
+            onSubmit={(e) => handleSubmit(e)}>
             <div className="ps-form__categories">
-                <select className="form-control">{selectOptionView || []}</select>
+                <select
+                    value={sub_category || 'all'}
+                    onChange={(e) => subCategoryChange(e.target.value)}
+                    className="form-control">{selectOptionView || []}</select>
             </div>
             <div className="ps-form__input">
                 <input
@@ -142,14 +167,14 @@ const SearchHeader = () => {
                 {clearTextView}
                 {loadingView}
             </div>
-            <button onClick={handleSubmit}>Search</button>
+            <button type='submit'>Search</button>
             <div
                 className={`ps-panel--search-result${isSearch ? ' active ' : ''
                     }`}>
                 <div className="ps-panel__content">{productItemsView}</div>
                 {loadMoreView}
             </div>
-        </form>
+        </form >
     );
 };
 

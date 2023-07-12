@@ -24,15 +24,17 @@ const ShopItems = ({ price, columns = 4, pageSize = 12 }) => {
     const queryParams = new URLSearchParams(location.search);
     // Access query parameters
     const query_keyword = queryParams.get('keyword');
+    const sub_category = queryParams.get('sub_cat');
     const getProducts = async () => {
         const reqObj = {
             keyword: query_keyword,
-            price_from: price.price_from, price_to: price.price_to
+            price_from: price.price_from, price_to: price.price_to,
+            sub_category
         };
         const searchRes = await searchProduct(reqObj);
         setLoading(false);
         setProductItems(searchRes?.data);
-        setTotal(searchRes?.data?.length);
+        setTotal(searchRes?.page?.total_Pages);
     };
     function handleSetKeyword() {
         if (query_keyword && query_keyword.length > 0) {
@@ -47,8 +49,8 @@ const ShopItems = ({ price, columns = 4, pageSize = 12 }) => {
             handleSetKeyword(query_keyword);
         }
         getProducts();
-    }, [query_keyword, price]);
-    const { page } = 1;
+    }, [query_keyword, sub_category, price]);
+    const { page } = 100;
     // const { query } = { page: 1 };
     const [listView, setListView] = useState(true);
     const [total, setTotal] = useState(0);
