@@ -12,7 +12,7 @@ const ActionsSidebar = ({ product }) => {
     const { addToCartContext } = useContext(CartContext);
     async function handleAddItemToCart(data) {
         const reqObj = [{
-            user_id: ctxtUser.userId,
+            user_id: ctxtUser?.userId,
             stock_id: data.stock_id,
             cart_quantity
         }];

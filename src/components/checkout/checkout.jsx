@@ -24,7 +24,7 @@ const Checkout = () => {
     const [addressList, setaddressList] = useState([]);
     const [checkoutProducts, setcheckoutProducts] = useState([]);
     const getAddressData = async () => {
-        const addressRes = await getAddress(ctxtUser.userId);
+        const addressRes = await getAddress(ctxtUser?.userId);
         setaddressList(addressRes);
     };
     async function getSingleProduct() {
@@ -32,7 +32,7 @@ const Checkout = () => {
         setcheckoutProducts(productRes);
     }
     async function getCartProducts() {
-        const productRes = await getCart(ctxtUser.userId);
+        const productRes = await getCart(ctxtUser?.userId);
         setcheckoutProducts(productRes);
 
     }

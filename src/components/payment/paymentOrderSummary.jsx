@@ -20,7 +20,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping }) => {
         setcheckoutProducts(productRes);
     }
     async function getCartProducts() {
-        const productRes = await getCart(ctxtUser.userId);
+        const productRes = await getCart(ctxtUser?.userId);
         setcheckoutProducts(productRes);
 
     }

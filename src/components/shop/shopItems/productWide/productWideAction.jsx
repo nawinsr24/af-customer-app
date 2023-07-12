@@ -34,7 +34,7 @@ const ModuleProductWideActions = ({ ecomerce, product }) => {
     // const { addItem } = useEcomerce();
     async function handleAddItemToCart(data) {
         const reqObj = [{
-            user_id: ctxtUser.userId,
+            user_id: ctxtUser?.userId,
             stock_id: data.stock_id,
             cart_quantity: 1
         }];

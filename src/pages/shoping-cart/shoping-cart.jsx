@@ -17,7 +17,7 @@ const ShoppingCart = ({ ecomerce }) => {
     const { addToCartContext } = useContext(CartContext);
 
     const getcartData = async () => {
-        const cartResponse = await getCart(ctxtUser.userId);
+        const cartResponse = await getCart(ctxtUser?.userId);
         setCartProducts(cartResponse);
     };
 

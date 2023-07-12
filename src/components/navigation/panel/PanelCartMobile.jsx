@@ -12,12 +12,12 @@ const PanelCartMobile = ({ ecomerce }) => {
     const { removeFromCartContext } = useContext(CartContext);
 
     const getcartData = async () => {
-        const cartResponse = await getCart(ctxtUser.userId);
+        const cartResponse = await getCart(ctxtUser?.userId);
         setCartProduct(cartResponse);
     };
 
     async function handleRemoveCartItem(cart) {
-        await deleteCart(ctxtUser.userId, cart.cart_id);
+        await deleteCart(ctxtUser?.userId, cart.cart_id);
         removeFromCartContext(cart);
         notify("success", `${cart.name} removed from cart`);
         getcartData();

@@ -10,7 +10,7 @@ const CartItems = ({ cartItems, callBackFn, increaseCart, decreaseCart }) => {
     const { ctxtUser } = useAuthContext();
     const { removeFromCartContext } = useContext(CartContext);
     async function handleRemoveItem(cart) {
-        await deleteCart(ctxtUser.userId, cart.cart_id);
+        await deleteCart(ctxtUser?.userId, cart.cart_id);
         removeFromCartContext(cart);
         notify("success", `${cart.name} removed from cart`);
         // setTemp(!temp);

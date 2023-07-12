@@ -13,11 +13,11 @@ const MiniCart = ({ isRefresh }) => {
     const { ctxtUser } = useAuthContext();
     const [cartData, setCartData] = useState([]);
     const getcartData = async () => {
-        const cartResponse = await getCart(ctxtUser.userId);
+        const cartResponse = await getCart(ctxtUser?.userId);
         setCartData(cartResponse);
     };
     async function handleRemoveItem(cart) {
-        await deleteCart(ctxtUser.userId, cart.cart_id);
+        await deleteCart(ctxtUser?.userId, cart.cart_id);
         notify("success", `${cart.name} removed from cart`);
         getcartData();
     }

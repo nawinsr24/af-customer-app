@@ -11,7 +11,7 @@ const ModuleDetailActionsMobile = ({ ecomerce, product }) => {
 
     const handleAddItemToCart = async (data) => {
         const reqObj = [{
-            user_id: ctxtUser.userId,
+            user_id: ctxtUser?.userId,
             stock_id: data.stock_id,
             cart_quantity: 1
         }];

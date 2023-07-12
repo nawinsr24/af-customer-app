@@ -12,11 +12,11 @@ const MobileHeaderActions = ({ auth, ecomerce }) => {
     const [cartData, setCartData] = useState([]);
     const Router = useNavigate();
     const getcartData = async () => {
-        const cartResponse = await getCart(ctxtUser.userId);
+        const cartResponse = await getCart(ctxtUser?.userId);
         setCartData(cartResponse);
     };
     // async function handleRemoveItem(cart) {
-    //     await deleteCart(ctxtUser.userId, cart.cart_id);
+    //     await deleteCart(ctxtUser?.userId, cart.cart_id);
     //     notify("success", `${cart.name} removed from cart`)
     //     getcartData();
     // }

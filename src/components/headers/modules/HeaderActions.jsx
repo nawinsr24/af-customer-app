@@ -11,7 +11,7 @@ const HeaderActions = ({ ecomerce, auth }) => {
     const [cartData, setCartData] = useState([]);
     useEffect(() => {
         const getData = async () => {
-            const cartResponse = await getCart(ctxtUser.userId);
+            const cartResponse = await getCart(ctxtUser?.userId);
             setCartData(cartResponse);
         };
         getData();

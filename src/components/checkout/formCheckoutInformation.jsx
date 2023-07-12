@@ -7,10 +7,10 @@ const FormCheckoutInformation = ({ onValueChange }) => {
     const { ctxtUser } = useAuthContext();
     const [temp, setTemp] = useState(false);
     const handleFormSubmit = async (data) => {
-        data.user_id = ctxtUser.userId;
+        data.user_id = ctxtUser?.userId;
         await addAddress(data);
         notify("success", "Address Added !");
-        setTemp(!temp)
+        setTemp(!temp);
         onValueChange(temp);
     };
 
@@ -282,14 +282,14 @@ const FormCheckoutInformation = ({ onValueChange }) => {
 
                 <button className="ps-btn ps-btn--black" style={{ color: "white" }}
                     onClick={() => {
-                        setTemp(!temp)
-                        onValueChange(temp)
+                        setTemp(!temp);
+                        onValueChange(temp);
                     }}>Return</button>
             </div>
 
         </Form>
     );
-}
+};
 // }
 
 export default FormCheckoutInformation;
