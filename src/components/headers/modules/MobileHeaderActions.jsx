@@ -39,7 +39,7 @@ const MobileHeaderActions = ({ auth, ecomerce }) => {
                 <AccountQuickLinksMobile />
             ) : (
 
-                <a href="/login">
+                <a href="/auth/login">
                     <div className="header__extra" style={{ marginLeft: "10px" }}>
                         <i className="icon-user"></i>
                     </div>

@@ -13,7 +13,7 @@ import NavigationList from '../navigation/NavigationList';
 const MasterLayout = ({ children }) => {
     // const dispatch = useDispatch();
     const [cookies] = useCookies(['cart', 'compare', 'wishlist']);
-
+    const is_auth = !window.location.href.includes('/auth');
     function initEcomerceValues() {
         if (cookies) {
             if (cookies.cart) {
@@ -36,7 +36,8 @@ const MasterLayout = ({ children }) => {
         <>
             {children}
             <PageLoader />
-            <NavigationList/>
+            {is_auth ? <NavigationList /> : ''}
+
             <BackTop>
                 <button className="ps-btn--backtop">
                     <i className="icon-arrow-up" />

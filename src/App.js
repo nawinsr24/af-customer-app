@@ -60,8 +60,8 @@ function App() {
             {loading && <LoadingScreen />}
             <Routes>
               <Route path="/" element={<HomepageDefaultPage />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/auth/login" element={<Login />} />
+              <Route path="/auth/register" element={<Register />} />
               <Route path="/product/:pid" element={<ProductDetailPage />} />
               <Route path="/shopping-cart" element={<ShoppingCart />} />
               <Route path="/shop" element={<ShopPage />} />
@@ -69,7 +69,7 @@ function App() {
               <Route path='/shipping' element={<ShippingPage />} />
               <Route path='/payment' element={<PaymentPage />} />
               <Route path='/payment-success' element={<PaymentSuccessPage />} />
-              <Route path='/verify' element={<OtpPage />} />
+              <Route path='/auth/verify' element={<OtpPage />} />
               <Route path='/delivery-history/:id' element={<ProductDeliveryHistoryPage />} />
               {/* <Route path='/search' element={<SearchPage />} /> */}
 

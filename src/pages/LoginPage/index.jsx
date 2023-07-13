@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 function Login() {
     const [isSubmitClick, setIsSubmitClick] = useState(false);
     const { ctxtlogin, ctxtUser } = useAuthContext();
-    const navigate = useNavigate();
+    const Router = useNavigate();
     const breadCrumb = [
         {
             text: 'Home',
@@ -35,12 +35,9 @@ function Login() {
             ctxtlogin(res);
             notify("success", "Login successfully");
 
-            navigate("/", { replace: true });
+            Router("/", { replace: true });
 
         } catch (err) {
-            console.log("1111111111111")
-            console.log(err);
-            console.log("222222222")
             if (err === 401)
                 notify("error", "Invalid Username / Password");
             else
@@ -56,7 +53,7 @@ function Login() {
             const res = await socialLogin(data);
             ctxtlogin(res);
             notify("success", "Login successfully");
-            navigate("/", { replace: true });
+            Router("/", { replace: true });
 
 
         } catch (err) {
@@ -71,14 +68,15 @@ function Login() {
 
     useEffect(() => {
         if (ctxtUser?.token)
-            navigate("/", { replace: true });
+            Router("/", { replace: true });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, []);
 
     return (<>
+        {/* <BreadCrumb breacrumb={breadCrumb} /> */}
         <div className="ps-my-account" style={{ display: 'flex', alignItems: 'center', flexDirection: "column" }} >
-            <a href='/' className="ps-logo" style={{ marginBottom: "50px" }}>
-                <img src={'static/img/logo_light.png'} alt="" />
+            <a href='/' className="ps-logo responsive-image">
+                <img style={{ marginBottom: "10px" }} src={'/static/amirtha-fashion-images/amirtha-log.png'} alt="amirtha-log" />
             </a>
             <div className="container" >
 
@@ -86,12 +84,12 @@ function Login() {
 
                     <ul className="ps-tab-list" style={{ marginBottom: "10px" }}>
                         <li className="active">
-                            <a href="/login">
+                            <a onClick={() => Router("/auth/login")}>
                                 Login
                             </a>
                         </li>
                         <li>
-                            <a href="/register">
+                            <a onClick={() => Router("/auth/register")}>
                                 Register
                             </a>
                         </li>
@@ -146,6 +144,11 @@ function Login() {
                                     {isSubmitClick && <CircularProgress color='inherit' size={20} sx={{ mr: 1 }} />}
                                     Login
                                 </button>
+                                <div
+                                    style={{ display: "flex", justifyContent: "end", marginTop: "5px" }}>
+                                    <a href="/">back to home ?</a>
+                                </div>
+
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
                                 <>
@@ -155,11 +158,11 @@ function Login() {
                                             onSuccess={credentialResponse => {
                                                 const all_data = jwt_decode(credentialResponse.credential);
                                                 const { email, name, given_name, family_name } = all_data;
-                                                const user_detail = { email, name, given_name, family_name }
+                                                const user_detail = { email, name, given_name, family_name };
                                                 handleSocialLogin(user_detail);
                                             }}
                                             onError={() => {
-                                                console.log('Login Failed')
+                                                console.log('Login Failed');
                                             }}
                                             useOneTap={true}
                                         />
@@ -228,7 +231,7 @@ function Login() {
         </div>
     </>
 
-    )
+    );
 }
 
-export default Login
+export default Login;

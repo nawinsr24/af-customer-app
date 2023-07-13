@@ -7,17 +7,17 @@ axios.defaults.baseURL = "https://dev.api.amirthafashion.com";
 // Add a request interceptor
 axios.interceptors.request.use(
     config => {
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token');
         if (token) {
-            config.headers['Authorization'] = 'Bearer ' + token
+            config.headers['Authorization'] = 'Bearer ' + token;
         }
         config.headers['Content-Type'] = 'application/json';
-        return config
+        return config;
     },
     error => {
-        Promise.reject(error)
+        Promise.reject(error);
     }
-)
+);
 
 export async function postData({ urlPath, body }) {
     try {
@@ -26,8 +26,8 @@ export async function postData({ urlPath, body }) {
         if (response.status === 200 || response.status === 201)
             return response.data;
     } catch (error) {
-        console.log(error);
-        throw error.response.data
+        console.log("POST", error);
+        throw error.response.data;
     }
 };
 
@@ -38,7 +38,7 @@ export async function getData({ urlPath, queryParams }) {
             return response.data;
     } catch (error) {
         console.log(error);
-        throw error.response.data
+        throw error.response.data;
     }
 };
 
@@ -50,7 +50,7 @@ export async function putData({ urlPath, body, queryParams }) {
             return response.data;
     } catch (error) {
         console.log(error);
-        throw error.response.data
+        throw error.response.data;
     }
 };
 
@@ -62,7 +62,7 @@ export async function deleteData({ urlPath, body, queryParams }) {
             return response.data;
     } catch (error) {
         console.log(error);
-        throw error.response.data
+        throw error.response.data;
     }
 };
 

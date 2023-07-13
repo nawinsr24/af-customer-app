@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Form, Input } from 'antd';
 import BreadCrumb from '../../components/BreadCrumb';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ function OtpPage() {
     ];
 
     async function handleSubmit(values) {
-        Router('/login');
+        Router('/auth/login');
     }
     return (
         <>
@@ -94,7 +94,7 @@ function OtpPage() {
                 </div>
             </div>
         </>
-    )
+    );
 }
 
 export default OtpPage;

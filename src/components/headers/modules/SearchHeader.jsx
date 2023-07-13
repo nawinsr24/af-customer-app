@@ -57,7 +57,7 @@ const SearchHeader = () => {
         setIsSearch(false);
     }
     async function getproduct() {
-        const reqObj = { keyword };
+        const reqObj = { keyword, sub_category };
         const searchRes = await searchProduct(reqObj);
         setLoading(false);
         setResultItems(searchRes.data);
@@ -74,6 +74,10 @@ const SearchHeader = () => {
         }
 
     };
+
+    useEffect(() => {
+        setSubcategory(query_sub_cat);
+    }, [query_sub_cat]);
 
     useEffect(() => {
         if (debouncedSearchTerm) {

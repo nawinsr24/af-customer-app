@@ -7,12 +7,13 @@ import { useNavigate } from 'react-router-dom';
 const AccountQuickLinks = (props) => {
     // const dispatch = useDispatch();
     const { ctxtlogout } = useAuthContext();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const handleLogout = (e) => {
         e.preventDefault();
         ctxtlogout();
         notify("success", "Logged out successfully");
         navigate("/", { replace: true });
+        window.location.reload();
         // dispatch(logOut());
     };
     const accountLinks = [
@@ -60,7 +61,7 @@ const AccountQuickLinks = (props) => {
                         {linksView}
                         <li className="ps-block__footer">
                             <a href="/" onClick={(e) => handleLogout(e)}>
-                               
+
                                 Logout
                             </a>
                         </li>
@@ -76,12 +77,12 @@ const AccountQuickLinks = (props) => {
                 </div>
                 <div className="ps-block__right">
 
-                    <a href='/login'>
+                    <a href='/auth/login'>
                         Login
                     </a>
 
 
-                    <a href='/register'>
+                    <a href='/auth/register'>
                         Register
                     </a>
 
