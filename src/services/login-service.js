@@ -12,7 +12,7 @@ export async function loginService({ username, password }) {
         const res = await postData(details);
         return res.data;
     } catch (error) {
-        return error;
+        throw error;
     }
 
 }
@@ -26,7 +26,7 @@ export async function socialLogin(data) {
         const res = await postData(details);
         return res.data;
     } catch (error) {
-        return error;
+        throw error;
     }
 
 }

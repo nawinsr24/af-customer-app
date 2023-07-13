@@ -20,9 +20,9 @@ export function AuthContextProvider({ children }) {
             localStorage.setItem('token', res.token);
             token = res.token;
         }
-        const tokenData = userFromToken(token)
+        const tokenData = userFromToken(token);
 
-        setCtxtUser({ ...tokenData })
+        setCtxtUser({ ...tokenData });
     }
 
     function userFromToken(token) {
@@ -31,17 +31,21 @@ export function AuthContextProvider({ children }) {
             token,
             userId: tokenData.userId,
             custName: tokenData.custName
-        }
+        };
     }
 
     function parseJwt(token) {
-        var base64Url = token.split('.')[1];
-        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
+        if (token) {
+            var base64Url = token?.split('.')[1];
+            var base64 = base64Url?.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
 
-        return JSON.parse(jsonPayload);
+            return JSON.parse(jsonPayload);
+        }
+        return;
+
     };
 
     async function ctxtlogout() {
@@ -51,7 +55,7 @@ export function AuthContextProvider({ children }) {
     }
 
     function setLoadingScreen(value) {
-        setLoading(value)
+        setLoading(value);
     }
 
     function setAsyncLoading(value) {
@@ -76,10 +80,10 @@ export function AuthContextProvider({ children }) {
         loading,
         setLoadingScreen,
         setAsyncLoading
-    }
+    };
     return <AuthContext.Provider value={value}>
         {children}
-    </AuthContext.Provider>
+    </AuthContext.Provider>;
 }
 
 export function useAuthContext() {

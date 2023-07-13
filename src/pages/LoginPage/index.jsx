@@ -38,7 +38,7 @@ function Login() {
             Router("/", { replace: true });
 
         } catch (err) {
-            if (err === 401)
+            if (err?.message?.length)
                 notify("error", "Invalid Username / Password");
             else
                 customAlert(err);
