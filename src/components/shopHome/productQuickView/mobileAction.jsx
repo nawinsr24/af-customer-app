@@ -10,22 +10,31 @@ const ModuleDetailActionsMobile = ({ ecomerce, product }) => {
     const { addToCartContext } = useContext(CartContext);
 
     const handleAddItemToCart = async (data) => {
-        const reqObj = [{
-            user_id: ctxtUser?.userId,
-            stock_id: data.stock_id,
-            cart_quantity: 1
-        }];
-        const res = await addToCart(reqObj);
-        addToCartContext(data);
-        if (res.success) {
-            notify("success", `${data.name} added to your cart`);
+        if (ctxtUser?.userId) {
+            const reqObj = [{
+                user_id: ctxtUser?.userId,
+                stock_id: data.stock_id,
+                cart_quantity: 1
+            }];
+            const res = await addToCart(reqObj);
+            addToCartContext(data);
+            if (res.success) {
+                notify("success", `${data.name} added to your cart`);
+            } else {
+                notify("error", `Failed to add items to cart.`);
+            }
         } else {
-            notify("error", `Failed to add items to cart.`);
+            notify("error", `Please log in to continue!`);
         }
+
     };
 
     const handleBuyNow = (data) => {
-        Router(`/checkout/?id=${data.stock_id}`);
+        if (!!ctxtUser?.userId) {
+            Router(`/checkout/?id=${data.stock_id}`);
+        } else {
+            notify("error", `Please log in to continue!`);
+        }
     };
 
     return (

@@ -49,6 +49,10 @@ const SearchHeader = () => {
 
     }
 
+    const setLoadingFn = () => {
+        setIsSearch(false);
+    };
+
     function handleSubmit(e) {
         e.preventDefault();
         if (keyword?.length) {
@@ -112,7 +116,7 @@ const SearchHeader = () => {
                 );
             }
             productItemsView = resultItems.map((product, i) => (
-                <ProductSearchResult product={product} key={`${product.stock_id}+${i}`} />
+                <ProductSearchResult callBackFn={() => setLoadingFn()} product={product} key={`${product.stock_id}+${i}`} />
             ));
         } else {
             productItemsView = <p>No product found.</p>;

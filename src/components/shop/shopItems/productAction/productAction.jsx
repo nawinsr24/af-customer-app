@@ -9,28 +9,28 @@ import { CartContext } from '../../../../context/cartContext';
 const ProductActions = ({ product, ecomerce }) => {
     const { ctxtUser } = useAuthContext();
     const [isQuickView, setIsQuickView] = useState(false);
-    const [reFreshCart, setReFreshCart] = useState(false);
     const { addToCartContext } = useContext(CartContext);
 
     // const { addItem } = useEcomerce();
 
     async function handleAddItemToCart(data) {
-        setReFreshCart(true);
-        setTimeout(() => {
-            setReFreshCart(false);
-        }, 100);
-        const reqObj = [{
-            user_id: ctxtUser?.userId,
-            stock_id: data.stock_id,
-            cart_quantity: 1
-        }];
-        const res = await addToCart(reqObj);
-        addToCartContext(data);
-        if (res.success) {
-            notify("success", `${data.name} added to your cart`);
+        if (ctxtUser?.userId) {
+            const reqObj = [{
+                user_id: ctxtUser?.userId,
+                stock_id: data.stock_id,
+                cart_quantity: 1
+            }];
+            const res = await addToCart(reqObj);
+            addToCartContext(data);
+            if (res.success) {
+                notify("success", `${data.name} added to your cart`);
+            } else {
+                notify("error", `Failed to add items to cart.`);
+            }
         } else {
-            notify("error", `Failed to add items to cart.`);
+            notify("error", `Please log in to continue!`);
         }
+
         // const modal = Modal.success({
         //     centered: true,
         //     title: 'Success!',

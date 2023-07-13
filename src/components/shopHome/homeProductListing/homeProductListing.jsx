@@ -74,7 +74,7 @@ const HomeDefaultProductListing = ({ stock, collectionSlug, title }) => {
     }
 
     return (
-        <div className="ps-product-list">
+        <div className="ps-product-list" style={{ margin: "10px 0px" }}>
             <div className="ps-container">
                 <div className="ps-section__header">
                     <h3>{title}</h3>

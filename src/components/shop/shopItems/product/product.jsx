@@ -72,12 +72,15 @@ const Product = ({ product }) => {
     return (
         <div className="ps-product">
             <div className="ps-product__thumbnail">
-                <a style={{ cursor: "pointer" }} onClick={() => Router(`/product/${product.stock_id}`)}>
+                <a style={{ cursor: "pointer", display: "flex", height: '22rem' }} onClick={() => Router(`/product/${product.stock_id}`)}>
                     <LazyLoad>
-                        <img
-                            src={`${Constants.imgUrl}${product?.images?.length && product?.images[0]?.image_url}`}
-                            alt={product?.images?.length && product?.images[0]?.image_url}
-                        />
+                        <figure style={{ display: "flex", padding: '10px', justifyContent: "center" }}>
+                            <img height={'80%'} width={"80%"}
+                                src={`${Constants.imgUrl}${product?.images?.length && product?.images[0]?.image_url}`}
+                                alt={`${Constants.imgUrl}${product?.images?.length && product?.images[0]?.image_url}`}
+                            />
+                        </figure>
+
                     </LazyLoad>
                 </a>
                 {badge(product)}

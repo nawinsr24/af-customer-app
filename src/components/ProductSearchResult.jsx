@@ -2,7 +2,9 @@ import React from 'react';
 import Rating from './Rating';
 import LazyLoad from 'react-lazyload';
 import Constants from '../constants';
-const ProductSearchResult = ({ product }) => {
+import { useNavigate } from 'react-router-dom';
+const ProductSearchResult = ({ product, callBackFn }) => {
+    const Router = useNavigate();
     // const { thumbnailImage, price, title } = useProduct();
     const price = (payload) => {
         let view;
@@ -31,7 +33,10 @@ const ProductSearchResult = ({ product }) => {
         <div className="ps-product ps-product--wide ps-product--search-result">
             <div className="ps-product__thumbnail">
                 {/* <Link to="/product/[pid]" as={`/product/${product.id}`}> */}
-                <a href={`product/${product.stock_id}`}>
+                <a style={{ cursor: 'pointer' }} onClick={() => {
+                    Router(`/product/${product.stock_id}`);
+                    callBackFn(false);
+                }}>
                     <>
                         <LazyLoad>
                             <img
@@ -43,7 +48,10 @@ const ProductSearchResult = ({ product }) => {
                 {/* </Link> */}
             </div>
             <div className="ps-product__content">
-                <a href={`product/${product.stock_id}`} className="ps-product__title">{product.name}</a>
+                <a style={{ cursor: 'pointer' }} onClick={() => {
+                    Router(`/product/${product.stock_id}`);
+                    callBackFn(false);
+                }} className="ps-product__title">{product.name}</a>
                 <div className="ps-product__rating">
                     <Rating />
                     <span>{product.ratingCount}</span>
