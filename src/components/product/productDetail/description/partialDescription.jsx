@@ -1,14 +1,12 @@
 import React from 'react';
 
-const PartialDescription = () => (
+const PartialDescription = ({ product }) => (
     <div className="ps-document">
-        <h5>Embodying the Raw, Wayward Spirit of Rock 'N' Roll</h5>
+        <h5>{product.name}</h5>
         <p>
-            Embodying the raw, wayward spirit of rock ‘n’ roll, the Kilburn
-            portable active stereo speaker takes the unmistakable look and sound
-            of Marshall, unplugs the chords, and takes the show on the road.
+            {product.description}
         </p>
-        <p>
+        {/* <p>
             Weighing in under 7 pounds, the Kilburn is a lightweight piece of
             vintage styled engineering. Setting the bar as one of the loudest
             speakers in its class, the Kilburn is a compact, stout-hearted hero
@@ -62,7 +60,7 @@ const PartialDescription = () => (
             the wheel with the design of the Galaxy S7, but it didn’t need to.
             The Gala S6 was an excellently styled device, and the S7 has managed
             to improve on that.
-        </p>
+        </p> */}
     </div>
 );
 

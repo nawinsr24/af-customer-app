@@ -13,7 +13,6 @@ import { notify } from '../../components/notify';
 const ProductDetailPage = () => {
     const { pid } = useParams();
     const Router = useNavigate();
-    console.log("pid", pid);
     const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(true);
 

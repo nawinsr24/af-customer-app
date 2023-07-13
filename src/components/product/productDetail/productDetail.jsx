@@ -35,7 +35,7 @@ const ProductDetail = ({ product }) => {
                         <ActionsSidebar product={product} />
                     </div>
                 </div>
-                <Description />
+                <Description product={product} />
             </div>
         );
     }
