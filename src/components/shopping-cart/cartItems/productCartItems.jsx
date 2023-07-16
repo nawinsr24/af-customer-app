@@ -7,7 +7,7 @@ const ProductCart = ({ product }) => {
         <div className="ps-product--cart">
             <div className="ps-product__thumbnail">
 
-                <a href={`/product/${product.stock_id}`}>
+                <a href={`/product/${product.product_id}`}>
                     <>
                         <LazyLoad>
                             <img
@@ -20,7 +20,7 @@ const ProductCart = ({ product }) => {
 
             </div>
             <div className="ps-product__content">
-                <a href={`/product/${product.stock_id}`}>
+                <a href={`/product/${product.product_id}`}>
                     <a className="ps-product__title">{product.name}</a>
                 </a>
             </div>

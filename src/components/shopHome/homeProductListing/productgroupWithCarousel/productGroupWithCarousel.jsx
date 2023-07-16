@@ -4,7 +4,6 @@ import { carouselFullwidth, carouselStandard } from '../../../../utilities/carou
 import Product from '../../../shop/shopItems/product/product';
 
 export const ProductGroupWithCarousel = ({ products, type = 'normal' }) => {
-
     if (type === 'fullwidth') {
         return (
             <Slider

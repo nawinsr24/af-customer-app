@@ -41,6 +41,7 @@ import './scss/technology.scss';
 import './scss/autopart.scss';
 import HomepageDefaultPage from "./pages/home";
 import { CartProvider } from "./context/cartContext";
+import ScrollToTop from "./components/scrollToTop";
 // import SearchPage from "./pages/search/search";
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
         <CartProvider>
           <MasterLayout>
             {loading && <LoadingScreen />}
+            <ScrollToTop />
             <Routes>
               <Route path="/" element={<HomepageDefaultPage />} />
               <Route path="/auth/login" element={<Login />} />

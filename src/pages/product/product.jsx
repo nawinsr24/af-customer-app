@@ -5,7 +5,7 @@ import ProductDetail from '../../components/product/productDetail/productDetail'
 // import CustomerBought from '~/components/partials/product/CustomerBought';
 // import RelatedProduct from '~/components/partials/product/RelatedProduct';
 import PageContainer from '../../components/layouts/PageContainer';
-import { getProductData } from '../../services/product-service';
+import { getProductById, getProductData } from '../../services/product-service';
 import { useNavigate, useParams } from 'react-router-dom';
 import { notify } from '../../components/notify';
 
@@ -18,7 +18,7 @@ const ProductDetailPage = () => {
 
     async function getData() {
         if (pid) {
-            const res = await getProductData(pid);
+            const res = await getProductById(pid);
             if (res?.length) {
                 console.log(res);
                 setProduct(res[0]);

@@ -20,7 +20,7 @@ const DetailTopInformation = ({ product }) => {
         <header>
             <h1>{product.name}</h1>
             <div className="ps-product__meta">
-                <p>
+                {/* <p>
                     Brand:
 
                     <a href="/shop" className="ml-2 text-capitalize">{product.vendor}</a>
@@ -29,7 +29,7 @@ const DetailTopInformation = ({ product }) => {
                 <div className="ps-product__rating">
                     <Rating />
                     <span>(1 review)</span>
-                </div>
+                </div> */}
             </div>
             {priceView}
         </header>

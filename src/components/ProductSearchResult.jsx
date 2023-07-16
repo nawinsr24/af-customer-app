@@ -34,7 +34,7 @@ const ProductSearchResult = ({ product, callBackFn }) => {
             <div className="ps-product__thumbnail">
                 {/* <Link to="/product/[pid]" as={`/product/${product.id}`}> */}
                 <a style={{ cursor: 'pointer' }} onClick={() => {
-                    Router(`/product/${product.stock_id}`);
+                    Router(`/product/${product.product_id}/?s_id=${product.stock_id}`);
                     callBackFn(false);
                 }}>
                     <>
@@ -49,12 +49,12 @@ const ProductSearchResult = ({ product, callBackFn }) => {
             </div>
             <div className="ps-product__content">
                 <a style={{ cursor: 'pointer' }} onClick={() => {
-                    Router(`/product/${product.stock_id}`);
+                    Router(`/product/${product.product_id}/?s_id=${product.stock_id}`);
                     callBackFn(false);
                 }} className="ps-product__title">{product.name}</a>
                 <div className="ps-product__rating">
-                    <Rating />
-                    <span>{product.ratingCount}</span>
+                    {/* <Rating />
+                    <span>{product.ratingCount}</span> */}
                 </div>
                 {price(product)}
             </div>

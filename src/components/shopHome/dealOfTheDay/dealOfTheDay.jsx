@@ -17,7 +17,6 @@ const HomeDefaultDealOfDay = ({ collectionSlug }) => {
             const dealOfTheDayResponse = await getDealOfTheDay();
             setProductItems(dealOfTheDayResponse?.data);
             setLoading(false);
-            console.log(dealOfTheDayResponse);
         };
         getData();
 

@@ -12,7 +12,7 @@ const ProductWide = ({ product }) => {
         <div className="ps-product ps-product--wide">
             <div className="ps-product__thumbnail">
 
-                <a onClick={() => Router(`/product/${product.stock_id}`)}>{
+                <a onClick={() => Router(`/product/${product.product_id}/?s_id=${product.stock_id}`)}>{
                     <LazyLoad>
                         <img
                             src={`${Constants.imgUrl}${product?.images?.length && product.images[0].image_url}`}
@@ -23,7 +23,7 @@ const ProductWide = ({ product }) => {
             </div>
             <div className="ps-product__container">
                 <div className="ps-product__content">
-                    <a onClick={() => Router(`/procuct/${product.stock_id}`)} className="ps-product__title">{product.title}</a>
+                    <a onClick={() => Router(`/procuct/${product.product_id}`)} className="ps-product__title">{product.title}</a>
 
                     <p className="ps-product__vendor">
                         Sold by:

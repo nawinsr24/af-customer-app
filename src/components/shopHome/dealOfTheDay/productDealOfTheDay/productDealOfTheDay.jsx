@@ -2,7 +2,7 @@ import React from 'react';
 import Rating from '../../../Rating';
 import LazyLoad from 'react-lazyload';
 import { StrapiProductPriceExpanded } from '../../../../utilities/product-helper';
-import ModuleProductProgressbar from './productProgressBar';
+// import ModuleProductProgressbar from './productProgressBar';
 import ModuleProductActions from '../../shopHomeProductAction';
 import Constants from '../../../../constants';
 import { useNavigate } from 'react-router-dom';
@@ -50,7 +50,10 @@ const ProductDealOfDay = ({ product }) => {
     return (
         <div className="ps-product ps-product--inner">
             <div className="ps-product__thumbnail">
-                <a style={{ cursor: "pointer", display: "flex", height: '22rem' }} onClick={() => Router(`/product/${product.stock_id}`)}>
+                <a style={{ cursor: "pointer", display: "flex", height: '22rem' }} onClick={() => {
+                    Router(`/product/${product.product_id}/?s_id=${product.stock_id}`);
+
+                }}>
                     <>
                         <LazyLoad>
                             <figure style={{ display: "flex", padding: '10px', justifyContent: "center" }}>
@@ -68,16 +71,18 @@ const ProductDealOfDay = ({ product }) => {
             </div>
             <div className="ps-product__container">
 
-                <a className="ps-product__vendor" style={{ cursor: "pointer" }} onClick={() => Router(`/shop`)}>Young Shop</a>
+                <a className="ps-product__vendor" style={{ cursor: "pointer" }} onClick={() => Router(`/shop`)}>
+                    {/* Young Shop */}
+                </a>
 
                 <div className="ps-product__content">
                     {StrapiProductPriceExpanded(product)}
                     {
-                        <a className="ps-product__title" style={{ cursor: "pointer" }} onClick={() => Router(`/product/${product.stock_id}`)}>{product.name}</a>
+                        <a className="ps-product__title" style={{ cursor: "pointer" }} onClick={() => Router(`/product/${product.product_id}/?s_id=${product.stock_id}`)}>{product.name}</a>
                     }
                     <div className="ps-product__rating">
-                        <Rating />
-                        <span>{product.ratingCount || 5}</span>
+                        {/* <Rating />
+                        <span>{product.ratingCount || 5}</span> */}
                     </div>
                     {/* <ModuleProductProgressbar product={product} /> */}
                 </div>

@@ -82,6 +82,8 @@ export const carouselFullwidth = {
     speed: 750,
     slidesToShow: 6,
     slidesToScroll: 3,
+    autoplay: true,
+    autoplaySpeed: 4000,
     arrows: true,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,

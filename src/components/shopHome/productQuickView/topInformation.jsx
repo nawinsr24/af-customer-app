@@ -25,8 +25,8 @@ const ModuleDetailTopInformation = ({ product }) => {
 
                 </p>
                 <div className="ps-product__rating">
-                    <Rating />
-                    <span>(1 review)</span>
+                    {/* <Rating />
+                    <span>(1 review)</span> */}
                 </div>
             </div>
             {priceView}

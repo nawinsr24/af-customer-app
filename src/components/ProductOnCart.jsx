@@ -1,9 +1,11 @@
 import React from 'react';
 import LazyLoad from 'react-lazyload';
 import Constants from '../constants';
+import { useNavigate } from 'react-router-dom';
 
 
 const ProductOnCart = ({ product, children }) => {
+    const Router = useNavigate();
     // const { thumbnailImage, title } = useProduct();
     console.log("product?.images", product);
     const title = (payload) => {
@@ -17,7 +19,7 @@ const ProductOnCart = ({ product, children }) => {
     return (
         <div className="ps-product--cart-mobile">
             <div className="ps-product__thumbnail">
-                <a href={`/product/${product.stock_id}`} >
+                <a onClick={() => Router(`/product/${product.product_id}/?s_id=${product.stock_id}`)} >
                     <LazyLoad>
                         <img
                             src={`${Constants.imgUrl}${product?.images?.length && product?.images[0]?.image_url}`}

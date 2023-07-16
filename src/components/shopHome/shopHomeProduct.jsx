@@ -66,7 +66,7 @@ const Product = ({ product }) => {
             );
         }
         return view;
-    }
+    };
 
     return (
         <div className="ps-product">
@@ -84,15 +84,15 @@ const Product = ({ product }) => {
             </div>
             <div className="ps-product__container">
                 <a className="ps-product__vendor" href="/shop">
-                    Young Shop
+                    {/* Young Shop */}
                 </a>
                 <div className="ps-product__content">
                     {<a className="ps-product__title" href="/product/[pid]" as={`/product/${product.id}`}>
                         {product.title}
                     </a>}
                     <div className="ps-product__rating">
-                        <Rating />
-                        <span>02</span>
+                        {/* <Rating />
+                        <span>02</span> */}
                     </div>
                     {price(product)}
                 </div>

@@ -3,7 +3,8 @@ import SkeletonProduct from '../../skeleton/productSkeleton/productSkeleton';
 import { generateTempArray } from '../../../utilities/common-helpers';
 import { ProductGroupWithCarousel } from './productgroupWithCarousel/productGroupWithCarousel';
 import { getStockByType } from '../../../services/home-page-service';
-const HomeDefaultProductListing = ({ stock, collectionSlug, title }) => {
+import { searchProduct } from '../../../services/search-service';
+const HomeDefaultProductListing = ({ product, stock, collectionSlug, title }) => {
     const [currentCollection, setCurrentCollection] = useState('new-arrivals');
     const [productItems, setProductItems] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -34,12 +35,23 @@ const HomeDefaultProductListing = ({ stock, collectionSlug, title }) => {
 
     useEffect(() => {
         const getData = async () => {
-            const resData = await getStockByType(stock.type);
-            setProductItems(resData.data);
+            let resData;
+            if (stock?.type == 'similar_product') {
+                console.log();
+                const reqObj = {
+                    sub_category: product.sub_category_id
+                };
+                console.log("REQUEST____________________________", reqObj);
+                resData = await searchProduct(reqObj);
+                console.log("resData", resData);
+            } else {
+                resData = await getStockByType(stock?.type);
+            }
+            setProductItems(resData?.data);
             setLoading(false);
         };
         getData();
-    }, [stock.type]);
+    }, [stock?.type, product]);
 
     const sectionLinksView = sectionLinks.map((link, i) => (
         <li
