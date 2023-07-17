@@ -18,7 +18,7 @@ const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, shipping }) =
                     {item.name}
                     <span>x{item.cart_quantity || 1}</span>
                 </strong>
-                <small>${(item.cart_quantity || 1) * item.base_price}</small>
+                <small>₹{(item.cart_quantity || 1) * item.base_price}</small>
             </a>
 
         ));
@@ -30,7 +30,7 @@ const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, shipping }) =
             <figure>
                 <figcaption>
                     <strong>Shipping Fee</strong>
-                    <small>$20.00</small>
+                    <small>₹20.00</small>
                 </figcaption>
             </figure>
         );
@@ -38,7 +38,7 @@ const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, shipping }) =
             <figure className="ps-block__total">
                 <h3>
                     Total
-                    <strong>${parseInt(amount) + 20}.00</strong>
+                    <strong>₹{parseInt(amount) + 20}.00</strong>
                 </h3>
             </figure>
         );
@@ -47,7 +47,7 @@ const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, shipping }) =
             <figure className="ps-block__total">
                 <h3>
                     Total
-                    <strong>${parseInt(amount)}.00</strong>
+                    <strong>₹{parseInt(amount)}.00</strong>
                 </h3>
             </figure>
         );
@@ -65,7 +65,7 @@ const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, shipping }) =
                 <figure>
                     <figcaption>
                         <strong>Subtotal</strong>
-                        <small>${amount}</small>
+                        <small>₹{amount}</small>
                     </figcaption>
                 </figure>
                 {shippingView}

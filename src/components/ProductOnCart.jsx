@@ -33,7 +33,7 @@ const ProductOnCart = ({ product, children }) => {
                 {title(product)}
                 <p>
                     <small>
-                        ${product.base_price} x {product.cart_quantity || 1}
+                        ₹ {product.base_price} x {product.cart_quantity || 1}
                     </small>
                 </p>{' '}
                 {children}

@@ -46,7 +46,7 @@ const MiniCart = ({ isRefresh }) => {
                 <div className="ps-cart__footer">
                     <h3>
                         Sub Total:
-                        <strong>${amount ? amount : 0}</strong>
+                        <strong>₹{amount ? amount : 0}</strong>
                     </h3>
                     <figure>
                         <a onClick={() => Router("/shopping-cart")} className="ps-btn">View Cart</a>
