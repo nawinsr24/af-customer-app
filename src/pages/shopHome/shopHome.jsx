@@ -4,6 +4,7 @@ import PageContainer from '../../components/layouts/PageContainer';
 import HomeDefaultDealOfDay from '../../components/shopHome/dealOfTheDay/dealOfTheDay';
 import HomeDefaultProductListing from '../../components/shopHome/homeProductListing/homeProductListing';
 import ShopCategories from '../../components/shop/shopCategories';
+import SiteFeatures from '../../components/siteFeatures/siteFeatures';
 const ShopHomePage = () => {
 
     const stockType = [{ type: 'most_popular', title: "Most popular" }, { type: 'best_selling', title: "Best selling" }, { type: 'new_arrival', title: "New arrival" }];
@@ -21,6 +22,7 @@ const ShopHomePage = () => {
                     {/* <ShopItems columns={6} pageSize={18} /> */}
                 </div>
             </div>
+            <SiteFeatures />
             {/* <Newletters /> */}
         </PageContainer>
 
