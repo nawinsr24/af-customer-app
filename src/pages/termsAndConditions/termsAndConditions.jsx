@@ -1,8 +1,16 @@
 import React from 'react';
 import PageContainer from '../../components/layouts/PageContainer';
 import BreadCrumb from '../../components/BreadCrumb';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const TermsAndConditions = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+
+    // Access query parameters
+    const div_id = queryParams.get('id');
     const breadCrumb = [
         {
             text: 'Home',
@@ -12,6 +20,18 @@ const TermsAndConditions = () => {
             text: 'Terms and conditions',
         },
     ];
+    const scrollFn = () => {
+        var divElement = document.getElementById(div_id);
+        if (divElement) {
+            divElement.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
+    useEffect(() => {
+        scrollFn();
+    }, [div_id]);
+
     return (
         <PageContainer>
             <div className="ps-page--single">
@@ -84,7 +104,7 @@ const TermsAndConditions = () => {
                             <h1>What are our Ethics?</h1>
                         </div>
                         <div className="ps-section__content">
-                            <h3>PRIVACY POLICY</h3>
+                            <h3 id='policy'>PRIVACY POLICY</h3>
                             <p style={{ textAlign: "justify" }}>
                                 This Privacy Policy outlines AMIRTHA FASHION's approach to Data Protection and Privacy to fulfil its obligations under the applicable laws and regulations. This Privacy Policy applies to your Personal Data which is processed by us, whether in physical or electronic mode.
                                 While you may be able to browse the platform (Website and App collectively referred to as “Platform”) from countries outside of India, however please note we do not offer any product/service under this Platform outside India. By visiting the platform or providing your information, you expressly agree to be bound by this Privacy Policy and agree to be governed by the laws of India including but not limited to the laws applicable to data protection and privacy. If you do not agree please do not use or access our Platform.
@@ -490,7 +510,7 @@ const TermsAndConditions = () => {
                             </h1>
                         </div>
                         <div className="ps-section__content">
-                            <h3>Shipping</h3>
+                            <h3 id='shipping'>Shipping</h3>
                             <p style={{ textAlign: "justify" }}>
 
                                 What is the cost of shipping?<br />
@@ -544,7 +564,7 @@ const TermsAndConditions = () => {
 
 
                         <div className="ps-section__header">
-                            <h1>Returns, Refunds, Cancellations and Exchanges
+                            <h1 id='return'>Returns, Refunds, Cancellations and Exchanges
 
                             </h1>
                         </div>
@@ -567,6 +587,121 @@ const TermsAndConditions = () => {
                                 You can cancel your order within 24 hours of order through My Order section or by writing to us at <a style={{ color: "#fcb800" }} href="mailto: info@amirthafashion.com"> info@amirthafashion.com.</a>
                                 **Amirtha Fashion reserves the right to cancel any order without pre-confirming the customer at any time and may verify any order before shipping the same to the customer that may include having a verbal or written confirmation from the customer.
 
+                            </p>
+                            <h3>How will I receive the refund for my cancelled or returned product?</h3>
+                            <p style={{ textAlign: "justify" }}>
+                                In case of prepaid orders, money will be returned to the bank account/ credit/debit card where the payment was made from. For Cash on Delivery orders customers will be required to provide bank     details/UPI ID where they would like to receive the refund.
+
+                            </p>
+                            <h3>How long does it take to receive a refund for a cancelled order or returned product?
+                            </h3>
+                            <p style={{ textAlign: "justify" }}>
+                                We will process your refund within 3 business days in case of cancellation of an order. In case of returns, we will     refund the money after the product has been picked up by our courier partner.
+                            </p>
+                            <h3>
+                                Can I return part of my order?
+
+                            </h3>
+                            <p style={{ textAlign: "justify" }}>
+                                Yes. You can return any products that are eligible for returns within 7 days of delivery. Please do note there are some items that are not returnable or exchangeable.
+
+                            </p>
+                            <h3>My garment does not fit my child. What can I do?
+                            </h3>
+                            <p style={{ textAlign: "justify" }}>
+                                If the product does not fit and you would like a new size, please request for a size exchange through My order section or the customer service team within 7 days of receiving the product. In some cases, minor size and fit alterations might be available for orders placed within India. Our team will try its best to help you for any size exchanges, alterations subject to availability. In case the size you     have requested is not available we will offer you the option to return the product instead.
+                            </p>
+                        </div>
+                        <div className="ps-section__header">
+                            <h1 id='termsAndConditions'>Terms & Conditions
+
+                            </h1>
+                        </div>
+                        <div className="ps-section__content">
+                            Please read the following terms and conditions very carefully as your use of service is subject to your acceptance of and compliance with the following terms and conditions ("Terms"). By subscribing to or using any of our services you agree that you have read, understood and are bound by the Terms, regardless of how you subscribe to or use the services. If you do not want to be bound by the Terms, you must not subscribe to or use our services.
+                            <h5>YOUR USE OF THE WEBSITE IMPLIES THAT YOU AGREE WITH THE TERMS OF USE.</h5>
+                            <p style={{ textAlign: "justify" }}>
+                                <h3>INTRODUCTION
+                                </h3>
+                                <p>
+                                    www.amirthafashion.com ("Website") is an Internet based content and e-commerce portal.
+                                    Use of the Website is offered to you conditioned on acceptance without modification of all the terms, conditions and notices contained in these Terms, as may be posted on the Website from time to time. The Website at its sole discretion reserves the right not to accept a User from registering on the Website without assigning any reason thereof.
+
+                                </p>
+                                <h3>User Account, Password, and Security
+                                </h3>
+                                <p>
+                                    You will receive a password and account ID upon completing the Website's registration process. The Website requires you to register as a user by creating an Account in order to avail of the Services provided by the Website. You will be responsible for maintaining the confidentiality of the Account Information, and are fully responsible for all activities that occur under Your Account. You agree to (a) immediately notify the Website of any unauthorized use of Your Account Information or any other breach of security, and (b) ensure that You exit from Your Account at the end of each session. Website cannot and will not be liable for any loss or damage arising from Your failure to comply with this Section. You may be held liable for losses incurred by Website or any other user of or visitor to the Website due to authorized or unauthorized use of Your Account as a result of Your failure in keeping Your Account Information secure and confidential.
+                                </p>
+                                <h3>Services provided
+                                </h3>
+                                <p>
+                                    Website provides a number of Internet-based services (all such services, collectively, the "Service"). One such Online service which permits users to purchase by offering a huge range of Ethnic Indian wear. The Products can be purchased through the Website through various methods of payments offered. The purchase of Products shall be additionally governed by specific policies of sale, like cancellation policy, return policy, etc. which are found on the following URL <a target='_blank' href="http://www.amirthafshion.com">www.amirthafshion.com</a> and all of which are incorporated here by reference. In addition, these terms and policies may be further supplemented by Product specific conditions, which may be displayed on the webpage of that Product.
+                                </p>
+                                <h3>Privacy Policy</h3>
+                                <p>
+                                    The User hereby consents, expresses and agrees that he has read and fully understands the Privacy Policy (link for privacy policy) of www.biba.in. The user further consents that the terms and contents of such Privacy Policy are acceptable to him. User Conduct and Rules You agree and undertake to use the Website and the Service only to post and upload messages and material that are proper. By way of example, and not as a limitation, you agree and undertake that when using a Service, you will not:<br />
+                                    (a) defame, abuse, harass, stalk, threaten or otherwise violate the legal rights of others;<br />
+                                    (b) publish, post, upload, distribute or disseminate any inappropriate, profane, defamatory, infringing, obscene, indecent or unlawful topic, name, material or information;<br />
+                                    (c) upload files that contain software or other material protected by intellectual property laws unless you own or control the rights thereto or have received all necessary consents;<br />
+                                    (d) upload or distribute files that contain viruses, corrupted files, or any other similar software or programs that may damage the operation of the Website or another's computer;<br />
+                                    (e) conduct or forward surveys, contests, pyramid schemes or chain letters;<br />
+                                    (f) download any file posted by another user of a Service that you know, or reasonably should know, cannot be legally distributed in such manner;<br />
+                                    (g) falsify or delete any author attributions, legal or other proper notices or proprietary designations or labels of the origin or source of software or other material contained in a file that is uploaded;<br />
+                                    (h) violate any code of conduct or other guidelines, which may be applicable for or to any particular Service;<br />
+                                    (i) violate any applicable laws or regulations for the time being in force in or outside India; and<br />
+                                    (j) violate, abuse, unethically manipulate or exploit, any of the terms and conditions of this Agreement or any other terms and conditions for the use of the Website contained elsewhere.<br />
+
+                                </p>
+                                <h3>Disclaimer Of Warranties & Liability
+                                </h3>
+                                <p>
+                                    YOU EXPRESSLY UNDERSTAND AND AGREE THAT, TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW: <a href="http://www.amirthafshion.com"> www.amirthafshion.com</a> (“Website”) has endeavoured to ensure that all the information is correct, but Website neither warrants nor makes any representations regarding the quality, accuracy or completeness of any data, information, product or Service. In no event shall Website be liable for any direct, indirect, punitive, incidental, special, consequential damages or any other damages resulting from:
+                                    <br />(a) the use or the inability to use the Services or Products;<br />
+                                    (b) unauthorized access to or alteration of the user's transmissions or data;<br />
+                                    (c) any other matter relating to the services; including, without limitation, damages for loss of use, data or profits, arising out of or in any way connected with the use or performance of the Website or Service. Neither shall Website be responsible for the delay or inability to use the Website or related services, the provision of or failure to provide Services, or for any information, software, products, services and related graphics obtained through the Website, or otherwise arising out of the use of the website, whether based on contract, tort, negligence, strict liability or otherwise. Further, Website shall not be held responsible for non-availability of the Website during periodic maintenance operations or any unplanned suspension of access to the website that may occur due to technical reasons or for any reason beyond Website’s control.<br />
+                                    The user understands and agrees that any material and/or data downloaded or otherwise obtained through the Website is done entirely at their own discretion and risk and they will be solely responsible for any damage to their computer systems or loss of data that results from the download of such material and/or data.
+
+                                </p>
+                                <h3>
+                                    Shipping
+                                </h3>
+                                <p>
+                                    Title and risk of loss for all products ordered by you shall pass on to you upon Website’s shipment to the shipping carrier.
+
+                                </p>
+                                <h3>
+                                    Termination
+                                </h3>
+                                <p>
+                                    The Terms of Use will continue to apply until terminated by Website as set forth below. Website may suspend or terminate your use of the Website or any Service if it believes, in its sole and absolute discretion that you have breached, violated, abused, or unethically manipulated or exploited any term of these Terms or anyway otherwise acted unethically. If Website terminates your use of the Website or any Service, Website may delete any content or other materials relating to your use of the Service and Website will have no liability to you or any third party for doing so. You shall be liable to pay for any Service or product that you have already ordered till the time of Termination by either party whatsoever. Further, you shall be entitled to your royalty payments as per the User License Agreement that has or is legally deemed accrued to you.
+                                </p>
+                                <h3>
+                                    Governing Law
+                                </h3>
+                                <p>
+                                    These Terms of Use and all transactions entered into on or through the Website and the relationship between You and Website shall be governed in accordance with the laws of India without reference to conflict of laws principles. You agree that all claims, differences and disputes arising under or in connection with or in relation hereto the Website, the Terms of Use or any transactions entered into on or through the Website or the relationship between You and Website shall be subject to the exclusive jurisdiction of the courts at New Delhi, India and You hereby accede to and accept the jurisdiction of such courts
+
+                                </p>
+                                <h3>Report Abuse</h3>
+                                <p>In the event You come across any abuse or violation of these Terms of Use or if You become aware of any objectionable content on the Website, please report to supports numbers. Communications
+                                    You hereby expressly agree to receive communications by way of SMS, e-mails from Website relating to Services provided.
+                                    A User can unsubscribe/ opt-out from receiving communications from the Website anytime via:
+                                    1 Newsletters sent periodically at the registered email address, by clicking on the unsubscribe option attached at the bottom of newsletter received through e-mail
+                                </p>
+                                <h3>Feedback and Information</h3>
+                                <p>
+                                    Any feedback you provide to this Website shall be deemed to be non-confidential. Website shall be free to use such information on an unrestricted basis. Further, by submitting the feedback, You represent and warrant that (i) Your feedback does not contain confidential or proprietary information of You or of third parties; (ii) Website is not under any obligation of confidentiality, express or implied, with respect to the feedback; (iii) Website may have something similar to the feedback already under consideration or in development; and (iv) You are not entitled to any compensation or reimbursement of any kind from Website for the feedback under any circumstances.
+
+                                </p>
+                                <h3>FOLLOW US
+                                </h3>
+                                <p>
+                                    (will update the insta ID)<br />
+                                    (will update the FB ID)<br />
+                                    (Will update the YouTube ID)<br />
+
+                                </p>
                             </p>
                         </div>
                     </div>

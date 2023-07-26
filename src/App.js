@@ -74,7 +74,7 @@ function App() {
               <Route path='/payment-success' element={<PaymentSuccessPage />} />
               <Route path='/auth/verify' element={<OtpPage />} />
               <Route path='/delivery-history/:id' element={<ProductDeliveryHistoryPage />} />
-              <Route path="/terms-and-condtions" element={<TermsAndConditions />} />
+              <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
               {/* <Route path='/search' element={<SearchPage />} /> */}
 
 

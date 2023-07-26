@@ -47,32 +47,32 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Quick links</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link to="/terms-and-condtions">
+                    <Link to="/terms-and-conditions/?id=policy">
                         {/* <a>Policy</a> */}
                         Policy
                     </Link>
                 </li>
 
                 <li>
-                    <Link to="/terms-and-condtions">
+                    <Link to="/terms-and-conditions/?id=termsAndConditions">
                         {/* <a>Term & Condition</a> */}
                         Term & Condition
                     </Link>
                 </li>
                 <li>
-                    <Link to="/terms-and-condtions">
+                    <Link to="/terms-and-conditions/?id=shipping">
                         {/* <a>Shipping</a> */}
                         Shipping
                     </Link>
                 </li>
                 <li>
-                    <Link to="/terms-and-condtions">
+                    <Link to="/terms-and-conditions/?id=return">
                         {/* <a>Return</a> */}
                         Return
                     </Link>
                 </li>
                 <li>
-                    <Link to="/terms-and-condtions">
+                    <Link to="/terms-and-conditions">
                         {/* <a>FAQs</a> */}
                         FAQs
                     </Link>
@@ -83,25 +83,25 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Company</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link to="/terms-and-condtions">
+                    <Link to="/terms-and-conditions">
                         {/* <a>About Us</a> */}
                         About Us
                     </Link>
                 </li>
                 <li>
-                    <Link to="/terms-and-condtions">
+                    <Link to="/terms-and-conditions">
                         {/* <a>Affilate</a> */}
                         Affilate
                     </Link>
                 </li>
                 <li>
-                    <Link to="/terms-and-condtions">
+                    <Link to="/terms-and-conditions">
                         {/* <a>Career</a> */}
                         Career
                     </Link>
                 </li>
                 <li>
-                    <Link to="/terms-and-condtions">
+                    <Link to="/terms-and-conditions">
                         {/* <a>Contact</a> */}
                         Contact
                     </Link>
@@ -112,7 +112,7 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Bussiness</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link to="/terms-and-condtions">
+                    <Link to="/terms-and-conditions">
                         {/* <a>Our Press</a> */}
                         Our Press
 
