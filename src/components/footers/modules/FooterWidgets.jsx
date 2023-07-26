@@ -8,10 +8,16 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Contact us</h4>
             <div className="widget_content">
                 <p>Call us 24/7</p>
-                <h3>1800 97 97 69</h3>
+                <a href='tel:+91 86087 07354'><h3>+91 86087 07354</h3></a>
                 <p>
-                    502 New Design Str, Melbourne, Australia <br />
-                    <a href="mailto:contact@martfury.co">contact@martfury.co</a>
+                    No: 275, Pycrofts Road, Triplicane, Chennai - 600005
+                    <br />
+                    <a style={{ color: "#fcb800" }} href="mailto:info@amirthafashion.com">info@amirthafashion.com</a>
+                </p>
+                <p>
+                    Connect with the Chief Customer Service Lead:
+                    <br />
+                    <a style={{ color: "#fcb800" }} href="mailto:renithkumar@amirthafashion.com">renithkumar@amirthafashion.com</a>
                 </p>
                 <ul className="ps-list--social">
                     <li>
@@ -41,32 +47,32 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Quick links</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link to="/page/blank">
+                    <Link to="/terms-and-conditions/?id=policy">
                         {/* <a>Policy</a> */}
                         Policy
                     </Link>
                 </li>
 
                 <li>
-                    <Link to="/page/blank">
+                    <Link to="/terms-and-conditions/?id=termsAndConditions">
                         {/* <a>Term & Condition</a> */}
                         Term & Condition
                     </Link>
                 </li>
                 <li>
-                    <Link to="/page/blank">
+                    <Link to="/terms-and-conditions/?id=shipping">
                         {/* <a>Shipping</a> */}
                         Shipping
                     </Link>
                 </li>
                 <li>
-                    <Link to="/page/blank">
+                    <Link to="/terms-and-conditions/?id=return">
                         {/* <a>Return</a> */}
                         Return
                     </Link>
                 </li>
                 <li>
-                    <Link to="/page/faqs">
+                    <Link to="/terms-and-conditions">
                         {/* <a>FAQs</a> */}
                         FAQs
                     </Link>
@@ -77,25 +83,25 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Company</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link to="/page/about-us">
+                    <Link to="/terms-and-conditions">
                         {/* <a>About Us</a> */}
                         About Us
                     </Link>
                 </li>
                 <li>
-                    <Link to="/page/blank">
+                    <Link to="/terms-and-conditions">
                         {/* <a>Affilate</a> */}
                         Affilate
                     </Link>
                 </li>
                 <li>
-                    <Link to="/page/blank">
+                    <Link to="/terms-and-conditions">
                         {/* <a>Career</a> */}
                         Career
                     </Link>
                 </li>
                 <li>
-                    <Link to="/page/contact-us">
+                    <Link to="/terms-and-conditions">
                         {/* <a>Contact</a> */}
                         Contact
                     </Link>
@@ -106,14 +112,14 @@ const FooterWidgets = () => (
             <h4 className="widget-title">Bussiness</h4>
             <ul className="ps-list--link">
                 <li>
-                    <Link to="/page/about-us">
+                    <Link to="/terms-and-conditions">
                         {/* <a>Our Press</a> */}
                         Our Press
 
                     </Link>
                 </li>
                 <li>
-                    <Link to="/account/checkout">
+                    <Link to="/checkout">
                         {/* <a>Checkout</a> */}
                         Checkout
                     </Link>
