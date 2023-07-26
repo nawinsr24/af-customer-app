@@ -89,7 +89,7 @@ const TermsAndConditions = () => {
                         </div>
                         <div className="ps-section__content">
                             <h4>Contact Us</h4>
-                            <p style={{ textAlign: "justify" }}>
+                            <p style={{ textAlign: "justify" }} id='policy'>
                                 AMIRTHA FASHION <br />
                                 No: 275, Pycrofts Road, Triplicane, Chennai - 600005,<br />
                                 Email: <a style={{ color: "#fcb800" }} href='mailto:info@amirthafashion.com'>info@amirthafashion.com.</a> <br />
@@ -104,7 +104,7 @@ const TermsAndConditions = () => {
                             <h1>What are our Ethics?</h1>
                         </div>
                         <div className="ps-section__content">
-                            <h3 id='policy'>PRIVACY POLICY</h3>
+                            <h3 >PRIVACY POLICY</h3>
                             <p style={{ textAlign: "justify" }}>
                                 This Privacy Policy outlines AMIRTHA FASHION's approach to Data Protection and Privacy to fulfil its obligations under the applicable laws and regulations. This Privacy Policy applies to your Personal Data which is processed by us, whether in physical or electronic mode.
                                 While you may be able to browse the platform (Website and App collectively referred to as “Platform”) from countries outside of India, however please note we do not offer any product/service under this Platform outside India. By visiting the platform or providing your information, you expressly agree to be bound by this Privacy Policy and agree to be governed by the laws of India including but not limited to the laws applicable to data protection and privacy. If you do not agree please do not use or access our Platform.
@@ -495,8 +495,8 @@ const TermsAndConditions = () => {
                                     Email : <a style={{ color: "#fcb800" }} href='mailto:renithkumar@amirthafashion.com'>renithkumar@amirthafashion.com</a> <br />
 
                                 </p>
-                                <h5>NOTIFICATION OF CHANGES</h5>
-                                <p>
+                                <h5 id='shipping'>NOTIFICATION OF CHANGES</h5>
+                                <p >
                                     We keep our Privacy Policy under regular review to make sure it is up to date and accurate. Any changes we may make to this Privacy Policy in the future will be posted on this page. We recommend that you re-visit this page regularly to check for any updates.
 
                                 </p>
@@ -510,7 +510,7 @@ const TermsAndConditions = () => {
                             </h1>
                         </div>
                         <div className="ps-section__content">
-                            <h3 id='shipping'>Shipping</h3>
+                            <h3>Shipping</h3>
                             <p style={{ textAlign: "justify" }}>
 
                                 What is the cost of shipping?<br />
@@ -551,7 +551,7 @@ const TermsAndConditions = () => {
                             </p>
                             <h4>My order has been shipped. Can I track it?
                             </h4>
-                            <p style={{ textAlign: "justify" }}>
+                            <p id='return' style={{ textAlign: "justify" }}>
                                 For orders within India, once your order has been dispatched, you can track the order from the My Order section.
                                 For International orders, we would share the tracking number as soon as we dispatch your order.
                                 You can track the status of your package 24 hours after your order is dispatched from our warehouse.
@@ -564,7 +564,7 @@ const TermsAndConditions = () => {
 
 
                         <div className="ps-section__header">
-                            <h1 id='return'>Returns, Refunds, Cancellations and Exchanges
+                            <h1>Returns, Refunds, Cancellations and Exchanges
 
                             </h1>
                         </div>
@@ -606,14 +606,14 @@ const TermsAndConditions = () => {
                                 Yes. You can return any products that are eligible for returns within 7 days of delivery. Please do note there are some items that are not returnable or exchangeable.
 
                             </p>
-                            <h3>My garment does not fit my child. What can I do?
+                            <h3 >My garment does not fit my child. What can I do?
                             </h3>
-                            <p style={{ textAlign: "justify" }}>
+                            <p id='termsAndConditions' style={{ textAlign: "justify" }}>
                                 If the product does not fit and you would like a new size, please request for a size exchange through My order section or the customer service team within 7 days of receiving the product. In some cases, minor size and fit alterations might be available for orders placed within India. Our team will try its best to help you for any size exchanges, alterations subject to availability. In case the size you     have requested is not available we will offer you the option to return the product instead.
                             </p>
                         </div>
                         <div className="ps-section__header">
-                            <h1 id='termsAndConditions'>Terms & Conditions
+                            <h1 >Terms & Conditions
 
                             </h1>
                         </div>
