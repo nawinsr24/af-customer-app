@@ -14,7 +14,6 @@ const FormChangeUserInformation = ({ custData, userId, updateIsEdit }) => {
     const queryClient = useQueryClient();
 
     async function handleSubmit(values) {
-        console.log(values)
         setIsSubmitClick(true);
         try {
             await putCustomerService({ ...values, userId });
@@ -22,10 +21,9 @@ const FormChangeUserInformation = ({ custData, userId, updateIsEdit }) => {
             queryClient.invalidateQueries();
             updateIsEdit(false);
         } catch (err) {
-            console.log(err);
             customAlert(err);
         }
-        setIsSubmitClick(false)
+        setIsSubmitClick(false);
     }
 
     return (

@@ -30,15 +30,16 @@ const ProductDetail = ({ product }) => {
         setData();
     }, []);
     if (stockData) {
-        if (stockData.total_price === true) {
+        if (stockData.discount_percentage) {
             priceView = (
                 <h4 className="ps-product__price sale">
-                    <del className="mr-2">₹{stockData.total_price}</del>₹
+                    <del className="mr-2">₹{stockData.original_base_price}</del>₹
                     {stockData.base_price}
                 </h4>
             );
         } else {
-            priceView = <h4 className="ps-product__price">₹{stockData.base_price}</h4>;
+            console.log("ESLE", stockData);
+            priceView = <h4 className="ps-product__price">₹{stockData.total_price}</h4>;
         }
         return (
             <div className="ps-product--detail ps-product--full-content">

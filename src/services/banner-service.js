@@ -7,7 +7,6 @@ export async function getAllBannersService() {
         };
 
         const res = await getData(details);
-        console.log(res, "---------------getAllBanners");
         return res.data;
     } catch (error) {
         return error;

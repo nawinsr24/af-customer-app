@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import LazyLoad from 'react-lazyload';
 import ProductActions from '../productAction/productAction';
 import Rating from '../../../Rating';
@@ -9,14 +9,14 @@ const Product = ({ product }) => {
     const Router = useNavigate();
     const price = (payload) => {
         let view;
-        if (payload.total_price) {
+        if (payload.discount_percentage) {
             view = (
                 <p style={{ display: "flex", flexWrap: "wrap", gap: "3px" }} className="ps-product__price sale">
                     <span>₹</span>
                     {payload.base_price}
                     <del>
                         <span>₹</span>
-                        {payload.total_price}
+                        {payload.original_base_price}
                     </del>
                 </p>
             );
@@ -56,11 +56,9 @@ const Product = ({ product }) => {
                 }
             });
         }
-        if (payload.sale_price) {
+        if (payload.discount_percentage) {
             const discountPercent = (
-                ((payload.price - payload.sale_price) /
-                    payload.sale_price) *
-                100
+                Number(payload.discount_percentage)
             ).toFixed(0);
             return (
                 <div className="ps-product__badge">-{discountPercent}%</div>

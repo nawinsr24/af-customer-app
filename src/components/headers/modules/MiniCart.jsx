@@ -7,13 +7,21 @@ import { notify } from '../../notify';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../../context/cartContext';
 
-const MiniCart = ({ isRefresh }) => {
+const MiniCart = ({ }) => {
     const { contextCartItems } = useContext(CartContext);
     const Router = useNavigate();
     const { ctxtUser } = useAuthContext();
     const [cartData, setCartData] = useState([]);
     const getcartData = async () => {
         const cartResponse = await getCart(ctxtUser?.userId);
+        cartResponse.forEach((pro) => {
+            if (pro.discount_percentage) {
+                const dis_price = parseFloat(pro.base_price) - (parseFloat(pro.base_price) * (parseFloat(pro.discount_percentage) / 100));
+                const final_price = Math.round(parseFloat(dis_price) + parseFloat(dis_price) * (parseFloat(pro.gst_rate) / 100));
+                pro.original_base_price = pro.base_price;
+                pro.base_price = final_price;
+            }
+        });
         setCartData(cartResponse);
     };
     async function handleRemoveItem(cart) {

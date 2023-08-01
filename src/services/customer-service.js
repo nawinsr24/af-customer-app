@@ -7,7 +7,6 @@ export async function getCustomerService({ userId }) {
         };
 
         const res = await getData(details);
-        console.log(res, "---------------getCustomerService");
         return res.data;
     } catch (error) {
         return error;
@@ -24,9 +23,7 @@ export async function putCustomerService({ userId, custName }) {
                 userId, custName
             }
         };
-        console.log(details);
         const res = await putData(details);
-        console.log(res, "---------------putCustomerService");
         return res;
     } catch (error) {
         return error;

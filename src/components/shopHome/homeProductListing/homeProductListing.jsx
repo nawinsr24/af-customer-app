@@ -37,13 +37,10 @@ const HomeDefaultProductListing = ({ product, stock, collectionSlug, title }) =>
         const getData = async () => {
             let resData;
             if (stock?.type == 'similar_product') {
-                console.log();
                 const reqObj = {
                     sub_category: product.sub_category_id
                 };
-                console.log("REQUEST____________________________", reqObj);
                 resData = await searchProduct(reqObj);
-                console.log("resData", resData);
             } else {
                 resData = await getStockByType(stock?.type);
             }
@@ -67,6 +64,15 @@ const HomeDefaultProductListing = ({ product, stock, collectionSlug, title }) =>
     let productItemsView;
     if (!loading) {
         if (productItems && productItems.length > 0) {
+            productItems.forEach((pro) => {
+                if (pro.discount_percentage) {
+                    const dis_price = parseFloat(pro.base_price) - (parseFloat(pro.base_price) * (parseFloat(pro.discount_percentage) / 100));
+                    const final_price = Math.round(parseFloat(dis_price) + parseFloat(dis_price) * (parseFloat(pro.gst_rate) / 100));
+                    pro.original_base_price = pro.base_price;
+                    pro.base_price = final_price;
+                }
+
+            });
             productItemsView = (
                 <ProductGroupWithCarousel
                     products={productItems}

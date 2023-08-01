@@ -41,7 +41,6 @@ function Register() {
             notify("success", "OTP Sent to your Email/Mobile");
             setIsOtpSend(true);
         } catch (err) {
-            console.log(err);
             if (err === 409)
                 notify("error", "Email/Mobile Already Exist");
             else
@@ -51,7 +50,6 @@ function Register() {
     }
 
     async function handleSubmit(values) {
-        console.log(values);
         setIsSubmitClick(true);
         try {
             delete values.confirmPassword;
@@ -60,7 +58,6 @@ function Register() {
             setIsOtpSend(true);
             Router("/", { replace: true });
         } catch (err) {
-            console.log(err);
             if (err === 409)
                 notify("error", "Invalid OTP");
             else if (err === 410)

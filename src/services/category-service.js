@@ -7,7 +7,6 @@ export async function getAllSubCatService() {
         };
 
         const res = await getData(details);
-        console.log(res, "---------------getAllSubCatService");
         return res.data;
     } catch (error) {
         return error;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Rating from '../../../Rating';
 import LazyLoad from 'react-lazyload';
 import { StrapiProductPriceExpanded } from '../../../../utilities/product-helper';
@@ -8,6 +8,17 @@ import Constants from '../../../../constants';
 import { useNavigate } from 'react-router-dom';
 const ProductDealOfDay = ({ product }) => {
     const Router = useNavigate();
+
+    // useEffect(() => {
+    //     if (product?.discount_percentage) {
+    //         const dis_price = parseFloat(product.base_price) - (parseFloat(product.base_price) * (parseFloat(product.discount_percentage) / 100));
+    //         const final_price = Math.round(parseFloat(dis_price) + parseFloat(dis_price) * (parseFloat(product.gst_rate) / 100));
+    //         product.original_base_price = product.base_price;
+    //         product.base_price = final_price;
+    //     }
+
+    // }, [product]);
+
     const badge = (payload) => {
         let view;
         if (payload.badge && payload.badge !== null) {
@@ -33,11 +44,9 @@ const ProductDealOfDay = ({ product }) => {
                 }
             });
         }
-        if (payload.sale_price) {
+        if (payload.discount_percentage) {
             const discountPercent = (
-                ((payload.price - payload.sale_price) /
-                    payload.sale_price) *
-                100
+                Number(payload.discount_percentage)
             ).toFixed(0);
             return (
                 <div className="ps-product__badge">-{discountPercent}%</div>

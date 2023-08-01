@@ -70,7 +70,6 @@ const SearchHeader = () => {
 
     const subCategoryChange = (id) => {
         setSubcategory(id);
-        console.log(sub_category);
         if (id === 'all') {
             Router(`/shop`);
         } else {

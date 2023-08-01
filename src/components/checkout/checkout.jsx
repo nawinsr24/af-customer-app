@@ -45,7 +45,6 @@ const Checkout = () => {
         }
     }, [is_add_adrress]);
     const handleAddressChange = (e) => {
-        console.log(e.target.value);
         setCheckoutAddress(e.target.value);
     };
 
@@ -60,7 +59,6 @@ const Checkout = () => {
         // }
         // await postOrder(reqObj);
         localStorage.setItem("delivary_address", JSON.stringify(checkoutAddress));
-        // console.log(reqObj);
         if (stock_id) {
             Router(`/shipping/?id=${stock_id}`);
         } else {

@@ -162,7 +162,6 @@ function Login() {
                                                 handleSocialLogin(user_detail);
                                             }}
                                             onError={() => {
-                                                console.log('Login Failed');
                                             }}
                                             useOneTap={true}
                                         />

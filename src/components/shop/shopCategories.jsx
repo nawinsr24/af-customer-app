@@ -18,7 +18,6 @@ const ShopCategories = () => {
     const Router = useNavigate();
 
     const onSelect = (category) => {
-        console.log("CAT", category);
         Router(`/shop/?sub_cat=${category.id}`);
     };
 

@@ -2,8 +2,8 @@ import axios from "axios";
 import { notify } from "../components/notify";
 
 
-axios.defaults.baseURL = "https://dev.api.amirthafashion.com";
-// axios.defaults.baseURL = "http://127.0.0.1:9005";
+// axios.defaults.baseURL = "https://dev.api.amirthafashion.com";
+axios.defaults.baseURL = "http://127.0.0.1:9005";
 
 // Add a request interceptor
 axios.interceptors.request.use(
@@ -27,7 +27,6 @@ export async function postData({ urlPath, body }) {
         if (response.status === 200 || response.status === 201)
             return response.data;
     } catch (error) {
-        console.log("POST", error.message);
         if (error?.message?.includes('status code 401')) {
             notify('error', error.response?.data?.message);
         }
@@ -42,7 +41,6 @@ export async function getData({ urlPath, queryParams }) {
         if (response.status === 200 || response.status === 201)
             return response.data;
     } catch (error) {
-        console.log(error);
         throw error.response.data;
     }
 };
@@ -54,7 +52,6 @@ export async function putData({ urlPath, body, queryParams }) {
         if (response.status === 200 || response.status === 201)
             return response.data;
     } catch (error) {
-        console.log(error);
         throw error.response.data;
     }
 };
@@ -66,7 +63,6 @@ export async function deleteData({ urlPath, body, queryParams }) {
         if (response.status === 200 || response.status === 201)
             return response.data;
     } catch (error) {
-        console.log(error);
         throw error.response.data;
     }
 };

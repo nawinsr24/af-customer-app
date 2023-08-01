@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 const ProductOnCart = ({ product, children }) => {
     const Router = useNavigate();
     // const { thumbnailImage, title } = useProduct();
-    console.log("product?.images", product);
     const title = (payload) => {
         let view = (
             <a href={`/product/${payload.product_id}`}>

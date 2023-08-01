@@ -8,7 +8,6 @@ import QueryKey from '../../QueryKey';
 import { getAllBannersService } from '../../services/banner-service';
 const HomeDefaultBanner = () => {
     const { isLoading, isError, error, data: bannerItems } = useQuery([QueryKey.getAllBanners], () => getAllBannersService());
-    console.log("bannerItems", bannerItems);
     const carouselSetting = {
         dots: false,
         infinite: true,

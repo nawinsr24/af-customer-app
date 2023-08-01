@@ -29,7 +29,6 @@ export async function verifyCustOtpService({ otp, username, custName, password }
         };
 
         const res = await postData(details);
-        console.log(res, "---------------verifyCustOtpService");
         return res;
     } catch (error) {
         return error;

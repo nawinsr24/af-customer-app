@@ -19,7 +19,6 @@ const SearchPage = () => {
         const searchRes = await searchProduct(reqObj);
         setLoading(false);
         setProductItems(searchRes.data);
-        console.log("searchRes", searchRes);
     };
     function handleSetKeyword() {
         if (query && query.length > 0) {

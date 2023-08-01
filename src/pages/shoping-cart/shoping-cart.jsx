@@ -18,6 +18,14 @@ const ShoppingCart = ({ ecomerce }) => {
 
     const getcartData = async () => {
         const cartResponse = await getCart(ctxtUser?.userId);
+        cartResponse.forEach((pro) => {
+            if (pro.discount_percentage) {
+                const dis_price = parseFloat(pro.base_price) - (parseFloat(pro.base_price) * (parseFloat(pro.discount_percentage) / 100));
+                const final_price = Math.round(parseFloat(dis_price) + parseFloat(dis_price) * (parseFloat(pro.gst_rate) / 100));
+                pro.original_base_price = pro.base_price;
+                pro.base_price = final_price;
+            }
+        });
         setCartProducts(cartResponse);
     };
 
@@ -76,7 +84,6 @@ const ShoppingCart = ({ ecomerce }) => {
         } else {
             notify("error", "something went wrong");
         }
-        console.log("CHECKOUT DATA", cartProduts);
     };
 
     // View

@@ -20,7 +20,6 @@ const ProductDetailPage = () => {
         if (pid) {
             const res = await getProductById(pid);
             if (res?.length) {
-                console.log(res);
                 setProduct(res[0]);
                 setLoading(false);
             } else {
@@ -54,6 +53,14 @@ const ProductDetailPage = () => {
     // Views
     let productView;
     if (!loading) {
+        product?.stock_data.forEach((pro) => {
+            if (pro.discount_percentage) {
+                const dis_price = parseFloat(pro.base_price) - (parseFloat(pro.base_price) * (parseFloat(pro.discount_percentage) / 100));
+                const final_price = Math.round(parseFloat(dis_price) + parseFloat(dis_price) * (parseFloat(pro.gst_rate) / 100));
+                pro.original_base_price = pro.base_price;
+                pro.base_price = final_price;
+            }
+        });
         productView = <ProductDetail product={product} />;
 
     } else {

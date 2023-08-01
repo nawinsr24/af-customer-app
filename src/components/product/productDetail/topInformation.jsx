@@ -6,15 +6,15 @@ const DetailTopInformation = ({ product }) => {
     // Views
     let priceView;
 
-    if (product.total_price) {
+    if (product.discount_percentage) {
         priceView = (
             <h4 className="ps-product__price sale">
-                <del className="mr-2">&{product.total_price}</del>$
+                <del className="mr-2">₹{product.original_base_price}</del>₹
                 {product.base_price}
             </h4>
         );
     } else {
-        priceView = <h4 className="ps-product__price">${product.base_price}</h4>;
+        priceView = <h4 className="ps-product__price">₹{product.total_price}</h4>;
     }
     return (
         <header>

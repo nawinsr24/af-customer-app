@@ -8,7 +8,6 @@ export async function getDealOfTheDay(page, limit) {
         };
 
         const res = await postData(details);
-        console.log(res, "---------------getDealOfTheDay");
         return res.data;
     } catch (error) {
         return error;
@@ -24,7 +23,6 @@ export async function getStockByType(type, page, limit) {
         };
 
         const res = await postData(details);
-        console.log(res, `---------------get${type}`);
         return res.data;
     } catch (error) {
         return;
@@ -53,7 +51,6 @@ export async function getCart(user_id) {
         const res = await getData(details);
         return res.data;
     } catch (error) {
-        console.log("ERROR", error);
         return;
     }
 
