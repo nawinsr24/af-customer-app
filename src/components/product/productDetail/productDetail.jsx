@@ -38,7 +38,6 @@ const ProductDetail = ({ product }) => {
                 </h4>
             );
         } else {
-            console.log("ESLE", stockData);
             priceView = <h4 className="ps-product__price">₹{stockData.total_price}</h4>;
         }
         return (
