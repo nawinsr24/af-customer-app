@@ -57,6 +57,8 @@ const SearchHeader = () => {
         e.preventDefault();
         if (keyword?.length) {
             Router(`/shop?keyword=${keyword || ''}${sub_category ? '&sub_cat=' + sub_category : ''}`);
+        } else {
+            Router('/shop');
         }
         setIsSearch(false);
     }
