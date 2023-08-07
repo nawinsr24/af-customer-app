@@ -8,14 +8,14 @@ const ProductSearchResult = ({ product, callBackFn }) => {
     // const { thumbnailImage, price, title } = useProduct();
     const price = (payload) => {
         let view;
-        if (payload.total_price) {
+        if (payload.discount_percentage) {
             view = (
                 <p className="ps-product__price sale">
                     <span>₹</span>
-                    {payload.total_price}
+                    {payload.base_price}
                     <del className="ml-2">
                         <span>₹</span>
-                        {payload.base_price}
+                        {payload.original_base_price}
                     </del>
                 </p>
             );

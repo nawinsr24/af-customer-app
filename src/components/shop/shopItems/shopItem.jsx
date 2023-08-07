@@ -17,10 +17,10 @@ const ShopItems = ({ price, columns = 4, pageSize = 12 }) => {
     // const Router = useRouter();
     // const [pageSize] = useState(100);
     const [keyword, setKeyword] = useState('');
+    const [SortType, setSortType] = useState('low_to_high');
     const [productItems, setProductItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const location = useLocation();
-    const [priceObj, setProceObj] = useState({});
     const queryParams = new URLSearchParams(location.search);
     // Access query parameters
     const query_keyword = queryParams.get('keyword');
@@ -29,10 +29,19 @@ const ShopItems = ({ price, columns = 4, pageSize = 12 }) => {
         const reqObj = {
             keyword: query_keyword,
             price_from: price.price_from, price_to: price.price_to,
+            sort_type: SortType,
             sub_category
         };
         const searchRes = await searchProduct(reqObj);
         setLoading(false);
+        searchRes?.data?.forEach((pro) => {
+            if (pro.discount_percentage) {
+                const dis_price = parseFloat(pro.base_price) - (parseFloat(pro.base_price) * (parseFloat(pro.discount_percentage) / 100));
+                const final_price = Math.round(parseFloat(dis_price) + parseFloat(dis_price) * (parseFloat(pro.gst_rate) / 100));
+                pro.original_base_price = pro.base_price;
+                pro.base_price = final_price;
+            }
+        });
         setProductItems(searchRes?.data);
         setTotal(searchRes?.page?.total_Pages);
     };
@@ -43,13 +52,15 @@ const ShopItems = ({ price, columns = 4, pageSize = 12 }) => {
             setKeyword('');
         }
     }
-
+    const getSortType = (s) => {
+        setSortType(s);
+    };
     useEffect(() => {
         if (query_keyword && query_keyword.length > 0) {
             handleSetKeyword(query_keyword);
         }
         getProducts();
-    }, [query_keyword, sub_category, price]);
+    }, [query_keyword, sub_category, price, SortType]);
     const { page } = 100;
     // const { query } = { page: 1 };
     const [listView, setListView] = useState(true);
@@ -161,7 +172,7 @@ const ShopItems = ({ price, columns = 4, pageSize = 12 }) => {
                 </p> : <p></p>}
 
                 <div className="ps-shopping__actions">
-                    <ProductSortBy />
+                    <ProductSortBy sortTypeFn={getSortType} />
                     <div className="ps-shopping__view">
                         <p>View</p>
                         <ul className="ps-tab-list">
