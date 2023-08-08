@@ -1,35 +1,70 @@
 import React, { useState } from 'react';
-import { Radio } from 'antd';
+import { Radio, Form } from 'antd';
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { postOrder } from '../../services/checkout-service';
 
-const ModulePaymentMethods = () => {
-    const [method, setMethod] = useState(1);
-    const Router = useNavigate()
+const ModulePaymentMethods = ({ address, checkoutProducts }) => {
+    const [method, setMethod] = useState('');
+    const Router = useNavigate();
     function handleChangeMethod(e) {
         setMethod(e.target.value); //e.target.value
     }
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        Router('/payment-success')
+    async function handleSubmit(e) {
+        const reqObj = {
+            ...address,
+            checkout_products: checkoutProducts,
+            payment_type: method
+        };
+        const payNowRes = await postOrder(reqObj);
+        // Router('/payment-success');
 
     }
 
     return (
         <>
             <h4>Payment Methods</h4>
-            <div className="ps-block--payment-method">
-                <div className="ps-block__header">
-                    <Radio.Group
-                        onChange={(e) => handleChangeMethod(e)}
-                        value={method}>
-                        <Radio value={1}>Visa / Master Card</Radio>
-                        <Radio value={2}>Paypal</Radio>
-                    </Radio.Group>
+            <div className="ps-block--payment-method" >
+
+                <div>
+                    <Form style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+                        className="ps-form__billing-info"
+                        onFinish={handleSubmit}>
+                        <Form.Item
+                            name="payment_type"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Select payment type!',
+                                },
+                            ]}>
+
+                            <Radio.Group
+                                onChange={(e) => handleChangeMethod(e)}
+                                value={method}>
+                                <Radio value={'cod'}>Cash on delivery</Radio>
+                                <Radio value={'online'}>Online</Radio>
+                            </Radio.Group>
+
+                        </Form.Item>
+                        <div style={
+                            { marginTop: '15px' }
+                        } className="ps-form__submit">
+
+                            <div className="ps-block__footer">
+                                <button className="ps-btn">
+                                    Pay now
+
+                                </button>
+                            </div>
+
+                        </div>
+                    </Form>
+
                 </div>
                 <div className="ps-block__content">
-                    {method === 1 ? (
+                    {/* {method === 1 ? (
                         <div className="ps-block__tab">
                             <div className="form-group">
                                 <label>Card Number</label>
@@ -70,14 +105,15 @@ const ModulePaymentMethods = () => {
                         </div>
                     ) : (
                         <div className="ps-block__tab">
-                            <a
+                            <button
                                 className="ps-btn"
-                                href="https://www.paypal.com/"
-                                target="_blank">
-                                Process with Paypal
-                            </a>
+                                onClick={(e) => handleSubmit(e)}>
+                                Pay now
+
+                            </button>
                         </div>
-                    )}
+                    )} */}
+
                 </div>
             </div>
         </>

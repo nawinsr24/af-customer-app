@@ -91,13 +91,13 @@ const Shipping = () => {
                                 </div>
                                 <div className="ps-block__footer">
 
-                                    <a onClick={() => stock_id ? Router(`/checkout/?id=${stock_id}`) : Router('/checkout')}>
+                                    <a style={{ cursor: 'pointer' }} onClick={() => stock_id ? Router(`/checkout/?id=${stock_id}`) : Router('/checkout')}>
                                         <i className="icon-arrow-left mr-2"></i>
                                         Return to information
                                     </a>
 
 
-                                    <a onClick={() => stock_id ? Router('/payment/?id=' + stock_id) : Router("/payment")} className="ps-btn">
+                                    <a onClick={() => stock_id ? Router('/order-checkout/?id=' + stock_id) : Router("/order-checkout")} className="ps-btn">
                                         Continue to payment
                                     </a>
 

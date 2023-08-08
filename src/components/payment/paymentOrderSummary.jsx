@@ -5,7 +5,7 @@ import { getProductData } from '../../services/product-service';
 import { getCart } from '../../services/home-page-service';
 import { useAuthContext } from '../../context/AuthContext';
 
-const ModulePaymentOrderSummary = ({ ecomerce, shipping }) => {
+const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn }) => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const [checkoutProducts, setcheckoutProducts] = useState([]);
@@ -25,6 +25,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping }) => {
                 pro.base_price = final_price;
             }
         });
+        checkoutProductsFn(productRes);
         setcheckoutProducts(productRes);
         if (!!!productRes?.length) {
             Router('/');
@@ -40,6 +41,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping }) => {
                 pro.base_price = final_price;
             }
         });
+        checkoutProductsFn(productRes);
         setcheckoutProducts(productRes);
         if (!!!productRes?.length) {
             Router('/');

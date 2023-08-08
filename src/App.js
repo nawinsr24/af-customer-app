@@ -43,6 +43,7 @@ import HomepageDefaultPage from "./pages/home";
 import { CartProvider } from "./context/cartContext";
 import ScrollToTop from "./components/scrollToTop";
 import TermsAndConditions from "./pages/termsAndConditions/termsAndConditions";
+import PaymentFailedPage from "./pages/payment/payment-failed";
 // import SearchPage from "./pages/search/search";
 
 function App() {
@@ -70,8 +71,9 @@ function App() {
               <Route path="/shop" element={<ShopPage />} />
               <Route path='/checkout' element={<CheckoutPage />} />
               <Route path='/shipping' element={<ShippingPage />} />
-              <Route path='/payment' element={<PaymentPage />} />
+              <Route path='/order-checkout' element={<PaymentPage />} />
               <Route path='/payment-success' element={<PaymentSuccessPage />} />
+              <Route path='/payment-failed' element={<PaymentFailedPage />} />
               <Route path='/auth/verify' element={<OtpPage />} />
               <Route path='/delivery-history/:id' element={<ProductDeliveryHistoryPage />} />
               <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
