@@ -72,8 +72,8 @@ function App() {
               <Route path='/checkout' element={<CheckoutPage />} />
               <Route path='/shipping' element={<ShippingPage />} />
               <Route path='/order-checkout' element={<PaymentPage />} />
-              <Route path='/payment-success' element={<PaymentSuccessPage />} />
-              <Route path='/payment-failed' element={<PaymentFailedPage />} />
+              <Route path='/order-success' element={<PaymentSuccessPage />} />
+              <Route path='/order-failed' element={<PaymentFailedPage />} />
               <Route path='/auth/verify' element={<OtpPage />} />
               <Route path='/delivery-history/:id' element={<ProductDeliveryHistoryPage />} />
               <Route path="/terms-and-conditions" element={<TermsAndConditions />} />

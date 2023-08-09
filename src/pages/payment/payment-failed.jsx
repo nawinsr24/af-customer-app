@@ -38,13 +38,12 @@ const PaymentFailedPage = () => {
                                         <div className="ps-block--payment-success">
                                             <div className="ps-block__content">
                                                 <h3>
-                                                    Thank you! Your order is
-                                                    processing.
+                                                    Your payment process is failed !
                                                 </h3>
-                                                <p>
+                                                {/* <p>
                                                     Your order number is{' '}
                                                     <strong>123</strong>
-                                                </p>
+                                                </p> */}
                                                 <p>
                                                     An email will be sent
                                                     containing information about
@@ -52,10 +51,10 @@ const PaymentFailedPage = () => {
                                                     any questions about your
                                                     purchase, email us at{' '}
                                                     <a
-                                                        href="mailto@contact@martfury.com"
+                                                        href="mailto@info@amirthafashion.com"
                                                         className="ps-highlight">
                                                         <strong>
-                                                            contact@martfury.com
+                                                            info@amirthafashion.com
                                                         </strong>
                                                     </a>
                                                 </p>
@@ -72,7 +71,7 @@ const PaymentFailedPage = () => {
                                     </div>
                                     <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
                                         <div className="ps-form__orders">
-                                            <ModulePaymentOrderSummary />
+                                            {/* <ModulePaymentOrderSummary /> */}
                                         </div>
                                     </div>
                                 </div>

@@ -42,8 +42,8 @@ const PaymentSuccessPage = () => {
                                                     processing.
                                                 </h3>
                                                 <p>
-                                                    Your order number is{' '}
-                                                    <strong>123</strong>
+                                                    {/* Your order number is{' '}
+                                                    <strong>123</strong> */}
                                                 </p>
                                                 <p>
                                                     An email will be sent
@@ -52,10 +52,10 @@ const PaymentSuccessPage = () => {
                                                     any questions about your
                                                     purchase, email us at{' '}
                                                     <a
-                                                        href="mailto@contact@martfury.com"
+                                                        href="mailto@info@amirthafashion.com"
                                                         className="ps-highlight">
                                                         <strong>
-                                                            contact@martfury.com
+                                                            info@amirthafashion.com
                                                         </strong>
                                                     </a>
                                                 </p>
@@ -72,7 +72,7 @@ const PaymentSuccessPage = () => {
                                     </div>
                                     <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
                                         <div className="ps-form__orders">
-                                            <ModulePaymentOrderSummary />
+                                            {/* <ModulePaymentOrderSummary /> */}
                                         </div>
                                     </div>
                                 </div>
