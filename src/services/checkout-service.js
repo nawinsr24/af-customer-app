@@ -1,5 +1,5 @@
+import axios from "axios";
 import { postData, getData, deleteData } from "./rest-api-helper";
-
 export async function getAddress(user_id) {
     try {
         const details = {
@@ -38,6 +38,18 @@ export async function postOrder(data) {
 
         const res = await postData(details);
         return res.data;
+    } catch (error) {
+        return error;
+    }
+
+}
+export async function getAirpay(data) {
+    try {
+
+        const base_url = axios.defaults.baseURL;
+        const urlPath = `/sendtoairpay/?customer_id=${data.customer_id}&payable_amount=${data.payable_amount}&address_id=${data.address_id}&order_id=${data.order_id} `;
+        window.open(base_url + urlPath);
+
     } catch (error) {
         return error;
     }

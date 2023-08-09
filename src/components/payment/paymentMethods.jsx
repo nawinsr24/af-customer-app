@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Radio, Form } from 'antd';
 
 import { useNavigate } from 'react-router-dom';
-import { postOrder } from '../../services/checkout-service';
+import { getAirpay, postOrder } from '../../services/checkout-service';
 
 const ModulePaymentMethods = ({ address, checkoutProducts }) => {
     const [method, setMethod] = useState('');
@@ -18,8 +18,7 @@ const ModulePaymentMethods = ({ address, checkoutProducts }) => {
             payment_type: method
         };
         const payNowRes = await postOrder(reqObj);
-        // Router('/payment-success');
-
+        await getAirpay(payNowRes);
     }
 
     return (
