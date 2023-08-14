@@ -18,7 +18,9 @@ const ModulePaymentMethods = ({ address, checkoutProducts }) => {
             payment_type: method
         };
         const payNowRes = await postOrder(reqObj);
-        await getAirpay(payNowRes);
+        method == 'cod'
+            ? Router('/order-success')
+            : await getAirpay(payNowRes);
     }
 
     return (

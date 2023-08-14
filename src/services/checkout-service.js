@@ -48,7 +48,7 @@ export async function getAirpay(data) {
 
         const base_url = axios.defaults.baseURL;
         const urlPath = `/sendtoairpay/?customer_id=${data.customer_id}&payable_amount=${data.payable_amount}&address_id=${data.address_id}&order_id=${data.order_id} `;
-        window.open(base_url + urlPath);
+        window.open(base_url + urlPath, "_self");
 
     } catch (error) {
         return error;

@@ -82,13 +82,13 @@ const Shipping = () => {
 
                                     </figure>
                                 </div>
-                                <h4>Shipping Method</h4>
+                                {/* <h4>Shipping Method</h4>
                                 <div className="ps-block__panel">
                                     <figure>
                                         <small>International Shipping</small>
                                         <strong>$20.00</strong>
                                     </figure>
-                                </div>
+                                </div> */}
                                 <div className="ps-block__footer">
 
                                     <a style={{ cursor: 'pointer' }} onClick={() => stock_id ? Router(`/checkout/?id=${stock_id}`) : Router('/checkout')}>
@@ -106,7 +106,7 @@ const Shipping = () => {
                         </div>
                         <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12  ps-block--checkout-order">
                             <div className="ps-form__orders">
-                                <ModulePaymentOrderSummary checkoutProducts={checkoutProducts} shipping={true} />
+                                <ModulePaymentOrderSummary checkoutProducts={checkoutProducts} shipping={false} />
                             </div>
                         </div>
                     </div>

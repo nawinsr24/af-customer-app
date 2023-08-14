@@ -31,13 +31,13 @@ const ModulePaymentShipping = ({ addressFn }) => {
 
                 </figure>
             </div>
-            <h4>Shipping Method</h4>
+            {/* <h4>Shipping Method</h4>
             <div className="ps-block__panel">
                 <figure>
                     <small>International Shipping</small>
                     <strong>$20.00</strong>
                 </figure>
-            </div>
+            </div> */}
         </>
     );
 };
