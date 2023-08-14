@@ -13,6 +13,19 @@ export async function getAddress(user_id) {
     }
 
 }
+export async function getDeliveryCharge(pin_code) {
+    try {
+        const details = {
+            urlPath: `/del/calculateCharge/?d_pin=${pin_code}`
+        };
+
+        const res = await getData(details);
+        return res.data;
+    } catch (error) {
+        return error;
+    }
+
+}
 
 export async function addAddress(data) {
     try {

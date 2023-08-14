@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const ModulePaymentShipping = ({ addressFn }) => {
+const ModulePaymentShipping = ({ addressFn, deliveryCharge }) => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const address_data = localStorage.getItem('delivary_address') ? JSON.parse(localStorage.getItem('delivary_address')) : null;
@@ -31,13 +31,13 @@ const ModulePaymentShipping = ({ addressFn }) => {
 
                 </figure>
             </div>
-            {/* <h4>Shipping Method</h4>
+            <h4>Delivery charge</h4>
             <div className="ps-block__panel">
                 <figure>
-                    <small>International Shipping</small>
-                    <strong>$20.00</strong>
+                    <small>Total Delivery chanrge</small>
+                    <strong>₹{deliveryCharge?.total_delivery_charge}</strong>
                 </figure>
-            </div> */}
+            </div>
         </>
     );
 };

@@ -4,7 +4,7 @@ import { Radio, Form } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { getAirpay, postOrder } from '../../services/checkout-service';
 
-const ModulePaymentMethods = ({ address, checkoutProducts }) => {
+const ModulePaymentMethods = ({ address, checkoutProducts, deliveryCharge }) => {
     const [method, setMethod] = useState('');
     const Router = useNavigate();
     function handleChangeMethod(e) {
@@ -15,7 +15,9 @@ const ModulePaymentMethods = ({ address, checkoutProducts }) => {
         const reqObj = {
             ...address,
             checkout_products: checkoutProducts,
-            payment_type: method
+            payment_type: method,
+            delivery_charge: !!!deliveryCharge?.is_free_delivery ? deliveryCharge.total_delivery_charge : 0
+
         };
         const payNowRes = await postOrder(reqObj);
         method == 'cod'

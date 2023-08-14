@@ -5,12 +5,14 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/AuthContext';
 import { getProductData } from '../../services/product-service';
 import { getCart } from '../../services/home-page-service';
+import { getDeliveryCharge } from '../../services/checkout-service';
 
 const Shipping = () => {
     const address_data = localStorage.getItem('delivary_address') ? JSON.parse(localStorage.getItem('delivary_address')) : null;
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const [checkoutProducts, setcheckoutProducts] = useState([]);
+    const [deliveryCharge, setDeliveryCharge] = useState(null);
 
 
     // Access query parameters
@@ -48,7 +50,18 @@ const Shipping = () => {
         }
 
     }
+
+    async function getDeliveryChargeFn() {
+        if (address_data?.pincode) {
+
+            const resData = await getDeliveryCharge(address_data?.pincode);
+            setDeliveryCharge(resData);
+            console.log("res", resData);
+        }
+
+    }
     useEffect(() => {
+        getDeliveryChargeFn();
         if (stock_id) {
             getSingleProduct();
         } else {
@@ -82,13 +95,13 @@ const Shipping = () => {
 
                                     </figure>
                                 </div>
-                                {/* <h4>Shipping Method</h4>
+                                <h4>Delivery charge</h4>
                                 <div className="ps-block__panel">
                                     <figure>
-                                        <small>International Shipping</small>
-                                        <strong>$20.00</strong>
+                                        <small>Total delivery charge</small>
+                                        <strong>₹ {deliveryCharge?.total_delivery_charge || 0}</strong>
                                     </figure>
-                                </div> */}
+                                </div>
                                 <div className="ps-block__footer">
 
                                     <a style={{ cursor: 'pointer' }} onClick={() => stock_id ? Router(`/checkout/?id=${stock_id}`) : Router('/checkout')}>
@@ -106,7 +119,7 @@ const Shipping = () => {
                         </div>
                         <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12  ps-block--checkout-order">
                             <div className="ps-form__orders">
-                                <ModulePaymentOrderSummary checkoutProducts={checkoutProducts} shipping={false} />
+                                <ModulePaymentOrderSummary checkoutProducts={checkoutProducts} deliveryCharge={deliveryCharge} />
                             </div>
                         </div>
                     </div>

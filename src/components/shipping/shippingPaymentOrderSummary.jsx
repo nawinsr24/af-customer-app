@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 // import useEcomerce from '~/hooks/useEcomerce';
 import { calculateAmount } from '../../utilities/ecomerce-helpers';
 
-const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, shipping }) => {
+const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, deliveryCharge }) => {
 
     // view
     let listItemsView, shippingView, totalView;
@@ -25,12 +25,12 @@ const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, shipping }) =
     } else {
         listItemsView = <p>No Product.</p>;
     }
-    if (shipping === true) {
+    if (!!!deliveryCharge?.is_free_delivery) {
         shippingView = (
             <figure>
                 <figcaption>
-                    <strong>Shipping Fee</strong>
-                    <small>₹20.00</small>
+                    <strong>Delivery charge</strong>
+                    <small>₹{deliveryCharge?.total_delivery_charge}</small>
                 </figcaption>
             </figure>
         );
@@ -38,7 +38,7 @@ const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, shipping }) =
             <figure className="ps-block__total">
                 <h3>
                     Total
-                    <strong>₹{parseInt(amount) + 20}.00</strong>
+                    <strong>₹{(parseInt(amount) + Number(deliveryCharge?.total_delivery_charge))}</strong>
                 </h3>
             </figure>
         );
@@ -47,7 +47,7 @@ const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, shipping }) =
             <figure className="ps-block__total">
                 <h3>
                     Total
-                    <strong>₹{parseInt(amount)}.00</strong>
+                    <strong>₹{parseInt(amount)}</strong>
                 </h3>
             </figure>
         );

@@ -5,7 +5,7 @@ import { getProductData } from '../../services/product-service';
 import { getCart } from '../../services/home-page-service';
 import { useAuthContext } from '../../context/AuthContext';
 
-const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn }) => {
+const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn, deliveryCharge }) => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const [checkoutProducts, setcheckoutProducts] = useState([]);
@@ -68,19 +68,19 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn }) =
                     {item.name}
                     <span>x{item.cart_quantity || 1}</span>
                 </strong>
-                <small>${(item.cart_quantity || 1) * item.base_price}</small>
+                <small>₹{(item.cart_quantity || 1) * item.base_price}</small>
             </a>
 
         ));
     } else {
         listItemsView = <p>No Product.</p>;
     }
-    if (shipping === true) {
+    if (!!!deliveryCharge?.is_free_delivery) {
         shippingView = (
             <figure>
                 <figcaption>
-                    <strong>Shipping Fee</strong>
-                    <small>$20.00</small>
+                    <strong>Delivery charge</strong>
+                    <small>₹{deliveryCharge?.total_delivery_charge}</small>
                 </figcaption>
             </figure>
         );
@@ -88,7 +88,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn }) =
             <figure className="ps-block__total">
                 <h3>
                     Total
-                    <strong>${parseInt(amount) + 20}.00</strong>
+                    <strong>₹{parseInt(amount) + Number(deliveryCharge?.total_delivery_charge)}</strong>
                 </h3>
             </figure>
         );
@@ -97,7 +97,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn }) =
             <figure className="ps-block__total">
                 <h3>
                     Total
-                    <strong>${parseInt(amount)}.00</strong>
+                    <strong>₹{parseInt(amount)}</strong>
                 </h3>
             </figure>
         );
@@ -115,7 +115,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn }) =
                 <figure>
                     <figcaption>
                         <strong>Subtotal</strong>
-                        <small>${amount}</small>
+                        <small>₹{amount}</small>
                     </figcaption>
                 </figure>
                 {shippingView}
