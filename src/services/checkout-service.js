@@ -37,7 +37,7 @@ export async function addAddress(data) {
         const res = await postData(details);
         return res.data;
     } catch (error) {
-        return error;
+        throw error;
     }
 
 }

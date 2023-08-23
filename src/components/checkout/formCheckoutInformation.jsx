@@ -8,10 +8,15 @@ const FormCheckoutInformation = ({ onValueChange }) => {
     const [temp, setTemp] = useState(false);
     const handleFormSubmit = async (data) => {
         data.user_id = ctxtUser?.userId;
-        await addAddress(data);
-        notify("success", "Address Added !");
-        setTemp(!temp);
-        onValueChange(temp);
+        try {
+            await addAddress(data);
+            notify("success", "Address Added !");
+            setTemp(!temp);
+            onValueChange(temp);
+        } catch (error) {
+            notify("error", "Failed to Add Address !");
+        }
+
     };
 
     return (
@@ -55,6 +60,49 @@ const FormCheckoutInformation = ({ onValueChange }) => {
                             />
                         </Form.Item>
                     </div>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-sm-6">
+                    <div className="form-group">
+                        <Form.Item
+                            name="email"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Enter your Email !',
+
+                                },
+                                {
+                                    pattern: '[A-Za-z0-9._%-]+@[A-Za-z0-9_-]+\\.[a-z]{2,4}',
+                                    message: 'Please enter valid email !'
+                                }
+                            ]}>
+                            <Input
+                                className="form-control"
+                                type="text"
+                                placeholder="Email"
+                            />
+                        </Form.Item>
+                    </div>
+                </div>
+                <div className="col-sm-6">
+                    {/* <div className="form-group">
+                        <Form.Item
+                            name="delivery_mobile_1"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Enter your contact number!',
+                                },
+                            ]}>
+                            <Input
+                                className="form-control"
+                                type="text"
+                                placeholder="Contact Number"
+                            />
+                        </Form.Item>
+                    </div> */}
                 </div>
             </div>
             {/* <div className="form-group">
@@ -284,7 +332,7 @@ const FormCheckoutInformation = ({ onValueChange }) => {
                     onClick={() => {
                         setTemp(!temp);
                         onValueChange(temp);
-                    }}>Return</button>
+                    }}>Back</button>
             </div>
 
         </Form>

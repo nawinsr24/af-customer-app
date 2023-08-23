@@ -20,15 +20,17 @@ const HeaderMobile = ({ }) => {
         <header className="header header--mobile">
 
             <div className="navigation--mobile">
-                <div className="navigation__left">
-                    {/* <Link to="/"> */}
-                    <a href="/" className="ps-logo">
-                        <img
-                            src="/static/img/logo_light.png"
-                            alt="martfury"
-                        />
+                <div className="header__left">
+
+                    <a href='/' className="ps-logo" style={{
+                        display: "flex",
+                        height: "100%",
+                        width: "40%",
+                        filter: "drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2))"
+                    }}>
+                        <img src={'static/amirtha-fashion-images/amirtha-log.png'} alt="" />
                     </a>
-                    {/* </Link> */}
+
                 </div>
                 <MobileHeaderActions />
             </div>

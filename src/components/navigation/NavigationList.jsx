@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Drawer } from 'antd';
 import PanelMenu from './panel/PanelMenu';
 import PanelCartMobile from './panel/PanelCartMobile';
@@ -16,6 +17,12 @@ class NavigationList extends Component {
         };
     }
 
+    redirect() {
+        console.log("Hii");
+        // let Router = useNavigate();
+        window.location.href = "/";
+        // Router('/');
+    };
     handleDrawerClose = () => {
         this.setState({
             menuDrawer: false,
@@ -23,6 +30,7 @@ class NavigationList extends Component {
             searchDrawer: false,
             categoriesDrawer: false,
         });
+
     };
 
     handleShowMenuDrawer = () => {
@@ -74,13 +82,16 @@ class NavigationList extends Component {
                     placement="right"
                     closable={false}
                     onClose={this.handleDrawerClose}
-                    visible={this.state.menuDrawer}>
+                    visible={this.state.menuDrawer}
+                >
                     <div className="ps-panel--wrapper">
                         <div className="ps-panel__header">
-                            <h3>Menu</h3>
+                            <h3>Home</h3>
                             <span
                                 className="ps-panel__close"
-                                onClick={this.handleDrawerClose}>
+                                onClick={() => {
+                                    this.redirect();
+                                }}>
                                 <i className="icon-cross"></i>
                             </span>
                         </div>
@@ -153,9 +164,9 @@ class NavigationList extends Component {
                     <a
                         className={`navigation__item ${menuDrawer === true ? 'active' : ''
                             }`}
-                        onClick={this.handleShowMenuDrawer}>
+                        onClick={() => { this.redirect(); }}>
                         <i className="icon-menu"></i>
-                        <span> Menu</span>
+                        <span> Home</span>
                     </a>
                     <a
                         className={`navigation__item ${categoriesDrawer === true ? 'active' : ''
