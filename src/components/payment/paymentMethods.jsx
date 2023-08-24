@@ -16,13 +16,18 @@ const ModulePaymentMethods = ({ address, checkoutProducts, deliveryCharge }) => 
             ...address,
             checkout_products: checkoutProducts,
             payment_type: method,
-            delivery_charge: !!!deliveryCharge?.is_free_delivery ? deliveryCharge.total_delivery_charge : 0
+            delivery_charge: !!!deliveryCharge?.is_free_delivery ? deliveryCharge?.total_delivery_charge : 0
 
         };
-        const payNowRes = await postOrder(reqObj);
-        method == 'cod'
-            ? Router('/order-success')
-            : await getAirpay(payNowRes);
+        try {
+
+            const payNowRes = await postOrder(reqObj);
+            method == 'cod'
+                ? Router('/order-success')
+                : await getAirpay(payNowRes);
+        } catch (error) {
+
+        }
     }
 
     return (

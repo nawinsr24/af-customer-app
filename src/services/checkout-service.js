@@ -13,6 +13,7 @@ export async function getAddress(user_id) {
     }
 
 }
+
 export async function getDeliveryCharge(pin_code) {
     try {
         const details = {
@@ -52,10 +53,39 @@ export async function postOrder(data) {
         const res = await postData(details);
         return res.data;
     } catch (error) {
+        throw error;
+    }
+
+}
+export async function getOrder(data) {
+    try {
+        const details = {
+            urlPath: `/customer/order/?customer_id=${data.customer_id}&order_id=${data.order_id}`,
+
+        };
+
+        const res = await getData(details);
+        return res.data;
+    } catch (error) {
         return error;
     }
 
 }
+export async function trackOrder(awb) {
+    try {
+        const details = {
+            urlPath: `/del/trackOrder/?awb=${awb}`,
+
+        };
+
+        const res = await getData(details);
+        return res.data;
+    } catch (error) {
+        return error;
+    }
+
+}
+
 export async function getAirpay(data) {
     try {
 

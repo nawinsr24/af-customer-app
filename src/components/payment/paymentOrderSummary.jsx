@@ -24,6 +24,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn, del
                 pro.original_base_price = pro.base_price;
                 pro.base_price = final_price;
             }
+            pro.cart_quantity = 1;
         });
         checkoutProductsFn(productRes);
         setcheckoutProducts(productRes);

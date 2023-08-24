@@ -161,28 +161,28 @@ class NavigationList extends Component {
                     </div>
                 </Drawer>
                 <div className="navigation__content">
-                    <a
+                    <a style={{ cursor: "pointer" }}
                         className={`navigation__item ${menuDrawer === true ? 'active' : ''
                             }`}
                         onClick={() => { this.redirect(); }}>
                         <i className="icon-menu"></i>
                         <span> Home</span>
                     </a>
-                    <a
+                    <a style={{ cursor: "pointer" }}
                         className={`navigation__item ${categoriesDrawer === true ? 'active' : ''
                             }`}
                         onClick={this.handleShowCategoriesDrawer}>
                         <i className="icon-list4"></i>
                         <span> Categories</span>
                     </a>
-                    <a
+                    <a style={{ cursor: "pointer" }}
                         className={`navigation__item ${searchDrawer === true ? 'active' : ''
                             }`}
                         onClick={this.handleShowSearchDrawer}>
                         <i className="icon-magnifier"></i>
                         <span> Search</span>
                     </a>
-                    <a
+                    <a style={{ cursor: "pointer" }}
                         className={`navigation__item ${cartDrawer === true ? 'active' : ''
                             }`}
                         onClick={this.handleShowCartDrawer}>

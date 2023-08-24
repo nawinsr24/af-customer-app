@@ -83,7 +83,7 @@ function App() {
               <Route element={<RequireAuth />}>
                 <Route path='/user-information' element={<UserInformationPage />} />
                 <Route path='/orders' element={<OrdersPage />} />
-                <Route path='/order-tracking/:id' element={<OrderTrakingPage />} />
+                <Route path='/order-tracking' element={<OrderTrakingPage />} />
                 <Route path='/order-history' element={<OrdersHistoryPage />} />
               </Route>
 

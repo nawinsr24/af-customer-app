@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import { Menu } from 'antd';
-import categories from '../../../static/data/static-categories.json';
 import { getAllSubCatService } from '../../../services/category-service';
-// import { Router } from 'react-router-dom';
-
-const { SubMenu } = Menu;
+import { Link } from 'react-router-dom';
 
 class PanelCategories extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             subCategories: [],
         };
-        // this.Router = Router();
     }
 
     rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
@@ -21,24 +18,18 @@ class PanelCategories extends Component {
         openKeys: ['sub1'],
     };
 
+
     async componentDidMount() {
         try {
             const res = await getAllSubCatService();
+            console.log('res', res);
             this.setState({ subCategories: res });
         } catch (error) {
             console.error('Error fetching subcategories:', error);
         }
-        console.log("BBBBBBBBBBBBBBBBBB", this.state.subCategories);
     }
 
-    onSelect = (category) => {
-        // const { history } = this.props;
-        // history.push(`/shop/?sub_cat=${category.category_id}`);
-    };
 
-    // useEffect(() => {
-    //     getData();
-    // }, [])
 
     onOpenChange = openKeys => {
         const latestOpenKey = openKeys.find(
@@ -60,11 +51,12 @@ class PanelCategories extends Component {
                 openKeys={this.state.openKeys}
                 onOpenChange={this.onOpenChange}>
                 {this.state.subCategories.map(category => (
-                    <Menu.Item key={category.id}>
-                        <a href={`/shop?sub_cat=${category.category_id}`}>
-                            {category.category_name + category.category_id}
+                    <Menu.Item key={category.id} >
+                        <a href={`/shop?sub_cat=${category.id}`} style={{ width: "100%", display: "block" }}>
+                            {category.category_name}
                         </a>
                     </Menu.Item>
+
                 ))
                 }
             </Menu>
