@@ -15,7 +15,7 @@ const UserInformation = () => {
     const { ctxtlogout, ctxtUser } = useAuthContext();
     const navigate = useNavigate();
     const { isLoading, isError, error, data: custData } = useQuery([QueryKey.getAllBanners], () => getCustomerService({ userId: ctxtUser?.userId }));
-    const [isEdit, setIsEdit] = useState(false)
+    const [isEdit, setIsEdit] = useState(false);
     const accountLinks = [
         {
             text: 'Account Information',
@@ -74,7 +74,7 @@ const UserInformation = () => {
                                                 className={
                                                     link.active ? 'active' : ''
                                                 }>
-                                                <a href={link.url}>
+                                                <a onClick={() => navigate(`${link.url}`)}>
                                                     <i
                                                         className={
                                                             link.icon
@@ -97,7 +97,7 @@ const UserInformation = () => {
                     <div className="col-lg-9">
                         <div className="ps-page__content">
                             {!isEdit && <UserInfoView custData={custData} updateIsEdit={updateIsEdit} />}
-                            {isEdit && <FormChangeUserInformation custData={custData} userId={ctxtUser?.userId} updateIsEdit={updateIsEdit}/>}
+                            {isEdit && <FormChangeUserInformation custData={custData} userId={ctxtUser?.userId} updateIsEdit={updateIsEdit} />}
                         </div>
                     </div>
                 </div>

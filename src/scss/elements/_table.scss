@@ -424,3 +424,14 @@
         }
     }
 }
+
+.track-order {
+    @media (max-width: 550px) {
+        text-align: left;
+    }
+
+    @media (min-width: 551px) {
+        text-align: right;
+        color: red;
+    }
+}

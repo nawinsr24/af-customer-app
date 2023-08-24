@@ -83,7 +83,7 @@ const OrderTrakingDetails = () => {
                                                 <strong>Arriving {trackData?.status}</strong>
                                             </h4>
                                         </div>
-                                        <div className="col-md-4 col-12">
+                                        {/* <div className="col-md-4 col-12">
                                             <figure className="ps-block--invoice">
                                                 <figcaption>
                                                     Address
@@ -104,10 +104,7 @@ const OrderTrakingDetails = () => {
                                                         <br />
                                                         contact : {trackData?.delivery_mobile_1}
                                                         <br />
-                                                        {/* Emergency contact : {o.delivery_mobile_2} */}
-                                                        {/* <div>
-                                                            <h4 style={{ color: 'green', margin: '10px 0px', }}><strong>Arriving {trackData?.order_date}</strong></h4>
-                                                        </div> */}
+                                                        
                                                     </>
 
                                                 </div>
@@ -122,7 +119,7 @@ const OrderTrakingDetails = () => {
                                                     </p>
                                                 </div>
                                             </figure>
-                                            {/* <figure className="ps-block--invoice">
+                                            <figure className="ps-block--invoice">
                                                 <figcaption>
                                                     Payment
                                                 </figcaption>
@@ -131,9 +128,9 @@ const OrderTrakingDetails = () => {
                                                         Payment Method: Visa
                                                     </p>
                                                 </div>
-                                            </figure> */}
-                                        </div>
-                                        {trackData?.order_stock?.map(
+                                            </figure>
+                                        </div> */}
+                                        {/* {trackData?.order_stock?.map(
                                             product => (
 
                                                 <>
@@ -160,7 +157,7 @@ const OrderTrakingDetails = () => {
 
                                                     </div>
                                                     <div className="row" style={{ marginTop: '10px' }}>
-                                                        {/* <div className="col-md-4 col-12">
+                                                        <div className="col-md-4 col-12">
                                                             <figure className="ps-block--invoice">
                                                                 <figcaption>
                                                                     Address
@@ -179,9 +176,9 @@ const OrderTrakingDetails = () => {
                                                                     </p>
                                                                 </div>
                                                             </figure>
-                                                        </div> */}
+                                                        </div>
                                                         <div className="col-md-4 col-12">
-                                                            {/* <figure className="ps-block--invoice">
+                                                            <figure className="ps-block--invoice">
                                                                 <figcaption>
                                                                     Shipping Fee
                                                                 </figcaption>
@@ -190,10 +187,10 @@ const OrderTrakingDetails = () => {
                                                                         Shipping Fee: Free
                                                                     </p>
                                                                 </div>
-                                                            </figure> */}
+                                                            </figure>
                                                         </div>
                                                         <div className="col-md-4 col-12">
-                                                            {/* <figure className="ps-block--invoice">
+                                                            <figure className="ps-block--invoice">
                                                                 <figcaption>
                                                                     Payment
                                                                 </figcaption>
@@ -202,7 +199,7 @@ const OrderTrakingDetails = () => {
                                                                         Payment Method: Visa
                                                                     </p>
                                                                 </div>
-                                                            </figure> */}
+                                                            </figure>
                                                         </div>
                                                     </div>
                                                 </>
@@ -212,26 +209,23 @@ const OrderTrakingDetails = () => {
 
 
                                             )
-                                        )}
+                                        )} */}
                                     </div>
                                     <>
-                                        {ShowTimeLine ? <div style={{ margin: "10px 0px" }} className='order-traker'>
+                                        <div style={{ margin: "10px 0px" }} className='order-traker'>
                                             <div class="wrapper">
                                                 <ul class="StepProgress">
-                                                    <li class="StepProgress-item is-done"><strong>Order Received</strong>
-                                                        11 june 2023</li>
-                                                    <li class="StepProgress-item is-done"><strong>Order Processed</strong>
+                                                    <li class="StepProgress-item is-done"><strong>Order Placed</strong>
+                                                        {trackData?.order_date || '12 june 2023'}</li>
+                                                    <li class={1 ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order Shipped</strong>
                                                         12 june 2023
                                                     </li>
-                                                    <li class="StepProgress-item is-done"><strong>Order Dispatched</strong>
+                                                    <li class={1 ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order in Transist</strong>
                                                         13 june 2023</li>
-                                                    <li class="StepProgress-item"><strong>Order Deliverd</strong></li>
-                                                    {/* <li class="StepProgress-item"><strong>Provide feedback</strong></li> */}
+                                                    <li class={1 ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order Delivered</strong></li>
                                                 </ul>
                                             </div>
-                                        </div> : <div>
-                                            <h4 style={{ color: "green" }}>Order Placed</h4>
-                                        </div>}
+                                        </div>
                                     </>
 
 
@@ -291,7 +285,7 @@ const OrderTrakingDetails = () => {
                     </div>
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 

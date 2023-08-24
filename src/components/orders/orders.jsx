@@ -1,11 +1,10 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AccountMenuSidebar from './accountMenu';
 import LazyLoad from 'react-lazyload';
 import { getOrder } from '../../services/checkout-service';
 import { useAuthContext } from '../../context/AuthContext';
 import Constants from '../../constants';
 import { useNavigate } from 'react-router-dom';
-
 
 const OrderDetails = () => {
     const [orders, setOrders] = useState([]);
@@ -134,6 +133,9 @@ const OrderDetails = () => {
                                                             {/* Emergency contact : {o.delivery_mobile_2} */}
                                                             <div>
                                                                 <h4 style={{ color: 'green', margin: '10px 0px', }}><strong>Arriving {o.order_date}</strong></h4>
+                                                            </div>
+                                                            <div className='track-order'>
+                                                                <span style={{ color: '#fcb800', margin: '10px 0px', cursor: "pointer", fontSize: '2rem' }}><a style={{ borderBottom: "2px solid #fcb800", fontWeight: 700 }} onClick={() => navigate(o)}>Track Order</a></span>
                                                             </div>
                                                         </figcaption>
                                                     </figure>
