@@ -2,7 +2,7 @@ import axios from "axios";
 import { notify } from "../components/notify";
 
 
-axios.defaults.baseURL = "https://dev.api.amirthafashion.com";
+axios.defaults.baseURL = "https://api.amirthafashion.com";
 // axios.defaults.baseURL = "http://127.0.0.1:4000";
 
 // Add a request interceptor
