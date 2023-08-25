@@ -23,7 +23,7 @@ export async function getDeliveryCharge(pin_code) {
         const res = await getData(details);
         return res.data;
     } catch (error) {
-        return error;
+        throw error;
     }
 
 }

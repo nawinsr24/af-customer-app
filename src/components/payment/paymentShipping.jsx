@@ -35,7 +35,7 @@ const ModulePaymentShipping = ({ addressFn, deliveryCharge }) => {
             <div className="ps-block__panel">
                 <figure>
                     <small>Total Delivery chanrge</small>
-                    <strong>₹{deliveryCharge?.total_delivery_charge}</strong>
+                    <strong> ₹{deliveryCharge?.total_delivery_charge || 0}</strong>
                 </figure>
             </div>
         </>

@@ -31,11 +31,24 @@ const ActionsSidebar = ({ product }) => {
 
     }
     async function handleBuyItem(data) {
-        if (!!ctxtUser?.userId) {
-            Router(`/checkout/?id=${data.stock_id}`);
-        } else {
-            notify("error", `Please log in to continue!`);
+        try {
+            console.log("BUG");
+            if (!!ctxtUser?.userId) {
+                const reqObj = [{
+                    user_id: ctxtUser?.userId,
+                    stock_id: data.stock_id,
+                    cart_quantity
+                }];
+                const res = await addToCart(reqObj);
+                addToCartContext(data);
+                Router(`/checkout/?id=${data.stock_id}`);
+            } else {
+                notify("error", `Please log in to continue!`);
+            }
+        } catch (error) {
+
         }
+
     }
 
     function handleAddItemToCompare(e) {
@@ -101,11 +114,14 @@ const ActionsSidebar = ({ product }) => {
                 onClick={(e) => handleAddItemToCart(product)}>
                 Add to cart
             </a>
-            <a
+            {/* <div className="ps-block__footer">
+                <button className="ps-btn">Continue to shipping</button>
+            </div> */}
+            <button
                 className="ps-btn"
                 onClick={(e) => handleBuyItem(product)}>
                 Buy Now
-            </a>
+            </button>
             {/* <div className="ps-product__actions">
                 <a onClick={(e) => handleAddItemToWishlist(e)}>
                     <i className="icon-heart mr-1"></i>

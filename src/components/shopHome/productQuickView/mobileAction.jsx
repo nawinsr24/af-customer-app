@@ -29,12 +29,24 @@ const ModuleDetailActionsMobile = ({ ecomerce, product }) => {
 
     };
 
-    const handleBuyNow = (data) => {
-        if (!!ctxtUser?.userId) {
-            Router(`/checkout/?id=${data.stock_id}`);
-        } else {
-            notify("error", `Please log in to continue!`);
+    const handleBuyNow = async (data) => {
+        try {
+            if (!!ctxtUser?.userId) {
+                const reqObj = [{
+                    user_id: ctxtUser?.userId,
+                    stock_id: data.stock_id,
+                    cart_quantity: 1
+                }];
+                const res = await addToCart(reqObj);
+                addToCartContext(data);
+                Router(`/checkout/?id=${data.stock_id}`);
+            } else {
+                notify("error", `Please log in to continue!`);
+            }
+        } catch (error) {
+
         }
+
     };
 
     return (

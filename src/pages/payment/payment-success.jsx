@@ -62,10 +62,10 @@ const PaymentSuccessPage = () => {
                                             </div>
                                             <div className="ps-block__bottom">
 
-                                                <a onClick={() => Router('/shop')} className="ps-btn">
+                                                <button onClick={() => Router('/shop')} className="ps-btn">
                                                     <i className="icon-arrow-left mr-2"></i>
                                                     Back to shop
-                                                </a>
+                                                </button>
 
                                             </div>
                                         </div>

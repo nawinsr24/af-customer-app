@@ -6,7 +6,7 @@ import { deleteCart, getCart } from '../../../services/home-page-service';
 import Constants from '../../../constants';
 import { notify } from '../../notify';
 import { CartContext } from '../../../context/cartContext';
-const PanelCartMobile = ({ ecomerce }) => {
+const PanelCartMobile = ({ reFresh }) => {
     const [cartProduct, setCartProduct] = useState([]);
     const { ctxtUser } = useAuthContext();
     const { removeFromCartContext } = useContext(CartContext);
@@ -25,7 +25,7 @@ const PanelCartMobile = ({ ecomerce }) => {
 
     useEffect(() => {
         getcartData();
-    }, []);
+    }, [reFresh]);
     //view
     let cartItemsView, footerView;
 
@@ -59,7 +59,7 @@ const PanelCartMobile = ({ ecomerce }) => {
                         {/* <strong>Sold by:</strong> {item.vendor} */}
                     </p>
                     <small>
-                        {item.quantity || 1} x ₹{item.base_price}
+                        {item.cart_quantity || 1} x ₹{item.base_price}
                     </small>
                 </div>
             </div>

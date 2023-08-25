@@ -7,6 +7,7 @@ import PanelSearch from './panel/PanelSearch';
 import PanelCategories from './panel/PanelCategories';
 
 class NavigationList extends Component {
+    temp = true;
     constructor(props) {
         super(props);
         this.state = {
@@ -116,7 +117,7 @@ class NavigationList extends Component {
                             </span>
                         </div>
                         <div className="ps-panel__content">
-                            <PanelCartMobile />
+                            <PanelCartMobile reFresh={!this.state.cartDrawer} />
                         </div>
                     </div>
                 </Drawer>

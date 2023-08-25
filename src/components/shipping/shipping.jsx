@@ -53,10 +53,16 @@ const Shipping = () => {
 
     async function getDeliveryChargeFn() {
         if (address_data?.pincode) {
+            try {
+                const resData = await getDeliveryCharge(address_data?.pincode);
+                setDeliveryCharge(resData);
+                console.log("res", resData);
 
-            const resData = await getDeliveryCharge(address_data?.pincode);
-            setDeliveryCharge(resData);
-            console.log("res", resData);
+            } catch {
+
+            }
+
+
         }
 
     }
@@ -99,10 +105,10 @@ const Shipping = () => {
                                 <div className="ps-block__panel">
                                     <figure>
                                         <small>Total delivery charge</small>
-                                        <strong>₹ {deliveryCharge?.total_delivery_charge || 0}</strong>
+                                        <strong> ₹{deliveryCharge?.total_delivery_charge || 0}</strong>
                                     </figure>
                                 </div>
-                                <div className="ps-block__footer">
+                                <div className="ps-block__footer" style={{ margin: "10px 0px" }}>
 
                                     <a style={{ cursor: 'pointer' }} onClick={() => stock_id ? Router(`/checkout/?id=${stock_id}`) : Router('/checkout')}>
                                         <i className="icon-arrow-left mr-2"></i>
@@ -110,9 +116,9 @@ const Shipping = () => {
                                     </a>
 
 
-                                    <a onClick={() => stock_id ? Router('/order-checkout/?id=' + stock_id) : Router("/order-checkout")} className="ps-btn">
+                                    <button onClick={() => stock_id ? Router('/order-checkout/?id=' + stock_id) : Router("/order-checkout")} className="ps-btn">
                                         Continue to payment
-                                    </a>
+                                    </button>
 
                                 </div>
                             </div>

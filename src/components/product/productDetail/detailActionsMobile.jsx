@@ -31,14 +31,26 @@ const DetailActionsMobile = ({ product }) => {
 
     };
 
-    const handleBuyNow = (e) => {
+    const handleBuyNow = async (e) => {
         e.preventDefault();
-        if (!!ctxtUser?.userId) {
+        try {
 
-            Router(`/checkout/?id=${product.stock_id}`);
-        } else {
-            notify("error", `Please log in to continue!`);
+            if (!!ctxtUser?.userId) {
+                const reqObj = [{
+                    user_id: ctxtUser?.userId,
+                    stock_id: product.stock_id,
+                    cart_quantity: 1
+                }];
+                const res = await addToCart(reqObj);
+                addToCartContext(product);
+                Router(`/checkout/?id=${product.stock_id}`);
+            } else {
+                notify("error", `Please log in to continue!`);
+            }
+        } catch (eror) {
+
         }
+
     };
 
     return (

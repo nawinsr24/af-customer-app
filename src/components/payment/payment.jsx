@@ -21,12 +21,15 @@ const Payment = () => {
         setcheckoutProducts(d);
     };
     async function getDeliveryChargeFn() {
-        if (address_data?.pincode) {
+        try {
+            if (address_data?.pincode) {
+                const resData = await getDeliveryCharge(address_data?.pincode);
+                setDeliveryCharge(resData);
+            }
+        } catch {
 
-            const resData = await getDeliveryCharge(address_data?.pincode);
-            setDeliveryCharge(resData);
-            console.log("res", resData);
         }
+
 
     }
     useEffect(() => {

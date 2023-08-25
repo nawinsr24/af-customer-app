@@ -81,7 +81,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn, del
             <figure>
                 <figcaption>
                     <strong>Delivery charge</strong>
-                    <small>₹{deliveryCharge?.total_delivery_charge}</small>
+                    <small>₹{deliveryCharge?.total_delivery_charge || 0}</small>
                 </figcaption>
             </figure>
         );
@@ -89,7 +89,7 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn, del
             <figure className="ps-block__total">
                 <h3>
                     Total
-                    <strong>₹{parseInt(amount) + Number(deliveryCharge?.total_delivery_charge)}</strong>
+                    <strong>₹{parseInt(amount) + Number(deliveryCharge?.total_delivery_charge || 0)}</strong>
                 </h3>
             </figure>
         );

@@ -48,7 +48,7 @@ const ProductDetail = ({ product }) => {
                         <div className="ps-product__info">
                             <DetailTopInformation product={stockData} />
                             <ProductDetailDescription callBackFn={setData} product={product} />
-                            <DetailActionsMobile product={stockData} />
+                            {/* <DetailActionsMobile product={stockData} /> */}
                         </div>
                     </div>
                     <div className="ps-product__price-right">

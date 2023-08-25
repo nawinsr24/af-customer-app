@@ -87,7 +87,7 @@ class OrdersHistoryDetails extends Component {
                                             <strong>Orders History</strong>
                                         </h3>
                                     </div>
-                                    <div className="ps-section__content">
+                                    <div className="ps-section__content" style={{ marginBottom: "4rem" }}>
                                         {/* <div className="row">
                                             <div className="col-md-4 col-12">
                                                 <figure className="ps-block--invoice">

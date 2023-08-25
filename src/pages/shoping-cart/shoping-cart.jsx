@@ -96,7 +96,7 @@ const ShoppingCart = ({ ecomerce }) => {
                     <CartItems cartItems={products} callBackFn={isCartRefresh}
                         increaseCart={increaseCartCount} decreaseCart={decreaseCartCount} />
                     <div className="ps-section__cart-actions">
-                        <a onClick={() => Router("/shop")} className="ps-btn">Back to Shop</a>
+                        <button onClick={() => Router("/shop")} className="ps-btn">Back to Shop</button>
                     </div>
                 </div>
                 <div className="ps-section__footer">
@@ -127,9 +127,9 @@ const ShoppingCart = ({ ecomerce }) => {
                         <div className="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
                             <CartSummary source={products} />
 
-                            <a onClick={() => handleCheckOut()} className="ps-btn ps-btn--fullwidth">
+                            <button onClick={() => handleCheckOut()} className="ps-btn ps-btn--fullwidth">
                                 Proceed to checkout
-                            </a>
+                            </button>
 
                         </div>
                     </div>
@@ -148,7 +148,7 @@ const ShoppingCart = ({ ecomerce }) => {
 
                     <div className="ps-section__cart-actions">
 
-                        <a onClick={() => Router("/shop")} className="ps-btn">Back to Shop</a>
+                        <button onClick={() => Router("/shop")} className="ps-btn">Back to Shop</button>
 
                     </div>
                 </div>

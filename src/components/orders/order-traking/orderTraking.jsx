@@ -1,9 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import AccountMenuSidebar from '../accountMenu';
-import LazyLoad from 'react-lazyload';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { notify } from '../../notify';
-import Constants from '../../../constants';
 import { trackOrder } from '../../../services/checkout-service';
 
 const OrderTrakingDetails = () => {
@@ -12,25 +9,24 @@ const OrderTrakingDetails = () => {
 
     // Access query parameters
     const data = queryParams.get('data');
-    console.log(data);
-
     const [trackData, setTrackData] = useState(null);
-    const [ShowTimeLine, setShowTimeLine] = useState(false);
     const [Tracking, setTracking] = useState(null);
     const Router = useNavigate();
-    useEffect(async () => {
+
+    const getTrackData = async () => {
+        const res = await trackOrder(trackData.awb);
+        setTracking(res);
+    };
+    useEffect(() => {
         if (data) {
             const decrypt = JSON.parse(atob(data));
-            console.log(decrypt);
             setTrackData(decrypt);
         } else {
             Router('/orders');
             return;
         }
         if (trackData?.awb) {
-            const res = await trackOrder(trackData.awb);
-            setShowTimeLine(true);
-            console.log(res);
+            getTrackData();
         }
     }, [data]);
 
@@ -75,12 +71,14 @@ const OrderTrakingDetails = () => {
                                         <strong>Track Order</strong>
                                     </h3>
                                 </div>
-                                <div className="ps-section__content" >
+                                <div className="ps-section__content" style={{ marginBottom: '4rem' }} >
                                     <div>
                                         <div >
                                             <h4 style={{ color: 'green' }}>
 
-                                                <strong>Arriving {trackData?.status}</strong>
+                                                <strong>{Tracking?.delivered
+                                                    ? `Delivered on ${Tracking?.delivered_on || ''}`
+                                                    : `Arriving on ${Tracking?.est_delivery_date || ''}`}</strong>
                                             </h4>
                                         </div>
                                         {/* <div className="col-md-4 col-12">
@@ -216,15 +214,23 @@ const OrderTrakingDetails = () => {
                                             <div class="wrapper">
                                                 <ul class="StepProgress">
                                                     <li class="StepProgress-item is-done"><strong>Order Placed</strong>
-                                                        {trackData?.order_date || '12 june 2023'}</li>
-                                                    <li class={1 ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order Shipped</strong>
-                                                        12 june 2023
+                                                        {trackData?.order_date || ''}</li>
+                                                    <li class={Tracking?.shipped ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order Shipped</strong>
+                                                        {Tracking?.shipped_on || ''}
                                                     </li>
-                                                    <li class={1 ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order in Transist</strong>
-                                                        13 june 2023</li>
-                                                    <li class={1 ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order Delivered</strong></li>
+                                                    <li class={Tracking?.transist ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order in Transist</strong>
+                                                        {Tracking?.transisted_on || ''}</li>
+                                                    <li class={Tracking?.delivered ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order Delivered</strong>{Tracking?.delivered_on || ''}</li>
                                                 </ul>
                                             </div>
+                                        </div>
+                                        <div className="ps-block__tab" style={{ marginTop: "3rem" }}>
+                                            <button
+                                                className="ps-btn"
+                                                onClick={(e) => Router('/orders')}>
+                                                Back
+
+                                            </button>
                                         </div>
                                     </>
 
