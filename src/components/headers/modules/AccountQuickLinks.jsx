@@ -25,10 +25,10 @@ const AccountQuickLinks = (props) => {
             text: 'Your Orders',
             url: '/orders',
         },
-        {
-            text: 'Order History',
-            url: '/order-history',
-        }
+        // {
+        //     text: 'Order History',
+        //     url: '/order-history',
+        // }
         // {
         //     text: 'Address',
         //     url: '/addresses',

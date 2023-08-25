@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Moment from 'moment';
+import 'moment-timezone';
 import AccountMenuSidebar from './accountMenu';
 import LazyLoad from 'react-lazyload';
 import { getOrder } from '../../services/checkout-service';
@@ -23,8 +25,28 @@ const OrderDetails = () => {
     };
 
     useEffect(() => {
-        getData();
+        ctxtUser?.userId ? getData() : Router('/');
     }, []);
+
+    const calculateArrivalDate = (delivery_date) => {
+        let message = '';
+        if (!!delivery_date) {
+            const deliveryDate = delivery_date;
+            const format = "YYYY-MM-DD";
+            const parsedDeliveryDate = Moment(deliveryDate, format);
+            const currentDate = Moment();
+            const tomorrowDate = Moment().add(1, 'days');
+            if (parsedDeliveryDate.isSame(currentDate, 'date')) {
+                message = 'today';
+            } else if (parsedDeliveryDate.isSame(tomorrowDate, 'date')) {
+                message = 'tomorrow';
+            } else {
+                message = `on ${parsedDeliveryDate.format("Do MMMM")}`;
+            }
+        }
+        return message;
+
+    };
 
 
     const accountLinks = [
@@ -39,11 +61,11 @@ const OrderDetails = () => {
             icon: 'icon-store',
             active: true
         },
-        {
-            text: 'Order History',
-            url: '/order-history',
-            icon: 'icon-history',
-        }
+        // {
+        //     text: 'Order History',
+        //     url: '/order-history',
+        //     icon: 'icon-history',
+        // }
     ];
     return (
         <section style={{
@@ -132,11 +154,24 @@ const OrderDetails = () => {
                                                             <br />
                                                             {/* Emergency contact : {o.delivery_mobile_2} */}
                                                             <div>
-                                                                <h4 style={{ color: 'green', margin: '10px 0px', }}><strong>Arriving {o.order_date}</strong></h4>
+                                                                {
+                                                                    o.order_status == 'delivered'
+                                                                        ? <div>
+                                                                            <h4 style={{ color: 'crimson', margin: '10px 0px', }}><strong>Delivered on {o.delivery_date}</strong></h4>
+                                                                        </div>
+                                                                        : <h4 style={{ color: 'green', margin: '10px 0px', }}><strong>Arriving {calculateArrivalDate(o.delivery_date)}</strong></h4>
+
+                                                                }
                                                             </div>
-                                                            <div className='track-order'>
-                                                                <span style={{ color: '#fcb800', margin: '10px 0px', cursor: "pointer", fontSize: '2rem' }}><a style={{ borderBottom: "2px solid #fcb800", fontWeight: 700 }} onClick={() => navigate(o)}>Track Order</a></span>
-                                                            </div>
+                                                            {
+                                                                o.order_status !== 'delivered'
+                                                                    ? <div className='track-order'>
+                                                                        <span style={{ color: '#fcb800', margin: '10px 0px', cursor: "pointer", fontSize: '2rem' }}>
+                                                                            <a style={{ borderBottom: "2px solid #fcb800", fontWeight: 700 }} onClick={() => navigate(o)}>Track Order</a></span>
+                                                                    </div>
+                                                                    : ''
+                                                            }
+
                                                         </figcaption>
                                                     </figure>
                                                 </div>

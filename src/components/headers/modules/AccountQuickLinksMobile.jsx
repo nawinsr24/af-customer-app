@@ -9,7 +9,7 @@ import { notify } from '../../notify';
 
 const AccountQuickLinks = (props) => {
     const { ctxtlogout } = useAuthContext();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const accountLinks = [
         {
             text: 'Account Information',
@@ -19,10 +19,10 @@ const AccountQuickLinks = (props) => {
             text: 'Your Orders',
             url: '/orders',
         },
-        {
-            text: 'Order History',
-            url: '/order-history',
-        }
+        // {
+        //     text: 'Order History',
+        //     url: '/order-history',
+        // }
         // {
         //     text: 'Address',
         //     url: '/account/addresses',
@@ -58,7 +58,7 @@ const AccountQuickLinks = (props) => {
 
             <Menu.Item>
                 <a href="/" onClick={(e) => handleLogout(e)}>
-                <i className="icon-power-switch"></i>
+                    <i className="icon-power-switch"></i>
                     Logout
                 </a>
             </Menu.Item>

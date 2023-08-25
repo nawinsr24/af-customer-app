@@ -28,11 +28,11 @@ const UserInformation = () => {
             url: '/orders',
             icon: 'icon-store',
         },
-        {
-            text: 'Order History',
-            url: '/order-history',
-            icon: 'icon-history',
-        }
+        // {
+        //     text: 'Order History',
+        //     url: '/order-history',
+        //     icon: 'icon-history',
+        // }
     ];
 
     function updateIsEdit(b) {

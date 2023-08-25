@@ -2,10 +2,12 @@ import React, { Component, useEffect, useState } from 'react';
 import AccountMenuSidebar from '../accountMenu';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { trackOrder } from '../../../services/checkout-service';
+import { useAuthContext } from '../../../context/AuthContext';
 
 const OrderTrakingDetails = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
+    const { ctxtUser } = useAuthContext();
 
     // Access query parameters
     const data = queryParams.get('data');
@@ -18,6 +20,9 @@ const OrderTrakingDetails = () => {
         setTracking(res);
     };
     useEffect(() => {
+        if (ctxtUser?.userId) {
+
+        }
         if (data) {
             const decrypt = JSON.parse(atob(data));
             setTrackData(decrypt);
@@ -43,11 +48,11 @@ const OrderTrakingDetails = () => {
             icon: 'icon-store',
             active: true
         },
-        {
-            text: 'Order History',
-            url: '/order-history',
-            icon: 'icon-history',
-        }
+        // {
+        //     text: 'Order History',
+        //     url: '/order-history',
+        //     icon: 'icon-history',
+        // }
     ];
 
     return (
@@ -73,7 +78,7 @@ const OrderTrakingDetails = () => {
                                 </div>
                                 <div className="ps-section__content" style={{ marginBottom: '4rem' }} >
                                     <div>
-                                        <div >
+                                        <div>
                                             <h4 style={{ color: 'green' }}>
 
                                                 <strong>{Tracking?.delivered
@@ -218,8 +223,8 @@ const OrderTrakingDetails = () => {
                                                     <li class={Tracking?.shipped ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order Shipped</strong>
                                                         {Tracking?.shipped_on || ''}
                                                     </li>
-                                                    <li class={Tracking?.transist ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order in Transist</strong>
-                                                        {Tracking?.transisted_on || ''}</li>
+                                                    <li class={Tracking?.shipped ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order in Transist</strong>
+                                                    </li>
                                                     <li class={Tracking?.delivered ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order Delivered</strong>{Tracking?.delivered_on || ''}</li>
                                                 </ul>
                                             </div>
