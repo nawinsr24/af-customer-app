@@ -36,6 +36,9 @@ const CartItems = ({ cartItems, callBackFn, increaseCart, decreaseCart }) => {
                 <td data-label="price" className="price">
                     ₹{item.base_price}
                 </td>
+                <td data-label="size" className="price">
+                    {item.size_name}
+                </td>
                 <td data-label="quantity">
                     <div className="form-group--number">
                         <button
@@ -74,6 +77,7 @@ const CartItems = ({ cartItems, callBackFn, increaseCart, decreaseCart }) => {
                         <tr>
                             <th>Product</th>
                             <th>Price</th>
+                            <th>Size</th>
                             <th>Quantity</th>
                             <th>Total</th>
                             <th>Action</th>

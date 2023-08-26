@@ -18,7 +18,6 @@ const OrderDetails = () => {
         setOrders(res);
     };
 
-
     const navigate = (product_data) => {
         const encrypt = btoa(JSON.stringify(product_data));
         Router(`/order-tracking/?data=${encrypt}`);
@@ -27,7 +26,9 @@ const OrderDetails = () => {
     useEffect(() => {
         ctxtUser?.userId ? getData() : Router('/');
     }, []);
-
+    function formatDate(d) {
+        return Moment(d).format("Do MMMM");
+    }
     const calculateArrivalDate = (delivery_date) => {
         let message = '';
         if (!!delivery_date) {
@@ -136,7 +137,7 @@ const OrderDetails = () => {
                                             </div>
                                         </div> */}
                                     {
-                                        orders.map(o => (
+                                        orders?.map(o => (
                                             <>
                                                 <div>
                                                     <div><h3>Delivery address</h3></div>
@@ -153,16 +154,21 @@ const OrderDetails = () => {
                                                             contact : {o.delivery_mobile_1}
                                                             <br />
                                                             {/* Emergency contact : {o.delivery_mobile_2} */}
-                                                            <div>
-                                                                {
-                                                                    o.order_status == 'delivered'
-                                                                        ? <div>
-                                                                            <h4 style={{ color: 'crimson', margin: '10px 0px', }}><strong>Delivered on {o.delivery_date}</strong></h4>
-                                                                        </div>
-                                                                        : <h4 style={{ color: 'green', margin: '10px 0px', }}><strong>Arriving {calculateArrivalDate(o.delivery_date)}</strong></h4>
+                                                            {
+                                                                o.delivery_date?.length ?
+                                                                    <div>
+                                                                        {
+                                                                            o.order_status == 'delivered'
+                                                                                ? <div>
+                                                                                    <h4 style={{ color: 'crimson', margin: '10px 0px', }}><strong>Delivered on {formatDate(o.delivery_date)}</strong></h4>
+                                                                                </div>
+                                                                                : <h4 style={{ color: 'green', margin: '10px 0px', }}><strong>Arriving {calculateArrivalDate(o.delivery_date)}</strong></h4>
 
-                                                                }
-                                                            </div>
+                                                                        }
+                                                                    </div>
+                                                                    : ''
+                                                            }
+
                                                             {
                                                                 o.order_status !== 'delivered'
                                                                     ? <div className='track-order'>
@@ -201,8 +207,8 @@ const OrderDetails = () => {
                                                                                     <a onClick={() => navigate(o)}>
                                                                                         <LazyLoad>
                                                                                             <img
-                                                                                                src={product.images[0] && `${Constants.imgUrl}${product.images[0]}`}
-                                                                                                alt={product.images[0] && `${Constants.imgUrl}${product.images[0]}`}
+                                                                                                src={product.images?.length && `${Constants.imgUrl}${product.images[0]}`}
+                                                                                                alt={product.images?.length && `${Constants.imgUrl}${product.images[0]}`}
                                                                                             />
                                                                                         </LazyLoad>
                                                                                     </a>

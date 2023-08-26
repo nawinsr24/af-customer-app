@@ -24,7 +24,11 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn, del
                 pro.original_base_price = pro.base_price;
                 pro.base_price = final_price;
             }
-            pro.cart_quantity = 1;
+            else {
+                pro.original_base_price = pro.base_price;
+                pro.base_price = pro.total_price;
+            }
+            // pro.cart_quantity = 1;
         });
         checkoutProductsFn(productRes);
         setcheckoutProducts(productRes);
@@ -40,6 +44,9 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn, del
                 const final_price = Math.round(parseFloat(dis_price) + parseFloat(dis_price) * (parseFloat(pro.gst_rate) / 100));
                 pro.original_base_price = pro.base_price;
                 pro.base_price = final_price;
+            } else {
+                pro.original_base_price = pro.base_price;
+                pro.base_price = pro.total_price;
             }
         });
         checkoutProductsFn(productRes);
@@ -63,14 +70,18 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn, del
     if (checkoutProducts && checkoutProducts.length > 0) {
         amount = calculateAmount(checkoutProducts);
         listItemsView = checkoutProducts.map((item, i) => (
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", }}>
+                <a style={{ width: "32%" }} href={`/product/${item.stock_id}`} key={`${item.stock_id}+${i}`}>
+                    <strong>
+                        {item.name}
+                        <span> x{item.cart_quantity || 1}</span>
+                    </strong>
+                </a>
 
-            <a onClick={() => Router(`product/${item.stock_id}`)} key={`${item.stock_id}${i}`}>
-                <strong>
-                    {item.name}
-                    <span>x{item.cart_quantity || 1}</span>
-                </strong>
-                <small>₹{(item.cart_quantity || 1) * item.base_price}</small>
-            </a>
+                <span>{item.discount_percentage ? Number(item.discount_percentage) + '%' : '--'}</span>
+                <span>{item.gst_rate}%</span>
+                <span>₹{(item.cart_quantity || 1) * item.base_price}</span>
+            </div>
 
         ));
     } else {
@@ -109,10 +120,16 @@ const ModulePaymentOrderSummary = ({ ecomerce, shipping, checkoutProductsFn, del
                 <figure>
                     <figcaption>
                         <strong>Product</strong>
+                        <strong>Discount</strong>
+                        <strong>Gst</strong>
                         <strong>total</strong>
                     </figcaption>
                 </figure>
-                <figure className="ps-block__items">{listItemsView}</figure>
+                <figure style={{
+                    "display": "flex",
+                    flexDirection: "column",
+                    gap: "2rem",
+                }}>{listItemsView}</figure>
                 <figure>
                     <figcaption>
                         <strong>Subtotal</strong>

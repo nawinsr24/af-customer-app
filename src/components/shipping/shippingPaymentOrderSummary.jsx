@@ -13,13 +13,18 @@ const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, deliveryCharg
         amount = calculateAmount(checkoutProducts);
         listItemsView = checkoutProducts.map((item, i) => (
 
-            <a href="/" key={`${item.stock_id}=${i}`}>
-                <strong>
-                    {item.name}
-                    <span>x{item.cart_quantity || 1}</span>
-                </strong>
-                <small>₹{(item.cart_quantity || 1) * item.base_price}</small>
-            </a>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", }}>
+                <a style={{ width: "32%" }} href={`/product/${item.stock_id}`} key={`${item.stock_id}+${i}`}>
+                    <strong>
+                        {item.name}
+                        <span> x{item.cart_quantity || 1}</span>
+                    </strong>
+                </a>
+
+                <span>{item.discount_percentage ? Number(item.discount_percentage) + '%' : '--'}</span>
+                <span>{item.gst_rate}%</span>
+                <span>₹{(item.cart_quantity || 1) * item.base_price}</span>
+            </div>
 
         ));
     } else {
@@ -58,10 +63,16 @@ const shippingPaymentOrderSummary = ({ checkoutProducts, ecomerce, deliveryCharg
                 <figure>
                     <figcaption>
                         <strong>Product</strong>
+                        <strong>Discount</strong>
+                        <strong>Gst</strong>
                         <strong>total</strong>
                     </figcaption>
                 </figure>
-                <figure className="ps-block__items">{listItemsView}</figure>
+                <figure style={{
+                    "display": "flex",
+                    flexDirection: "column",
+                    gap: "2rem",
+                }}>{listItemsView}</figure>
                 <figure>
                     <figcaption>
                         <strong>Subtotal</strong>

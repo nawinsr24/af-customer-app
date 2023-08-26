@@ -27,7 +27,7 @@ const HeaderDefault = () => {
                             width: "40%",
                             filter: "drop-shadow(0.1rem 0.1rem 0.1rem rgba(0, 0, 0, 0.2))"
                         }}>
-                            <img src={'static/amirtha-fashion-images/amirtha-log.png'} alt="" />
+                            <img src={'/static/amirtha-fashion-images/amirtha-log.png'} alt="" />
                         </a>
 
                     </div>

@@ -32,7 +32,6 @@ const ActionsSidebar = ({ product }) => {
     }
     async function handleBuyItem(data) {
         try {
-            console.log("BUG");
             if (!!ctxtUser?.userId) {
                 const reqObj = [{
                     user_id: ctxtUser?.userId,

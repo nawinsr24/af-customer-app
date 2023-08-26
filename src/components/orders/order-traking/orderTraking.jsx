@@ -1,4 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
+import Moment from 'moment';
+import 'moment-timezone';
 import AccountMenuSidebar from '../accountMenu';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { trackOrder } from '../../../services/checkout-service';
@@ -14,24 +16,28 @@ const OrderTrakingDetails = () => {
     const [trackData, setTrackData] = useState(null);
     const [Tracking, setTracking] = useState(null);
     const Router = useNavigate();
-
-    const getTrackData = async () => {
-        const res = await trackOrder(trackData.awb);
+    function formatDate(d) {
+        return Moment(d).format("Do MMMM");
+    }
+    const getTrackData = async (awb_id) => {
+        const res = await trackOrder(awb_id);
         setTracking(res);
     };
     useEffect(() => {
-        if (ctxtUser?.userId) {
-
-        }
+        let awb_id = null;
         if (data) {
             const decrypt = JSON.parse(atob(data));
             setTrackData(decrypt);
+            console.log("decrypt", decrypt);
+            awb_id = decrypt?.awb;
         } else {
             Router('/orders');
             return;
         }
-        if (trackData?.awb) {
-            getTrackData();
+        console.log("trackData", trackData);
+        if (awb_id) {
+            console.log("HIII");
+            getTrackData(awb_id);
         }
     }, [data]);
 
@@ -82,8 +88,8 @@ const OrderTrakingDetails = () => {
                                             <h4 style={{ color: 'green' }}>
 
                                                 <strong>{Tracking?.delivered
-                                                    ? `Delivered on ${Tracking?.delivered_on || ''}`
-                                                    : `Arriving on ${Tracking?.est_delivery_date || ''}`}</strong>
+                                                    ? `Delivered on ${formatDate(Tracking?.delivered_on) || ''}`
+                                                    : Tracking?.shipped ? `Arriving on ${formatDate(Tracking?.est_delivery_date) || ''}` : ''}</strong>
                                             </h4>
                                         </div>
                                         {/* <div className="col-md-4 col-12">
@@ -219,13 +225,13 @@ const OrderTrakingDetails = () => {
                                             <div class="wrapper">
                                                 <ul class="StepProgress">
                                                     <li class="StepProgress-item is-done"><strong>Order Placed</strong>
-                                                        {trackData?.order_date || ''}</li>
+                                                        {formatDate(trackData?.order_date) || ''}</li>
                                                     <li class={Tracking?.shipped ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order Shipped</strong>
-                                                        {Tracking?.shipped_on || ''}
+                                                        {formatDate(Tracking?.shipped_on) || ''}
                                                     </li>
                                                     <li class={Tracking?.shipped ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order in Transist</strong>
                                                     </li>
-                                                    <li class={Tracking?.delivered ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order Delivered</strong>{Tracking?.delivered_on || ''}</li>
+                                                    <li class={Tracking?.delivered ? 'StepProgress-item is-done' : 'StepProgress-item'}><strong>Order Delivered</strong>{formatDate(Tracking?.delivered_on) || ''}</li>
                                                 </ul>
                                             </div>
                                         </div>

@@ -63,8 +63,7 @@
         }
     }
 
-    .header__center {
-    }
+    .header__center {}
 
     .header__right {
         max-width: 370px;
@@ -128,6 +127,7 @@
 
     @include media('<lg') {
         display: none;
+
         &.header--mobile {
             display: block;
         }
@@ -700,4 +700,3 @@
         }
     }
 }
-

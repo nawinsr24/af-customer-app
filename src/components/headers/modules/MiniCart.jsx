@@ -20,6 +20,9 @@ const MiniCart = ({ }) => {
                 const final_price = Math.round(parseFloat(dis_price) + parseFloat(dis_price) * (parseFloat(pro.gst_rate) / 100));
                 pro.original_base_price = pro.base_price;
                 pro.base_price = final_price;
+            } else {
+                pro.original_base_price = pro.base_price;
+                pro.base_price = pro.total_price;
             }
         });
         setCartData(cartResponse);

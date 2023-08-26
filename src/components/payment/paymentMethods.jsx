@@ -12,13 +12,29 @@ const ModulePaymentMethods = ({ address, checkoutProducts, deliveryCharge }) => 
     }
 
     async function handleSubmit(e) {
+        let gst_total = 0;
+        let total_discount = 0;
+        let total = 0;
+        let base_total = 0;
+        checkoutProducts.forEach((product) => {
+            total += parseFloat(product.base_price * (product.cart_quantity || 1));
+            gst_total += parseFloat(product.gst_rate);
+            base_total += parseFloat(product.original_base_price * (product.cart_quantity || 1));
+            total_discount += parseFloat(product.discount_percentage || 0);
+        });
         const reqObj = {
             ...address,
+            gst_total,
+            total_discount,
+            base_total,
+            gross_total: Math.round(total + (!!!deliveryCharge?.is_free_delivery ? parseFloat(deliveryCharge?.total_delivery_charge) : 0)),
+            total,
             checkout_products: checkoutProducts,
             payment_type: method,
             delivery_charge: !!!deliveryCharge?.is_free_delivery ? deliveryCharge?.total_delivery_charge : 0
 
         };
+        console.log(reqObj);
         try {
 
             const payNowRes = await postOrder(reqObj);

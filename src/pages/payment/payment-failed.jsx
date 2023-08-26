@@ -31,6 +31,17 @@ const PaymentFailedPage = () => {
                         <div className="container">
                             <div className="ps-section__header">
                                 <h1>Payment Failed</h1>
+                                <section class="c-container">
+
+                                    {/* <div class="o-circle c-container__circle o-circle__sign--success">
+                                        <div class="o-circle__sign"></div>
+                                    </div> */}
+
+                                    <div class="o-circle c-container__circle o-circle__sign--failure">
+                                        <div class="o-circle__sign"></div>
+                                    </div>
+
+                                </section>
                             </div>
                             <div className="ps-section__content">
                                 <div className="row">
